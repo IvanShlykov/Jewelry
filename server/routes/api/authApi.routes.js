@@ -1,0 +1,46 @@
+const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const { User } = require('../../db/models');
+const { generateTokens } = require('../../utils/authUtils');
+const jwtConfig = require('../../config/jwtConfig');
+
+router.post('/registration', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    if (name && email && password) {
+      let user = await User.findOne({ where: { email } });
+      if (!user) {
+        const hash = await bcrypt.hash(password, 10);
+        user = await User.create({ name, email, password: hash });
+        const { accessToken, refreshToken } = generateTokens({
+          user: { id: user.id, email: user.email, name: user.name },
+        });
+        res.cookie(jwtConfig.access.type, accessToken, {
+          httpOnly: true,
+          maxAge: jwtConfig.access.expiresIn,
+        });
+        res.cookie(jwtConfig.refresh.type, refreshToken, {
+          httpOnly: true,
+          maxAge: jwtConfig.refresh.expiresIn,
+        });
+        res.status(201).json({ message: 'ok', user: { id: user.id, name: user.name } });
+      } else {
+        res.status(400).json({ message: 'такой пользователь уже существует' });
+      }
+    } else {
+      res.status(400).json({ message: 'заполните все поля' });
+    }
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/checked', async (req, res) => {
+  if (res.locals.user) {
+    res.status(200).json({ id: res.locals.user.id, name: res.locals.user.name });
+  } else {
+    res.status(400).json({ message: 'neok' });
+  }
+});
+
+module.exports = router;

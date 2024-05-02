@@ -1,0 +1,37 @@
+body{
+  background-color:rgb(58, 59, 60);
+  }
+
+  img{
+          width: 400px;
+          height: 400px;
+  }
+  h2{
+    color: white;
+  }
+  input{
+    background-color: blueviolet;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    margin: 10px;
+  }
+  ::placeholder {
+    color: white;
+  }
+  p{
+    color: white;
+  }
+  form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .auth{
+    width: 95vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
