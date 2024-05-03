@@ -21,7 +21,7 @@ import type { AuthForm, State, User } from "./type";
    export const logout = createAsyncThunk(
    'auth/logout',
    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-   () => api.checkedFetch()
+   () => api.fetchLogOut()
   );
    const authSlice = createSlice({
     name: 'auth',
@@ -52,7 +52,7 @@ import type { AuthForm, State, User } from "./type";
         .addCase(authorization.rejected, (state, action) => {
           state.error = action.error.message;
         })
-        .addCase(logout.fulfilled, (state, action) => {
+        .addCase(logout.fulfilled, (state) => {
           state.user = null ;
           state.error=undefined
         })
