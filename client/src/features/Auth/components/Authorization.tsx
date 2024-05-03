@@ -30,7 +30,7 @@ navigate('/')
 if(message){
     setTimeout(()=>{
         dispatch(clear())
-    },2000)
+    },10000)
 }
     },[user,message])
 
@@ -44,8 +44,6 @@ const {
 
   const auth:SubmitHandler<AuthForm> = (data:AuthForm) =>{
     dispatch(authorization({email:data.email, password:data.password})).catch(console.log)
- 
-
   }
 
     return (
