@@ -14,11 +14,15 @@ function Header():JSX.Element {
   }
   return (
     <div>
-        <NavLink to='/'>Phenomenons</NavLink>
+
+        <NavLink to='/'>HomePage</NavLink>
+        <NavLink to='/new'>Новинки</NavLink>
+        <NavLink to='/collections'>Коллекции</NavLink>
+        <NavLink to='/specials'>Специальные предложения</NavLink>
         {!user ? (
             <>
             <NavLink to='/registration'>registration</NavLink>
-        <NavLink to="/authorization">Authorization</NavLink>
+            <NavLink to="/authorization">Authorization</NavLink>
             </>
           ): (
             <li>
@@ -28,6 +32,7 @@ function Header():JSX.Element {
               
             </li>
           )}
+
     </div>
   )
 }
