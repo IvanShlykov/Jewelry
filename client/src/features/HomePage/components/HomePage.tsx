@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import '../style/home.css';
 
 function HomePage(): JSX.Element {
-  const arrayOfJewelry = useSelector((store) => store.jewelrySlice);
   return (
     <>
       <div className="banners">
         <Link className="banner-collections" to={'/collections'}>
-          <img src={collection.photo} alt="collections" />{' '}
+          <div className="image-container collections">
+            <span className="banner-collections-text">ПОДРОБНЕЕ</span>
+          </div>
         </Link>
         <Link className="banner-specials" to={'/specials'}>
-          <img src={jewelry.isSpecial && jewerly} alt="specials" />{' '}
+          <div className="image-container specials">
+            <span className="banner-collections-text">ПОДРОБНЕЕ</span>
+          </div>
         </Link>
         <Link className="banner-new" to={'/new'}>
-          <img src={jewelry.isNew} alt="new" />{' '}
+          <div className="image-container new">
+            <span className="banner-collections-text">ПОДРОБНЕЕ</span>
+          </div>
         </Link>
-      </div>
-      <div className="list">
-        {arrayOfJewelry.map((el) => (
-          <JewelryCard jewelry={el} key={el.id} />
-        ))}
       </div>
     </>
   );

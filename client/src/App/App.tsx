@@ -9,7 +9,7 @@ import Main from '../features/Main/Main';
 import Registration from '../features/Auth/components/Registration';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
-import { initJewelry } from '../features/HomePage/jewelrySlice';
+import { initJewelry } from '../features/JewelrysPage/jewelrySlice';
 import HomePage from '../features/HomePage/components/HomePage';
 
 function App(): JSX.Element {

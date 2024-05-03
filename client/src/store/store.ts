@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import authSlice from '../features/Auth/authSlice';
-import jewelrySlice from '../features/HomePage/jewelrySlice';
+import jewelrySlice from '../features/JewelrysPage/jewelrySlice';
 
 const store = configureStore({
   reducer: {

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
 import type { State } from './type';
 
-const initialState: State = { jewelry: [], error: undefined };
+const initialState: State = { jewelrys: [], error: undefined };
 
 export const initJewelry = createAsyncThunk(
   'jewelry/init',
@@ -17,7 +17,7 @@ const jewelrySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(initJewelry.fulfilled, (state, action) => {
-        state.jewelry = action.payload;
+        state.jewelrys = action.payload;
         state.error = undefined;
       })
       .addCase(initJewelry.rejected, (state, action) => {
