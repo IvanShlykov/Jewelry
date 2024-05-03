@@ -1,0 +1,29 @@
+.image-container {
+    background-size: cover;
+    background-position: center;
+    height: 200px; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+  }
+
+  .collections {
+    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch3larimar.jpg');
+  }
+
+  .specials {
+    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch4larimar.jpg');
+  }
+
+  .new {
+    background-image: url('https://dvajirafa.ru/data/LARIMAR/NZOV4Plarimar.jpg');
+  }
+
+  .banner-collections-text {
+    color: white;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
+  }
