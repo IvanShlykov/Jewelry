@@ -5,6 +5,7 @@ function Header():JSX.Element {
   return (
     <div>
         <NavLink to='/'>HomePage</NavLink>
+        <NavLink to='/jewelry'>Все украшения</NavLink>
         <NavLink to='/new'>Новинки</NavLink>
         <NavLink to='/collections'>Коллекции</NavLink>
         <NavLink to='/specials'>Специальные предложения</NavLink>
