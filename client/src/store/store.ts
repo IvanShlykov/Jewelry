@@ -1,15 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import authSlice from '../features/Auth/authSlice';
-
-
+import jewelrySlice from '../features/HomePage/jewelrySlice';
 
 const store = configureStore({
- reducer: {
- authState:authSlice,
- },
+  reducer: {
+    authState: authSlice,
+    jewelryState: jewelrySlice,
+  },
 });
-
 
 export default store;
 
