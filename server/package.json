@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js --ext js,json,jsx",
-    "dbr": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all"
+    "dbr": "npx sequelize-cli db:drop && npx   sequelize-cli db:create &&  npx sequelize-cli db:migrate && npx   sequelize-cli db:seed:all "
   },
   "keywords": [],
   "author": "",
