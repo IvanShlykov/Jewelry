@@ -9,6 +9,7 @@ import Main from '../features/Main/Main';
 import Registration from '../features/Auth/components/Registration';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
+import Authorization from '../features/Auth/components/Authorization';
 
 function App(): JSX.Element {
 
@@ -25,6 +26,7 @@ dispatch(checked()).catch(console.log)
       <Routes>
          <Route path='/' element={<Main/>} >
           <Route  path='registration' element={<Registration/>}/>
+          <Route  path='authorization' element={<Authorization/>}/>
          </Route>
       </Routes>
    

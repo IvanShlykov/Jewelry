@@ -14,15 +14,15 @@ import type { RegistrationUser } from '../type';
 const schema = object().shape({
     name: string().required('Необходимо указать имя'),
     email: string().required('Необходимо указать электронную почту'),
-    phone: number().required('Необходимо указать номер телефона'),
+    phone: string().required('Необходимо указать номер телефона'),
     password: string()
       .required('Необходимо указать пароль')
-      .min(6, 'Пароль должен быть более 3 символов')
-      .max(12, 'Пароль должен быть не более 5 символов'),
+      .min(6, 'Пароль должен быть более 6 символов')
+      .max(12, 'Пароль должен быть не более 12 символов'),
     cpassword: string()
       .required('Необходимо подтвердить пароль')
-      .min(6, 'Пароль должен быть более 3 символов')
-      .max(12, 'Пароль должен быть не более 5 символов')
+      .min(6, 'Пароль должен быть более 6 символов')
+      .max(12, 'Пароль должен быть не более 12 символов')
       .oneOf([ref('password')], 'Пароли не совпадают'),
   });
 
@@ -70,7 +70,7 @@ const {
             <span>{errors.name?.message}</span>
             <input type='email' placeholder='email' {...register('email')}/>
             <span>{errors.email?.message}</span>
-            <input type='number' placeholder='phone' {...register('phone')}/>
+            <input type='text' placeholder='phone' {...register('phone')}/>
             <span>{errors.phone?.message}</span>
             <input type='password' placeholder='password' {...register('password')}/>
             <span>{errors.password?.message}</span>

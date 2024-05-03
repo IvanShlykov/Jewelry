@@ -1,6 +1,7 @@
 import type { AuthForm, User, UserClient } from "./type"
 
 export const registrationFetch = async(obj:User):Promise<UserClient>=>{
+
     const res = await  fetch('/api/auth/registration',{
         method:'post',
         headers:{'content-type':"application/json"},
@@ -16,19 +17,23 @@ if(res.ok){
   }
 
   export const authorizationFetch = async (obj:AuthForm): Promise<UserClient> => {
+
+  
     const res = await fetch('/api/auth/authorization', {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(obj),
+     
     });
+    console.log(res.ok);
     if(res.ok){
       const data = await res.json()
       return data.user
     }
       const data = await res.json()
-        throw data.message
+        throw  data.message
       };
       export const fetchLogOut = async (): Promise<{ message: string }> => {
         const res = await fetch('/api/auth/logout');
