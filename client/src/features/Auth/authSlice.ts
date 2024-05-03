@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from './api'
-import type { State, User } from "./type";
+import type { AuthForm, State, User } from "./type";
 
    const initialState:State = {user:null,error:undefined}
 
@@ -14,8 +14,15 @@ import type { State, User } from "./type";
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     () => api.checkedFetch()
    );
-   
-
+   export const authorization = createAsyncThunk(
+    'auth/authorization',
+    (obj:AuthForm) => api.authorizationFetch(obj)
+   );
+   export const logout = createAsyncThunk(
+   'auth/logout',
+   // eslint-disable-next-line @typescript-eslint/no-floating-promises
+   () => api.checkedFetch()
+  );
    const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -37,7 +44,21 @@ import type { State, User } from "./type";
         })
         .addCase(checked.rejected, (state, action) => {
           state.error = action.error.message;
-        });
+        })
+        .addCase(authorization.fulfilled, (state, action) => {
+          state.user = action.payload;
+          state.error=undefined
+        })
+        .addCase(authorization.rejected, (state, action) => {
+          state.error = action.error.message;
+        })
+        .addCase(logout.fulfilled, (state, action) => {
+          state.user = null ;
+          state.error=undefined
+        })
+        .addCase(logout.rejected, (state, action) => {
+          state.error = action.error.message;
+        })
     },
    });
    export const {clear} = authSlice.actions
