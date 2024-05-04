@@ -1,15 +1,20 @@
 .image-container {
     background-size: cover;
-    background-position: center;
-    height: 200px; 
+    background-position: bottom;
+    height: 400px; 
     display: flex;
     justify-content: center;
     align-items: flex-end;
     position: relative;
+    margin-bottom: 1px;
+    margin-top: 1px;
+
   }
 
   .collections {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch3larimar.jpg');
+    background-image: url('/Новинки.JPG');
+    /* background-size: 200px; */
+    background-repeat: no-repeat;
   }
 
   .specials {
@@ -27,3 +32,23 @@
     width: 100%;
     text-align: center;
   }
+
+.TextHead{
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: rgba(128, 128, 128, 0.671);
+  font-size: 25px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.colPhoto{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  img{
+    width: calc(50vw - 1px);
+    height: calc(50vw - 1px);
+  }
+}

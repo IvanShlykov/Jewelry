@@ -31,7 +31,24 @@ module.exports = {
         {
           scale: 'Единый размер',
         },
-
+        {
+          scale: '35см',
+        },
+        {
+          scale: '40см',
+        },
+        {
+          scale: '45см',
+        },
+        {
+          scale: '50см',
+        },
+        {
+          scale: '55см',
+        },
+        {
+          scale: '60см',
+        },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}
     );

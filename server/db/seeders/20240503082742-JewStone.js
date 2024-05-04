@@ -5,8 +5,20 @@ module.exports = {
       'JewStones',
       [
         {
-          jewelryID: 1,
-          stoneID: 1,
+          jewelryID: 4,
+          stoneID: 2,
+        },
+        {
+          jewelryID: 16,
+          stoneID: 2,
+        },
+        {
+          jewelryID: 22,
+          stoneID: 2,
+        },
+        {
+          jewelryID: 33,
+          stoneID: 2,
         },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}

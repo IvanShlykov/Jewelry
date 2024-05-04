@@ -5,10 +5,10 @@ module.exports = {
       'Stones',
       [
         {
-          title: 'Фианит',
+          title: 'Без камней',
         },
         {
-          title: 'Алмаз',
+          title: 'Фианит',
         },
         {
           title: 'Джевалит',

@@ -5,13 +5,18 @@ module.exports = {
       'Collections',
       [
         {
-          name: 'Весна',
-          photo: '/CollectionIMG/Весна.jpg',
+          name: 'База',
+          photo: '',
         },
         {
-          name: 'Зима',
-          photo: '/CollectionIMG/Зима.jpg',
+          name: 'Слушай своё сердце',
+          photo: '/CollectionIMG/Heart.jpg',
         },
+        {
+          name: 'н а ц е п и',
+          photo: '/CollectionIMG/chain.JPG',
+        },
+
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}
     );
