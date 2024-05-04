@@ -5,7 +5,7 @@ export type User={
     password:string;
 }
 
-export type UserClient = User['name'] & {id:'number'}
+export type UserClient = User['name'] & {id:'number', isAdmin: boolean}
 export type RegistrationUser = User & {cpassword:'string'}
 
 

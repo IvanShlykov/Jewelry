@@ -14,6 +14,7 @@ import Authorization from '../features/Auth/components/Authorization';
 
 import { initJewelry } from '../features/JewelrysPage/jewelrySlice';
 import HomePage from '../features/HomePage/components/HomePage';
+import AdminPage from '../features/Admin/components/AdminPage';
 
 
 function App(): JSX.Element {
@@ -38,6 +39,7 @@ function App(): JSX.Element {
           <Route path="new" element={<NewPage />} /> */}
           <Route  path='registration' element={<Registration/>}/>
           <Route  path='authorization' element={<Authorization/>}/>
+          <Route  path='admin' element={<AdminPage/>}/>
         </Route>
 
       </Routes>

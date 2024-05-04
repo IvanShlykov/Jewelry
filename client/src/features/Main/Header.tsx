@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
-import  { RootState, useAppDispatch } from '../../store/store';
+import type { RootState} from '../../store/store';
+import  { useAppDispatch } from '../../store/store';
 import { logout } from '../Auth/authSlice';
 
 
@@ -12,6 +13,8 @@ function Header():JSX.Element {
   const logOutHeader = ():void=>{
     dispatch(logout()).catch(console.log)
   }
+  console.log(user);
+  
   return (
     <div>
 
@@ -32,6 +35,7 @@ function Header():JSX.Element {
               
             </li>
           )}
+          {user && user.isAdmin && <NavLink to='/admin'>Управление</NavLink>}
 
     </div>
   )

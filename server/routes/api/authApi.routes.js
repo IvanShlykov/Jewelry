@@ -6,14 +6,25 @@ const jwtConfig = require('../../config/jwtConfig');
 
 router.post('/registration', async (req, res) => {
   try {
-    const { name, email,phone, password} = req.body;
-    if (name && email && phone && password ) {
+    const { name, email, phone, password } = req.body;
+    if (name && email && phone && password) {
       let user = await User.findOne({ where: { email } });
       if (!user) {
         const hash = await bcrypt.hash(password, 10);
-        user = await User.create({ name, email, phone,password: hash });
+        user = await User.create({
+          name,
+          email,
+          phone,
+          password: hash,
+        });
         const { accessToken, refreshToken } = generateTokens({
-          user: { id: user.id, email: user.email, name: user.name, phone: user.phone},
+          user: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            phone: user.phone,
+            isAdmin: user.isAdmin,
+          },
         });
         res.cookie(jwtConfig.access.type, accessToken, {
           httpOnly: true,
@@ -23,7 +34,10 @@ router.post('/registration', async (req, res) => {
           httpOnly: true,
           maxAge: jwtConfig.refresh.expiresIn,
         });
-        res.status(201).json({ message: 'ok', user: { id: user.id, name: user.name } });
+        res.status(201).json({
+          message: 'ok',
+          user: { id: user.id, name: user.name, isAdmin: user.isAdmin },
+        });
       } else {
         res.status(400).json({ message: 'такой пользователь уже существует' });
       }
@@ -37,13 +51,13 @@ router.post('/registration', async (req, res) => {
 router.post('/authorization', async (req, res) => {
   try {
     const { email, password } = req.body;
-console.log(req.body);
+    console.log(req.body);
     if (email && password) {
       const user = await User.findOne({ where: { email } });
       if (user && (await bcrypt.compare(password, user.password))) {
-        const { accessToken, refreshToken } = generateTokens(
-          { user: { name: user.name, id: user.id } },
-        );
+        const { accessToken, refreshToken } = generateTokens({
+          user: { name: user.name, id: user.id, isAdmin: user.isAdmin },
+        });
         res.cookie(jwtConfig.access.type, accessToken, {
           httpOnly: true,
           maxAge: jwtConfig.access.expiresIn,
@@ -53,8 +67,11 @@ console.log(req.body);
           httpOnly: true,
           maxAge: jwtConfig.refresh.expiresIn,
         });
-        console.log("dsad");
-        res.status(200).json({ message: 'ok', user: { name: user.name, id: user.id } });
+        console.log('dsad');
+        res.status(200).json({
+          message: 'ok',
+          user: { name: user.name, id: user.id, isAdmin: user.isAdmin },
+        });
       } else {
         res.status(400).json({ message: 'почта или пароль не верный' });
       }
@@ -68,7 +85,11 @@ console.log(req.body);
 
 router.get('/checked', async (req, res) => {
   if (res.locals.user) {
-    res.status(200).json({ id: res.locals.user.id, name: res.locals.user.name });
+    res.status(200).json({
+      id: res.locals.user.id,
+      name: res.locals.user.name,
+      isAdmin: res.locals.user.isAdmin,
+    });
   } else {
     res.status(400).json({ message: 'neok' });
   }
@@ -77,5 +98,5 @@ router.get('/checked', async (req, res) => {
 router.get('/logout', async (req, res) => {
   res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
   res.json({ message: 'success' });
-})
+});
 module.exports = router;
