@@ -1,11 +1,16 @@
-.main{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+
+a {
+    text-decoration: none;
 }

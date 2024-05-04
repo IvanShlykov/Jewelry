@@ -10,23 +10,21 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="banners">
-      <Link className="banner-collections" to="/collections">
-        <div className="image-container collections">
+      <Link className="banner-new" to="/new">
+        <div className="image-container new">
           <span className="banner-collections-text">Новинки</span>
         </div>
       </Link>
       <div className="TextHead">Коллекции</div>
-      {collections.slice(1).map((el) => (
-        <Collection collection={el} key={el.id}/>
+      {collections.slice(1, 3).map((el) => (
+        <Collection collection={el} key={el.id} />
       ))}
+      <Link to="/collections">
+        <div className="TextBottom">Смотреть все коллекции</div>
+      </Link>
       <Link className="banner-specials" to="/specials">
         <div className="image-container specials">
-          <span className="banner-collections-text">Смотреть коллекцию</span>
-        </div>
-      </Link>
-      <Link className="banner-new" to="/new">
-        <div className="image-container new">
-          <span className="banner-collections-text">ПОДРОБНЕЕ</span>
+          <span className="banner-collections-text">Смотерть</span>
         </div>
       </Link>
     </div>

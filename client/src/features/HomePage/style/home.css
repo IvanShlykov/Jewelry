@@ -22,7 +22,7 @@
   }
 
   .new {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/NZOV4Plarimar.jpg');
+    background-image: url('/Новинки.JPG');
   }
 
   .banner-collections-text {
@@ -33,14 +33,18 @@
     text-align: center;
   }
 
-.TextHead{
+.TextHead, .TextBottom{
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   background-color: rgba(128, 128, 128, 0.671);
-  font-size: 25px;
   margin-top: 1px;
   margin-bottom: 1px;
+}
+
+.TextBottom{
+  background-color: white;
+  color: black;
 }
 
 .colPhoto{
