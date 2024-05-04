@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { addCollection, initCollections } from '../adminSlice';
+import type { Collection } from '../type';
 
-function AddCollection(): JSX.Element {
+type Props = {
+  collections: Collection[];
+};
+
+function AddCollection({ collections }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [nameCollection, setNameCollection] = useState('');
@@ -27,7 +32,7 @@ function AddCollection(): JSX.Element {
         <input
           name="photo"
           type="text"
-          placeholder="Название коллекции"
+          placeholder="Фото"
           value={photoCollection}
           onChange={(e) => setPhotoCollection(e.target.value)}
         />

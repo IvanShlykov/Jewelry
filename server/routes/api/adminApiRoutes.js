@@ -1,5 +1,16 @@
 const router = require('express').Router();
+const multer = require('multer');
 const { Collection } = require('../../db/models');
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, 'public/CollectionIMG/');
+  },
+  filename(req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+const upload = multer({ storage });
 
 router.get('/collection', async (req, res) => {
   try {
@@ -10,10 +21,11 @@ router.get('/collection', async (req, res) => {
   }
 });
 
-router.post('/collection', async (req, res) => {
+router.post('/collection', upload.single('img'), async (req, res) => {
   try {
-    const { name, photo } = req.body;
-    const collection = await Collection.create({ name, photo });
+    const { name } = req.body;
+    const newPhoto = req.file.path.replace('public', '');
+    const collection = await Collection.create({ name, photo: newPhoto });
     res.status(200).json({ collection });
   } catch ({ message }) {
     res.json({ message });
