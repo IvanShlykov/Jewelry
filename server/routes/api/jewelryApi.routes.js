@@ -1,15 +1,11 @@
-const router = require("express").Router();
-const {Jewelry} = require('../../db/models');
+const router = require('express').Router();
+const { Jewelry } = require('../../db/models');
 
-router.get("/", async (req, res) => {
-
+router.get('/', async (req, res) => {
   try {
-   
     const jewelrys = await Jewelry.findAll();
-    console.log(jewelrys,'fhgfffffffffff')
     res.status(200).json({ jewelrys });
   } catch ({ message }) {
-    console.log(message,'mmmmeee')
     res.status(500).json({ message });
   }
 });
