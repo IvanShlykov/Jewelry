@@ -23,8 +23,9 @@ function HomePage(): JSX.Element {
         <div className="TextBottom">Смотреть все коллекции</div>
       </Link>
       <Link className="banner-specials" to="/specials">
+      <div className="TextHead">Предложения до 5 000 руб.</div>
         <div className="image-container specials">
-          <span className="banner-collections-text">Смотерть</span>
+          <span className="banner-collections-text">Смотреть все</span>
         </div>
       </Link>
     </div>

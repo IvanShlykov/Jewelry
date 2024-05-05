@@ -11,14 +11,18 @@
 
   }
 
-  .collections {
-    background-image: url('/Новинки.JPG');
+  /* .collections { */
+    /* background-image: url('/Новинки.JPG'); */
     /* background-size: 200px; */
-    background-repeat: no-repeat;
-  }
+    /* background-repeat: no-repeat; */
+  /* } */
 
   .specials {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch4larimar.jpg');
+    background-image: url('5000.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    background-position: center;
+    margin-top: 0;
   }
 
   .new {
@@ -39,7 +43,7 @@
   padding-bottom: 15px;
   background-color: rgba(128, 128, 128, 0.671);
   margin-top: 1px;
-  margin-bottom: 1px;
+  /* margin-bottom: 1px; */
 }
 
 .TextBottom{

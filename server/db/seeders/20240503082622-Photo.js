@@ -6,9 +6,16 @@ module.exports = {
       [
         {
           jewelryID: 1,
-          url: 'https://drive.google.com/drive/folders/1QyouNQuXlWgBnAvPcVvLfPz-ruYmfaoT'
+          url: '11.jpg',
         },
-
+        {
+          jewelryID: 1,
+          url: '12.jpg',
+        },
+        {
+          jewelryID: 1,
+          url: '13.jpg',
+        },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}
     );
