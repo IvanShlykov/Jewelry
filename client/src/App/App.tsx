@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 
 import './App.css';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import Main from '../features/Main/Main';
 
 import Registration from '../features/Auth/components/Registration';
+import type { RootState } from '../store/store';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
 import Authorization from '../features/Auth/components/Authorization';
@@ -15,14 +17,21 @@ import HomePage from '../features/HomePage/components/HomePage';
 import AdminPage from '../features/Admin/components/AdminPage';
 import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useSelector((store: RootState) => store.authState.user);
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
   }, []);
+
+  useEffect(() => {
+   if(user && user.isAdmin){
+    navigate('/admin')
+   }
+  }, [user]);
 
   return (
     <div className="App">
@@ -35,8 +44,8 @@ function App(): JSX.Element {
           <Route path="new" element={<NewPage />} /> */}
           <Route path="registration" element={<Registration />} />
           <Route path="authorization" element={<Authorization />} />
-          <Route path="admin" element={<AdminPage />} />
         </Route>
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </div>
   );

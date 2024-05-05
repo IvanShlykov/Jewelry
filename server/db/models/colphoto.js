@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ Collection }) {
-      this.belongsTo(Collection, { foreignKey: 'collectionID' });
+      this.belongsTo(Collection, {
+        foreignKey: 'collectionID',
+        onDelete: 'CASCADE',
+      });
     }
   }
   ColPhoto.init(
@@ -16,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       url: DataTypes.STRING,
       collectionID: {
         type: DataTypes.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Collections',
           key: 'id',
