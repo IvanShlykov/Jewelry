@@ -17,6 +17,7 @@ module.exports = {
           model: 'Collections',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

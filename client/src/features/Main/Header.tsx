@@ -11,7 +11,6 @@ function Header(): JSX.Element {
   const logOutHeader = (): void => {
     dispatch(logout()).catch(console.log);
   };
-  console.log(user);
   const [check, setCheck] = useState(false);
   const change = (): void => {
     setCheck((prev) => !prev);
@@ -68,7 +67,6 @@ function Header(): JSX.Element {
           </Link>
         
       )}
-      {user && user.isAdmin && <NavLink to="/admin">Управление</NavLink>}
     </div>
   );
 }

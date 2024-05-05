@@ -8,12 +8,18 @@ export const initCollections = createAsyncThunk('collections/init', () =>
   api.initCollectionFetch(),
 );
 
-export const addCollection = createAsyncThunk('collection/add', (collection: CollectionAdd) =>
-  api.addCollectionFetch(collection),
+export const addCollection = createAsyncThunk('collection/add', (formData: FormData) =>
+  api.addCollectionFetch(formData),
 );
 
 export const delCollection = createAsyncThunk('collection/del', (id: IDCollection) =>
   api.delCollectionFetch(id),
+);
+
+export const changeCollection = createAsyncThunk(
+  'collection/change',
+  ({ formData, id }: { formData: FormData; id: IDCollection }) =>
+    api.changeCollectionFetch(formData, id),
 );
 
 const adminSlice = createSlice({
@@ -37,10 +43,17 @@ const adminSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(delCollection.fulfilled, (state, action) => {
-        state.collections = state.collections.filter((el) => el.id !== action.payload)
+        state.collections = state.collections.filter((el) => el.id !== action.payload);
         state.error = undefined;
       })
       .addCase(delCollection.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(changeCollection.fulfilled, (state, action) => {
+        state.collections = state.collections.map((el) => el.id === action.payload.id ? action.payload : el)
+        state.error = undefined;
+      })
+      .addCase(changeCollection.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
