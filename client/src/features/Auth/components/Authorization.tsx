@@ -49,9 +49,9 @@ const {
     return (
             <div className='auth'>
   <form onSubmit={handleSubmit(auth)}>
-            <input type='email' placeholder='email' {...register('email')}/>
+            <input className='inputAuth' type='email' placeholder='email' {...register('email')}/>
             <span>{errors.email?.message}</span>
-            <input type='password' placeholder='password' {...register('password')}/>
+            <input className='inputAuth' type='password' placeholder='password' {...register('password')}/>
             <span>{errors.password?.message}</span>
             <button className='btn' type='submit'>authorization</button>
         </form>
