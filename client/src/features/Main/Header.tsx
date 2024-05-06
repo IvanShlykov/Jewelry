@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import type { RootState } from '../../store/store';
 import { useAppDispatch } from '../../store/store';
 import { logout } from '../Auth/authSlice';
+
 import ModalWindowAuth from '../Admin/components/ModalWindowAuth';
 
 function Header(): JSX.Element {
@@ -29,6 +30,7 @@ function Header(): JSX.Element {
       setIsModalOpen(false); 
     }).catch(console.log);
   };
+
   return (
     <div className="menu">
       <input
@@ -66,6 +68,7 @@ function Header(): JSX.Element {
             Специальные предложения
           </NavLink>
         </li>
+
     
       </ul>
     
@@ -75,12 +78,11 @@ function Header(): JSX.Element {
       <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
         </>
       ) : (
+
           <Link onClick={logOutHeader} to="/">
             Выйти
-          </Link>
-        
+          </Link>  
       )} 
-      
     </div>
   );
 }
