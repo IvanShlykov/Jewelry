@@ -37,7 +37,6 @@ router.post('/registration', async (req, res) => {
 router.post('/authorization', async (req, res) => {
   try {
     const { email, password } = req.body;
-console.log(req.body);
     if (email && password) {
       const user = await User.findOne({ where: { email } });
       if (user && (await bcrypt.compare(password, user.password))) {
@@ -53,7 +52,6 @@ console.log(req.body);
           httpOnly: true,
           maxAge: jwtConfig.refresh.expiresIn,
         });
-        console.log("dsad");
         res.status(200).json({ message: 'ok', user: { name: user.name, id: user.id } });
       } else {
         res.status(400).json({ message: 'почта или пароль не верный' });
