@@ -16,6 +16,7 @@ import { initCollectionsHome, initJewelrys } from '../features/JewelrysPage/jewe
 import HomePage from '../features/HomePage/components/HomePage';
 import AdminPage from '../features/Admin/components/AdminPage';
 import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
+import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCustomJewelery';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ function App(): JSX.Element {
           <Route path="new" element={<NewPage />} /> */}
           <Route path="registration" element={<Registration />} />
           <Route path="authorization" element={<Authorization />} />
+          <Route path="application" element={<AddCustomJewelery/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

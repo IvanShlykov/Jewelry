@@ -4,6 +4,8 @@ import authSlice from '../features/Auth/authSlice';
 
 import jewelrysSlice from '../features/JewelrysPage/jewelrysSlice';
 import adminSlice from '../features/Admin/adminSlice';
+import  addCustomJewelerySlice  from '../features/AddCustomJewelery/jewelrysSlice';
+
 
 
 const store = configureStore({
@@ -11,7 +13,7 @@ const store = configureStore({
     authState: authSlice,
     jewelrysState: jewelrysSlice,
     adminState: adminSlice,
-
+    CustomJewelerysState: addCustomJewelerySlice
   },
 });
 
