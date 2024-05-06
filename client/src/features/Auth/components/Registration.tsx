@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { number, object, ref, string } from 'yup';
+import { object, ref, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { RootState} from '../../../store/store';
 import { useAppDispatch } from '../../../store/store'

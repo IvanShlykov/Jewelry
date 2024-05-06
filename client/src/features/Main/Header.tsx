@@ -5,15 +5,30 @@ import type { RootState } from '../../store/store';
 import { useAppDispatch } from '../../store/store';
 import { logout } from '../Auth/authSlice';
 
+import ModalWindowAuth from '../Admin/components/ModalWindowAuth';
+
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.authState.user);
-  const logOutHeader = (): void => {
-    dispatch(logout()).catch(console.log);
-  };
+ 
   const [check, setCheck] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (): void => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+  };
   const change = (): void => {
     setCheck((prev) => !prev);
+  };
+  const logOutHeader = (): void => {
+    dispatch(logout()).then(() => {
+      setIsModalOpen(false); 
+    }).catch(console.log);
   };
 
   return (
@@ -53,20 +68,21 @@ function Header(): JSX.Element {
             Специальные предложения
           </NavLink>
         </li>
-      </ul>
 
-      {!user ? (
+    
+      </ul>
+    
+       {!user ? (
         <>
-          <Link to="/registration">Регистрация</Link>
-          <Link to="/authorization">Войти</Link>
+       <button onClick={openModal}>Открыть модальное окно</button>
+      <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
         </>
       ) : (
-        
+
           <Link onClick={logOutHeader} to="/">
             Выйти
-          </Link>
-        
-      )}
+          </Link>  
+      )} 
     </div>
   );
 }
