@@ -2,32 +2,50 @@ import React, { useEffect } from 'react';
 
 import './App.css';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import Main from '../features/Main/Main';
 
 import Registration from '../features/Auth/components/Registration';
+import type { RootState } from '../store/store';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
 import Authorization from '../features/Auth/components/Authorization';
-import { initJewelry } from '../features/JewelrysPage/jewelrySlice';
+import { initCollectionsHome, initJewelrys } from '../features/JewelrysPage/jewelrysSlice';
 import HomePage from '../features/HomePage/components/HomePage';
+import AdminPage from '../features/Admin/components/AdminPage';
+import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useSelector((store: RootState) => store.authState.user);
+  const navigate = useNavigate()
   useEffect(() => {
-    dispatch(initJewelry()).catch(console.log)
+    dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
+    dispatch(initCollectionsHome()).catch(console.log);
   }, []);
+
+  useEffect(() => {
+   if(user && user.isAdmin){
+    navigate('/admin')
+   }
+  }, [user]);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<HomePage />} />
+          <Route path="jewelry" element={<JewelrysPage />} />
+          {/* <Route path="collections" element={<CollectionsPage />} />
+          <Route path="specials" element={<SpecialsPage />} />
+          <Route path="new" element={<NewPage />} /> */}
           <Route path="registration" element={<Registration />} />
-          <Route  path='authorization' element={<Authorization/>}/>
+          <Route path="authorization" element={<Authorization />} />
         </Route>
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </div>
   );

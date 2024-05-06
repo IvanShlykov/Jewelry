@@ -36,10 +36,10 @@ import { fetchLogOut } from '../Auth/api';
               </li>
             </>
           ) : (
-            // <li>
-            //   <NavLink onClick={logOut} to="/">
-            //     logout{' '}
-            //   </NavLink>
+            //  <li>
+            //    <NavLink onClick={logOut} to="/">
+            //      logout{' '}
+            //  </NavLink>
             // </li>
           )}
         </ul>

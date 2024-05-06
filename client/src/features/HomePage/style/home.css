@@ -1,23 +1,32 @@
 .image-container {
     background-size: cover;
-    background-position: center;
-    height: 200px; 
+    background-position: bottom;
+    height: 400px; 
     display: flex;
     justify-content: center;
     align-items: flex-end;
     position: relative;
+    margin-bottom: 1px;
+    margin-top: 1px;
+
   }
 
-  .collections {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch3larimar.jpg');
-  }
+  /* .collections { */
+    /* background-image: url('/Новинки.JPG'); */
+    /* background-size: 200px; */
+    /* background-repeat: no-repeat; */
+  /* } */
 
   .specials {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/sch4larimar.jpg');
+    background-image: url('5000.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    background-position: center;
+    margin-top: 0;
   }
 
   .new {
-    background-image: url('https://dvajirafa.ru/data/LARIMAR/NZOV4Plarimar.jpg');
+    background-image: url('/Новинки.JPG');
   }
 
   .banner-collections-text {
@@ -27,3 +36,27 @@
     width: 100%;
     text-align: center;
   }
+
+.TextHead, .TextBottom{
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: rgba(128, 128, 128, 0.671);
+  margin-top: 1px;
+  /* margin-bottom: 1px; */
+}
+
+.TextBottom{
+  background-color: white;
+  color: black;
+}
+
+.colPhoto{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  img{
+    width: calc(50vw - 1px);
+    height: calc(50vw - 1px);
+  }
+}

@@ -11,7 +11,21 @@ export type Jewelry = {
   metallId: number;
 };
 
+export type PhotoCol = {
+  id: number;
+  collectionID: number;
+  url: string
+}
+
+export type CollectionHome= {
+  id: number;
+  name: string;
+  photo: string;
+  ColPhotos: PhotoCol[]
+};
+
 export type State = {
   jewelrys: Jewelry[];
+  collections: CollectionHome[];
   error: undefined | string;
 };
