@@ -33,15 +33,19 @@ router.delete('/collection/:id', async (req, res) => {
     const { id } = req.params;
     const jewelrys = await Jewelry.findAll({ where: { collectionID: id } });
     if (jewelrys.length) {
-      jewelrys.forEach((element) => {
-        element.collectionID = 1;
-        element.save();
-      });
+      for (let i = 0; i < jewelrys.length; i += 1) {
+        // eslint-disable-next-line no-await-in-loop
+        await Jewelry.update(
+          { collectionID: 1 },
+          { where: { id: jewelrys[i].id } }
+        );
+      }
     }
 
     await Collection.destroy({ where: { id } });
     res.status(200).json(+id);
   } catch ({ message }) {
+    console.log(message);
     res.status(500).json({ message });
   }
 });
@@ -63,6 +67,56 @@ router.put('/collection/:id', async (req, res) => {
     res.status(200).json({ collection });
   } catch ({ message }) {
     res.json({ message });
+  }
+});
+
+// ColPhoto
+router.get('/colphotos', async (req, res) => {
+  try {
+    const colPhotos = await ColPhoto.findAll({
+      include: Collection,
+      order: [['collectionID', 'ASC']],
+    });
+    console.log(colPhotos);
+    res.status(200).json({ colPhotos });
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.post('/colphoto', async (req, res) => {
+  try {
+    const file = req.files && req.files.photo;
+    let img;
+    if (file) {
+      img = await fileupload(file);
+    } else {
+      img = '/img/placeholder.png';
+    }
+    const { collectionID } = req.body;
+
+    let colPhoto = await ColPhoto.create({
+      collectionID: +collectionID,
+      url: img,
+    });
+    colPhoto = await ColPhoto.findOne({
+      where: { id: colPhoto.id },
+      include: Collection,
+    });
+    res.status(200).json({ colPhoto });
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.delete('/colphoto/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await ColPhoto.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    console.log(message);
+    res.status(500).json({ message });
   }
 });
 

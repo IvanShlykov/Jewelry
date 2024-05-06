@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Collection }) {
       this.belongsTo(Collection, {
         foreignKey: 'collectionID',
-        onDelete: 'CASCADE',
+        // onDelete: 'CASCADE',
       });
     }
   }
