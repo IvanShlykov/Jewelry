@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
-import type { Collection, CollectionAdd, IDCollection, State } from './type';
+import type { Collection, CollectionAdd, IDCollection, Metall, MetallAdd, State } from './type';
 
-const initialState: State = { collections: [],colPhotos: [], error: undefined };
+const initialState: State = { collections: [], colPhotos: [], metalls: [], error: undefined };
 
 export const initCollections = createAsyncThunk('collections/init', () =>
   api.initCollectionFetch(),
@@ -22,9 +22,7 @@ export const changeCollection = createAsyncThunk(
     api.changeCollectionFetch(formData, id),
 );
 
-export const initColPhotos = createAsyncThunk('colPhotos/init', () =>
-  api.initColPhotosFetch(),
-);
+export const initColPhotos = createAsyncThunk('colPhotos/init', () => api.initColPhotosFetch());
 
 export const addColPhoto = createAsyncThunk('colPhoto/add', (formData: FormData) =>
   api.addColPhotoFetch(formData),
@@ -32,6 +30,20 @@ export const addColPhoto = createAsyncThunk('colPhoto/add', (formData: FormData)
 
 export const delColPhoto = createAsyncThunk('colPhoto/del', (id: IDCollection) =>
   api.delColPhotoFetch(id),
+);
+
+export const initMetalls = createAsyncThunk('metall/init', () => api.initMetallsFetch());
+
+export const addMetall = createAsyncThunk('metall/add', (obj: MetallAdd) =>
+  api.addMetallFetch(obj),
+);
+
+export const delMetall = createAsyncThunk('metall/del', (id: IDCollection) =>
+  api.delMetallFetch(id),
+);
+
+export const changeMetall = createAsyncThunk('metall/change', (obj: Metall) =>
+  api.changeMetallFetch(obj),
 );
 
 const adminSlice = createSlice({
@@ -63,8 +75,12 @@ const adminSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(changeCollection.fulfilled, (state, action) => {
-        state.collections = state.collections.map((el) => el.id === action.payload.id ? action.payload : el)
-        state.colPhotos = state.colPhotos.map((el) => el.collectionID === action.payload.id ? ({...el,Collection: action.payload}) : el)
+        state.collections = state.collections.map((el) =>
+          el.id === action.payload.id ? action.payload : el,
+        );
+        state.colPhotos = state.colPhotos.map((el) =>
+          el.collectionID === action.payload.id ? { ...el, Collection: action.payload } : el,
+        );
         state.error = undefined;
       })
       .addCase(changeCollection.rejected, (state, action) => {
@@ -79,7 +95,7 @@ const adminSlice = createSlice({
       })
       .addCase(addColPhoto.fulfilled, (state, action) => {
         state.colPhotos.push(action.payload);
-        state.colPhotos.sort((a,b) => a.Collection.id < b.Collection.id ? -1 : 1)
+        state.colPhotos.sort((a, b) => (a.Collection.id < b.Collection.id ? -1 : 1));
         state.error = undefined;
       })
       .addCase(addColPhoto.rejected, (state, action) => {
@@ -92,6 +108,30 @@ const adminSlice = createSlice({
       .addCase(delColPhoto.rejected, (state, action) => {
         state.error = action.error.message;
       })
+      .addCase(initMetalls.fulfilled, (state, action) => {
+        state.metalls = action.payload;
+        state.error = undefined;
+      })
+      .addCase(initMetalls.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(addMetall.fulfilled, (state, action) => {
+        state.metalls.push(action.payload);
+        state.error = undefined;
+      })
+      .addCase(addMetall.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(delMetall.fulfilled, (state, action) => {
+        state.metalls = state.metalls.filter((el) => el.id !== action.payload);
+        state.error = undefined;
+      })
+      .addCase(changeMetall.fulfilled, (state, action) => {
+        state.metalls = state.metalls.map((el) =>
+          el.id === action.payload.id ? action.payload : el,
+        );
+        state.error = undefined;
+      });
   },
 });
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Collection, Jewelry, ColPhoto } = require('../../db/models');
+const { Collection, Jewelry, ColPhoto, Metall } = require('../../db/models');
 const fileupload = require('../../utils/fileUpload');
 
 router.get('/collection', async (req, res) => {
@@ -7,7 +7,7 @@ router.get('/collection', async (req, res) => {
     const collections = await Collection.findAll({ order: [['id', 'ASC']] });
     res.status(200).json({ collections });
   } catch ({ message }) {
-    res.json({ message });
+    res.status(500).json({ message });
   }
 });
 
@@ -24,7 +24,7 @@ router.post('/collection', async (req, res) => {
     const collection = await Collection.create({ name, photo: img });
     res.status(200).json({ collection });
   } catch ({ message }) {
-    res.json({ message });
+    res.status(500).json({ message });
   }
 });
 
@@ -45,7 +45,6 @@ router.delete('/collection/:id', async (req, res) => {
     await Collection.destroy({ where: { id } });
     res.status(200).json(+id);
   } catch ({ message }) {
-    console.log(message);
     res.status(500).json({ message });
   }
 });
@@ -66,7 +65,7 @@ router.put('/collection/:id', async (req, res) => {
     const collection = await Collection.findOne({ where: { id } });
     res.status(200).json({ collection });
   } catch ({ message }) {
-    res.json({ message });
+    res.status(500).json({ message });
   }
 });
 
@@ -77,10 +76,9 @@ router.get('/colphotos', async (req, res) => {
       include: Collection,
       order: [['collectionID', 'ASC']],
     });
-    console.log(colPhotos);
     res.status(200).json({ colPhotos });
   } catch ({ message }) {
-    res.json({ message });
+    res.status(500).json({ message });
   }
 });
 
@@ -105,7 +103,7 @@ router.post('/colphoto', async (req, res) => {
     });
     res.status(200).json({ colPhoto });
   } catch ({ message }) {
-    res.json({ message });
+    res.status(500).json({ message });
   }
 });
 
@@ -115,7 +113,49 @@ router.delete('/colphoto/:id', async (req, res) => {
     await ColPhoto.destroy({ where: { id } });
     res.status(200).json(+id);
   } catch ({ message }) {
-    console.log(message);
+    res.status(500).json({ message });
+  }
+});
+
+// Metalls
+router.get('/metalls', async (req, res) => {
+  try {
+    const metalls = await Metall.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ metalls });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/metall', async (req, res) => {
+  try {
+    console.log(req.body);
+    const { name } = req.body;
+    const metall = await Metall.create({ name });
+    res.status(200).json({ metall });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/metall/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Metall.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.put('/metall/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    await Metall.update({ name }, { where: { id } });
+    const metall = await Metall.findOne({ where: { id } });
+    res.status(200).json({ metall });
+  } catch ({ message }) {
     res.status(500).json({ message });
   }
 });

@@ -2,28 +2,22 @@ import React, { useState } from 'react';
 import '../modalStyle.css';
 import type { Collection, IDCollection, Metall } from '../type';
 import { useAppDispatch } from '../../../store/store';
-import { changeCollection } from '../adminSlice';
+import { changeCollection, changeMetall } from '../adminSlice';
 
 type Props = {
-  collection: Collection;
+  metall: Metall;
   state: boolean;
   setState: (modal: boolean) => void;
 };
 
-function ModalWindowChange({ collection, state, setState }: Props): JSX.Element {
+function ModalWindowChangeMetall({ metall, state, setState }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const [newName, setNewName] = useState(collection.name);
-  const [newImg, setNewImg] = useState<File>();
+  const [newName, setNewName] = useState(metall.name);
 
   const changeItem = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const formData = new FormData();
-    if (newImg) {
-      formData.append('photo', newImg);
-    }
-    formData.append('name', newName);
-    dispatch(changeCollection({ formData, id: collection.id })).catch(console.log);
+    dispatch(changeMetall({ id: metall.id, name: newName })).catch(console.log);
     setState(!state);
   };
 
@@ -37,15 +31,6 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
           />
-          <input
-            name="photo"
-            type="file"
-            placeholder="Фото"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              if (event.target.files && event.target.files.length > 0)
-                setNewImg(event.target.files[0]);
-            }}
-          />
           <button className="btn" type="submit">
             Сохранить
           </button>
@@ -58,4 +43,4 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
   );
 }
 
-export default ModalWindowChange;
+export default ModalWindowChangeMetall;
