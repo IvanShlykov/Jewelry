@@ -42,9 +42,9 @@ import type { AuthForm, State, User } from "./type";
           state.user = action.payload;
           state.error=undefined
         })
-        .addCase(checked.rejected, (state, action) => {
-          state.error = action.error.message;
-        })
+        // .addCase(checked.rejected, (state, action) => {
+        //   state.error = action.error.message;
+        // })
         .addCase(authorization.fulfilled, (state, action) => {
           state.user = action.payload;
           state.error=undefined
