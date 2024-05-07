@@ -22,6 +22,7 @@ export type Photo = {
 
 export type IDType = Type['id'];
 export type IDMetall = Metall['id'];
+export type IDJewelry = Jewelry['id'];
 
 export type Type = {
   id: number;
