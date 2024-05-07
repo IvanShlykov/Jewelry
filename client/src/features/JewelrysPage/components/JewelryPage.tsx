@@ -1,8 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@reduxjs/toolkit/query';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '../style/jewelry.css';
+import Slider from 'react-slick';
 import ModalWindowJewelry from './ModalWindowJewelry';
 
 function JewelryPage(): JSX.Element {
@@ -12,6 +15,14 @@ function JewelryPage(): JSX.Element {
     store.jewelrysState.jewelrys.find((jew) => jew.id.toString() === id),
   );
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   if (!jewelry) {
     return <div>Украшение не найдено</div>;
   }
@@ -20,14 +31,21 @@ function JewelryPage(): JSX.Element {
     <div className="card">
       {active && <ModalWindowJewelry active={active} setActive={setActive} id={jewelry.id} />}
       <div id="main-content">
-        <div className="image-container" onClick={() => setActive(true)}>
-          {jewelry.Photos.length > 0 ? (
-            <img
-              src={jewelry.Photos[0].url}
-              alt={`Фото ${jewelry.name}`}
-              className="jewelry-main-photo"
-            />
-          ) : (
+        <div className="image-container">
+          <div className="jewelry-slider-container">
+            <Slider {...settings}>
+              {jewelry.Photos.map((photo, index) => (
+                <div key={index} onClick={() => setActive(true)}>
+                  <img
+                    src={photo.url}
+                    alt={`Фото ${jewelry.name}`}
+                    className="jewelry-main-photo"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+          {jewelry.Photos.length === 0 && (
             <div className="no-photo">К сожалению, фото отсутствует</div>
           )}
         </div>
