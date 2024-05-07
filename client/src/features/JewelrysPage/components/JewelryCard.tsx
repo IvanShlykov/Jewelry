@@ -9,12 +9,22 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
   return (
     <div className="card">
       <Link to={`/jewelry/${jewelry.id}`}>
-        <img src='https://dvajirafa.ru/data/LARIMAR/xNK4Plarimar.jpg.pagespeed.ic.a_l9lgGh-c.jpg' alt="..." />
+        <div className="image-container">
+          {jewelry.Photos.length > 0 ? (
+            <>
+              <img
+                src={jewelry.Photos[0].url}
+                alt={`Фото ${jewelry.name}`}
+                className="jewelry-main-photo"
+              />
+              <div className="text-overlay-top">{jewelry.name}</div>
+              <div className="text-overlay-bottom">{`${jewelry.price} ₽`}</div>
+            </>
+          ) : (
+            <div className="no-photo">К сожалению, фото отсутствует</div>
+          )}
+        </div>
       </Link>
-
-      <h2>
-        <em>{jewelry.description}</em>
-      </h2>
     </div>
   );
 }

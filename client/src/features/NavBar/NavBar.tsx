@@ -7,7 +7,9 @@ import { fetchLogOut } from '../Auth/api';
 
  function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useSelector((store: RootState) => store.auth.authSlice);
+
+  const user = useSelector((store: RootState) => store.auth.user);
+
   const logOut = (): void => {
     fetchLogOut()
       .then((data) => data.message === 'success' && dispatch({ type: 'auth/logOut' }))
@@ -36,10 +38,11 @@ import { fetchLogOut } from '../Auth/api';
               </li>
             </>
           ) : (
-            //  <li>
-            //    <NavLink onClick={logOut} to="/">
-            //      logout{' '}
-            //  </NavLink>
+
+            // <li>
+            //   <NavLink onClick={logOut} to="/">
+            //     logout{' '}
+            //   </NavLink>
             // </li>
           )}
         </ul>
