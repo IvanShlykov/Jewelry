@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../../../store/store';
 import { addCustomJewelery } from '../jewelrysSlice';
-import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store/store';
 
 import type { ApplicationWithOutID } from '../type';

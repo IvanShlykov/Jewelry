@@ -58,3 +58,10 @@
 .inputAuth{
   width: 85%
 }
+.modal-body {
+  overflow-y: auto;
+}
+
+.scrollable-content {
+  padding: 10px;
+}
