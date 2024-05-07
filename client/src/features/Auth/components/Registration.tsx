@@ -66,15 +66,15 @@ const {
     return (
             <div className='auth'>
   <form onSubmit={handleSubmit(reg)}>
-            <input type='text' placeholder='name' {...register('name')}/>
+            <input className='inputAuth' type='text' placeholder='name' {...register('name')}/>
             <span>{errors.name?.message}</span>
-            <input type='email' placeholder='email' {...register('email')}/>
+            <input className='inputAuth' type='email' placeholder='email' {...register('email')}/>
             <span>{errors.email?.message}</span>
-            <input type='text' placeholder='phone' {...register('phone')}/>
+            <input className='inputAuth' type='text' placeholder='phone' {...register('phone')}/>
             <span>{errors.phone?.message}</span>
-            <input type='password' placeholder='password' {...register('password')}/>
+            <input className='inputAuth' type='password' placeholder='password' {...register('password')}/>
             <span>{errors.password?.message}</span>
-            <input type='password' placeholder='cpassword' {...register('cpassword')}/>
+            <input className='inputAuth' type='password' placeholder='cpassword' {...register('cpassword')}/>
             <span>{errors.cpassword?.message}</span>
             <button className='btn' type='submit'>registration</button>
         </form>

@@ -1,0 +1,64 @@
+.jewelry-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  img {
+    width: calc(50vw - 1px);
+    height: calc(50vw - 1px);
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.text-overlay-top,
+.text-overlay-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.text-overlay-top {
+  top: 0;
+}
+
+.text-overlay-bottom {
+  bottom: 0;
+}
+
+.no-photo {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* Медиа-запросы для адаптивной верстки */
+@media (max-width: 600px) {
+  .card {
+    max-width: 100%;
+  }
+}

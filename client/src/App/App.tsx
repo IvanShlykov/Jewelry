@@ -18,10 +18,12 @@ import AdminPage from '../features/Admin/components/AdminPage';
 import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCustomJewelery';
 
+
+
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.authState.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
@@ -29,9 +31,9 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-   if(user && user.isAdmin){
-    navigate('/admin')
-   }
+    if (user && user.isAdmin) {
+      navigate('/admin');
+    }
   }, [user]);
 
   return (
@@ -40,6 +42,7 @@ function App(): JSX.Element {
         <Route path="/" element={<Main />}>
           <Route index element={<HomePage />} />
           <Route path="jewelry" element={<JewelrysPage />} />
+          <Route path="jewelry/:id" element={<JewelryPage />} />
           {/* <Route path="collections" element={<CollectionsPage />} />
           <Route path="specials" element={<SpecialsPage />} />
           <Route path="new" element={<NewPage />} /> */}
