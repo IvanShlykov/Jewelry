@@ -202,4 +202,29 @@ router.get('/types', async (req, res) => {
   }
 });
 
+router.delete('/hashtag/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await JewHashtag.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/hashtag', async (req, res) => {
+  try {
+    const { title, id } = req.body;
+    let hashtag = await Hashtag.findOne({ where: { title } });
+    if (!hashtag) hashtag = await Hashtag.create({ title });
+    const jewHashtag = await JewHashtag.create({
+      hashtagID: hashtag.id,
+      jewelryID: id,
+    });
+    res.status(200).json({ jewHashtag, id });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;

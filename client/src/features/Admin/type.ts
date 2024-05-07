@@ -3,7 +3,7 @@ export type State = {
   colPhotos: ColPhoto[];
   metalls: Metall[];
   jewelrys: Jewelry[];
-  types: Jewelry[];
+  types: Type[];
   error: undefined | string;
 };
 
@@ -48,6 +48,20 @@ export type JewelryAdd = {
   JewStones: JewStone[];
 };
 
+export type JewHashtagAdd = {
+  jewelryID: number;
+  hashtagID: number;
+};
+
+export type JewHashtag = JewHashtagAdd & { id: 'number', Hashtag: Hashtag };
+
+export type HashtagAdd = {
+  title: string;
+};
+
+export type Hashtag = HashtagAdd & { id: 'number' };
+
+
 export type Jewelry = JewelryAdd & { id: 'number' };
 export type IDJewelryAdd = Jewelry['id'];
 
@@ -58,12 +72,6 @@ export type TypeAdd = {
 
 export type Type = TypeAdd & { id: 'number' };
 
-export type JewHashtagAdd = {
-  jewelryID: number;
-  hashtagID: number;
-};
-
-export type JewHashtag = JewHashtagAdd & { id: 'number', Hashtag: Hashtag };
 
 export type StockAdd = {
   sizeID: number;
@@ -94,11 +102,7 @@ export type JewStoneAdd = {
 
 export type JewStone = JewStoneAdd & { id: 'number' };
 
-export type HashtagAdd = {
-  title: string;
-};
 
-export type Hashtag = HashtagAdd & { id: 'number' };
 
 
 export type SizeAdd = {

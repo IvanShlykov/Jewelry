@@ -1,6 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
-import type { Collection, CollectionAdd, IDCollection, Metall, MetallAdd, State } from './type';
+import type {
+  Collection,
+  CollectionAdd,
+  Hashtag,
+  HashtagAdd,
+  IDCollection,
+  Metall,
+  MetallAdd,
+  State,
+} from './type';
 
 const initialState: State = {
   collections: [],
@@ -54,9 +63,17 @@ export const changeMetall = createAsyncThunk('metall/change', (obj: Metall) =>
   api.changeMetallFetch(obj),
 );
 
-export const initJewelrys = createAsyncThunk('jewelrys/init', () => api.initJewelrysFetch());
+export const initJewelrys = createAsyncThunk('jewelrysAdmin/init', () => api.initJewelrysFetch());
 
 export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
+
+export const delHashTag = createAsyncThunk('hashtag/del', (id: IDCollection) =>
+  api.delHashtagFetch(id),
+);
+
+export const addHashtagSlice = createAsyncThunk('hashtag/add', (obj: Hashtag) =>
+  api.addHashtagFetch(obj),
+);
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -150,6 +167,24 @@ const adminSlice = createSlice({
       })
       .addCase(initTypes.fulfilled, (state, action) => {
         state.types = action.payload;
+        state.error = undefined;
+      })
+      .addCase(delHashTag.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) => ({
+          ...el,
+          JewHashtags: el.JewHashtags.filter((elem) => elem.id !== action.payload),
+        }));
+        state.error = undefined;
+      })
+      .addCase(addHashtagSlice.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.id
+            ? {
+                ...el,
+                JewHashtags: [...el.JewHashtags, action.payload.jewHashtag]
+              }
+            : el,
+        )
         state.error = undefined;
       });
   },

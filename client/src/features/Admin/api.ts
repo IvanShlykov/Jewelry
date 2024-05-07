@@ -1,4 +1,4 @@
-import type { ColPhoto, Collection, CollectionAdd, IDCollection, Jewelry, Metall, MetallAdd, Type } from './type';
+import type { ColPhoto, Collection, CollectionAdd, Hashtag, HashtagAdd, IDCollection, JewHashtag, Jewelry, Metall, MetallAdd, Type } from './type';
 
 export const initCollectionFetch = async (): Promise<Collection[]> => {
   const res = await fetch('/api/admin/collection');
@@ -128,9 +128,34 @@ export const initJewelrysFetch = async (): Promise<Jewelry[]> => {
   return data.jewelrys;
 };
 
-
+// Types
 export const initTypesFetch = async (): Promise<Type[]> => {
   const res = await fetch('/api/admin/types');
   const data = await res.json();
   return data.types;
+};
+
+// Hashtag
+export const delHashtagFetch = async (id: IDCollection): Promise<IDCollection> => {
+  const res = await fetch(`/api/admin/hashtag/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  }
+  throw data.message;
+};
+
+export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHashtag, id:IDCollection}> => {
+  const res = await fetch('/api/admin/hashtag', {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(obj),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data;
+  }
+  const data = await res.json();
+  throw data.message;
 };
