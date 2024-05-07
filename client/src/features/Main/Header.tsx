@@ -60,6 +60,7 @@ function Header(): JSX.Element {
             Новинки
           </NavLink>
         </li>
+        
         <li>
           <NavLink to="/collections" className="menu-item" onClick={change}>
             Коллекции
@@ -70,6 +71,13 @@ function Header(): JSX.Element {
             Специальные предложения
           </NavLink>
         </li>
+
+        <li>
+          <NavLink to="/application" className="menu-item" onClick={change}>
+            Заказать индивидуальное украшение
+          </NavLink>
+        </li>
+
       </ul>
 
       {!user ? (
