@@ -16,6 +16,10 @@ function ModalWindowSearch({
 
   const dispatch = useDispatch();
 
+  const closeModalWindow = () :void=> {
+    onClose(); 
+  };
+
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>):void=> {
         dispatch(setSearchQuery(e.target.value));
       };
@@ -43,7 +47,7 @@ function ModalWindowSearch({
             <div className="modal-body">
             <div className="scrollable-content">
               {filteredJewelrys.map((jewelry) => (
-                <div className="jewelry-container" key={jewelry.id}>
+                <div className="jewelry-container" key={jewelry.id} onClick={closeModalWindow}>
                   <div className="jewelry-card">
                     <JewelryCard jewelry={jewelry} key={jewelry.id} />
                   </div>
@@ -53,8 +57,7 @@ function ModalWindowSearch({
             </div>
           )}
         </div>
-        </div>
-        
+        </div>  
       )
    : (
     <div className="modal" />
