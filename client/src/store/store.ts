@@ -9,6 +9,7 @@ import searchReducer from '../features/Search/searchSlice';
 
 
 
+
 const store = configureStore({
   reducer: {
     authState: authSlice,
@@ -16,6 +17,7 @@ const store = configureStore({
     adminState: adminSlice,
     customJewelerysState: addCustomJewelerySlice,
     search: searchReducer,
+
   },
 });
 

@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../store/store';
 import { addCustomJewelery } from '../jewelrysSlice';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store/store';
+
 import type { ApplicationWithOutID } from '../type';
 import ModalWindowAuth from '../../Auth/components/ModalWindowAuth';
 
@@ -12,6 +13,7 @@ function AddCustomJewelery(): JSX.Element {
   const [nameJewelery, setNameJewelery] = useState('');
   const [img, setImg] = useState('');
   const user = useSelector((store: RootState) => store.authState.user);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -21,6 +23,7 @@ function AddCustomJewelery(): JSX.Element {
     setIsModalOpen(false);
   };
 
+
   const addCustomJeweleryForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (user) {
@@ -29,12 +32,15 @@ function AddCustomJewelery(): JSX.Element {
       setNameJewelery('');
       setImg('');
     } else {
+
       <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
+
+      console.log('User is not authenticated');
+
     }
   };
 
   return (
-
     user ? (
       <div>
       <form onSubmit={addCustomJeweleryForm}>
@@ -52,6 +58,7 @@ function AddCustomJewelery(): JSX.Element {
 </div>
     )
   )
+
 }
 
 export default AddCustomJewelery;
