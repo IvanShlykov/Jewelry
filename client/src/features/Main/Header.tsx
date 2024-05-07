@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../store/store';
 import { logout } from '../Auth/authSlice';
 
 import ModalWindowAuth from '../Auth/components/ModalWindowAuth';
+import { setSearchQuery } from '../Search/searchSlice';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,6 +15,16 @@ function Header(): JSX.Element {
   const [check, setCheck] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const query = useSelector((store: RootState)=> store.search.searchQuery);
+
+  const jewelrys = useSelector((store: RootState) => store.jewelrysState.jewelrys);
+  const filteredJewelrys = jewelrys.filter(jewelry =>
+    jewelry.name.toLowerCase().includes(query.toLowerCase()))
+
+  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchQuery(e.target.value));
+  };
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -42,6 +53,7 @@ function Header(): JSX.Element {
         onChange={change}
         checked={check}
       />
+      
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="burger-checkbox" className="burger" />
       <ul className="menu-list">
@@ -90,8 +102,17 @@ function Header(): JSX.Element {
           Выйти
         </Link>
       )}
+       <div className="header">
+       <input
+        type="text"
+        value={query}
+        onChange={handleSearch}
+        placeholder="Поиск украшений..."
+      />
+    </div>
     </div>
   );
 }
+
 
 export default Header;

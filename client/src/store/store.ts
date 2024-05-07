@@ -5,6 +5,7 @@ import authSlice from '../features/Auth/authSlice';
 import jewelrysSlice from '../features/JewelrysPage/jewelrysSlice';
 import adminSlice from '../features/Admin/adminSlice';
 import  addCustomJewelerySlice  from '../features/AddCustomJewelery/jewelrysSlice';
+import searchReducer from '../features/Search/searchSlice';
 
 
 
@@ -13,7 +14,8 @@ const store = configureStore({
     authState: authSlice,
     jewelrysState: jewelrysSlice,
     adminState: adminSlice,
-    CustomJewelerysState: addCustomJewelerySlice
+    customJewelerysState: addCustomJewelerySlice,
+    search: searchReducer,
   },
 });
 
