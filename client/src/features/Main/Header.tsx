@@ -6,7 +6,8 @@ import { useAppDispatch } from '../../store/store';
 import { logout } from '../Auth/authSlice';
 
 import ModalWindowAuth from '../Auth/components/ModalWindowAuth';
-import { setSearchQuery } from '../Search/searchSlice';
+
+import ModalWindowSearch from '../Search/components/ModalWindowSearch';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,18 +17,20 @@ function Header(): JSX.Element {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
+
   const query = useSelector((store: RootState)=> store.search.searchQuery);
 
-  const jewelrys = useSelector((store: RootState) => store.jewelrysState.jewelrys);
-  const filteredJewelrys = jewelrys.filter(jewelry =>
-    jewelry.name.toLowerCase().includes(query.toLowerCase()))
-
-  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery(e.target.value));
-  };
 
   const openModal = (): void => {
     setIsModalOpen(true);
+  };
+
+  const closeModalSearch = (): void => {
+    setIsModalSearchOpen(false);
+  };
+  const openModalSearch = (): void => {
+    setIsModalSearchOpen(true);
   };
 
   const closeModal = (): void => {
@@ -102,14 +105,10 @@ function Header(): JSX.Element {
           Выйти
         </Link>
       )}
-       <div className="header">
-       <input
-        type="text"
-        value={query}
-        onChange={handleSearch}
-        placeholder="Поиск украшений..."
-      />
-    </div>
+      <button type="button" onClick={openModalSearch}>
+            Поиск
+          </button>
+          <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
     </div>
   );
 }
