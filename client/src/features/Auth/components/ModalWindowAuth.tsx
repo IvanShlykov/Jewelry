@@ -13,8 +13,8 @@ function ModalWindowAuth({
   const [state, setState] = useState(true);
 
   return isOpen ? (
-    <div className="authmodal active">
-      <div className="authmodal-content">
+    <div className="authmodal active" onClick={onClose}>
+      <div className="authmodal-content" onClick={e => e.stopPropagation()}>
         <div>
           <span className="close" onClick={onClose}>
             &times;

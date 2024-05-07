@@ -54,5 +54,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     'react-refresh/only-export-components': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };

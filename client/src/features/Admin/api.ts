@@ -1,4 +1,4 @@
-import type { ColPhoto, Collection, CollectionAdd, IDCollection, Metall, MetallAdd } from './type';
+import type { ColPhoto, Collection, CollectionAdd, IDCollection, Jewelry, Metall, MetallAdd, Type } from './type';
 
 export const initCollectionFetch = async (): Promise<Collection[]> => {
   const res = await fetch('/api/admin/collection');
@@ -82,10 +82,10 @@ export const initMetallsFetch = async (): Promise<Metall[]> => {
   return data.metalls;
 };
 
-export const addMetallFetch = async (obj:MetallAdd): Promise<Metall> => {
+export const addMetallFetch = async (obj: MetallAdd): Promise<Metall> => {
   const res = await fetch('/api/admin/metall', {
     method: 'post',
-    headers: {'content-type': 'application/json'},
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify(obj),
   });
 
@@ -106,10 +106,10 @@ export const delMetallFetch = async (id: IDCollection): Promise<IDCollection> =>
   throw data.message;
 };
 
-export const changeMetallFetch = async (obj:Metall): Promise<Metall> => {
+export const changeMetallFetch = async (obj: Metall): Promise<Metall> => {
   const res = await fetch(`/api/admin/metall/${obj.id}`, {
     method: 'PUT',
-    headers: {'content-type': 'application/json'},
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify(obj),
   });
 
@@ -119,4 +119,18 @@ export const changeMetallFetch = async (obj:Metall): Promise<Metall> => {
   }
   const data = await res.json();
   throw data.message;
+};
+
+// Jewelry
+export const initJewelrysFetch = async (): Promise<Jewelry[]> => {
+  const res = await fetch('/api/admin/jewelrys');
+  const data = await res.json();
+  return data.jewelrys;
+};
+
+
+export const initTypesFetch = async (): Promise<Type[]> => {
+  const res = await fetch('/api/admin/types');
+  const data = await res.json();
+  return data.types;
 };

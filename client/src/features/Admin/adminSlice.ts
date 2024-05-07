@@ -2,7 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
 import type { Collection, CollectionAdd, IDCollection, Metall, MetallAdd, State } from './type';
 
-const initialState: State = { collections: [], colPhotos: [], metalls: [], error: undefined };
+const initialState: State = {
+  collections: [],
+  colPhotos: [],
+  metalls: [],
+  jewelrys: [],
+  types: [],
+
+  error: undefined,
+};
 
 export const initCollections = createAsyncThunk('collections/init', () =>
   api.initCollectionFetch(),
@@ -45,6 +53,10 @@ export const delMetall = createAsyncThunk('metall/del', (id: IDCollection) =>
 export const changeMetall = createAsyncThunk('metall/change', (obj: Metall) =>
   api.changeMetallFetch(obj),
 );
+
+export const initJewelrys = createAsyncThunk('jewelrys/init', () => api.initJewelrysFetch());
+
+export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -130,6 +142,14 @@ const adminSlice = createSlice({
         state.metalls = state.metalls.map((el) =>
           el.id === action.payload.id ? action.payload : el,
         );
+        state.error = undefined;
+      })
+      .addCase(initJewelrys.fulfilled, (state, action) => {
+        state.jewelrys = action.payload;
+        state.error = undefined;
+      })
+      .addCase(initTypes.fulfilled, (state, action) => {
+        state.types = action.payload;
         state.error = undefined;
       });
   },
