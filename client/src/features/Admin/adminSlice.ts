@@ -17,6 +17,8 @@ const initialState: State = {
   metalls: [],
   jewelrys: [],
   types: [],
+  hashtags: [],
+  
 
   error: undefined,
 };
@@ -67,13 +69,18 @@ export const initJewelrys = createAsyncThunk('jewelrysAdmin/init', () => api.ini
 
 export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
 
-export const delHashTag = createAsyncThunk('hashtag/del', (id: IDCollection) =>
-  api.delHashtagFetch(id),
+export const delHashTag = createAsyncThunk(
+  'hashtag/del',
+  (obj: { jewHashtagid: number; jewelryID: IDCollection }) => api.delHashtagFetch(obj),
 );
 
 export const addHashtagSlice = createAsyncThunk('hashtag/add', (obj: Hashtag) =>
   api.addHashtagFetch(obj),
 );
+// Hashtag
+
+export const initHashtag= createAsyncThunk('hashtag/init', () => api.initHashtagFetch());
+
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -170,10 +177,16 @@ const adminSlice = createSlice({
         state.error = undefined;
       })
       .addCase(delHashTag.fulfilled, (state, action) => {
-        state.jewelrys = state.jewelrys.map((el) => ({
-          ...el,
-          JewHashtags: el.JewHashtags.filter((elem) => elem.id !== action.payload),
-        }));
+        state.jewelrys = state.jewelrys.map((el) =>
+          +el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                JewHashtags: el.JewHashtags.filter(
+                  (elem) => elem.id !== action.payload.jewHashtagid,
+                ),
+              }
+            : el,
+        );
         state.error = undefined;
       })
       .addCase(addHashtagSlice.fulfilled, (state, action) => {
@@ -181,12 +194,17 @@ const adminSlice = createSlice({
           el.id === action.payload.id
             ? {
                 ...el,
-                JewHashtags: [...el.JewHashtags, action.payload.jewHashtag]
+                JewHashtags: [...el.JewHashtags, action.payload.jewHashtag],
               }
             : el,
-        )
+        );
+        state.hashtags = [...state.hashtags, action.payload.hashtag]
         state.error = undefined;
-      });
+      })
+      .addCase(initHashtag.fulfilled, (state, action) => {
+        state.hashtags = action.payload;
+        state.error = undefined;
+      })
   },
 });
 

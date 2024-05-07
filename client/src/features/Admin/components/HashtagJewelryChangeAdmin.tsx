@@ -1,23 +1,24 @@
 import React, { memo, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { addCollection, delHashTag } from '../adminSlice';
-import type { Collection, JewHashtag } from '../type';
+import type { Collection, IDCollection, JewHashtag } from '../type';
 import CollectionUno from './CollectionUno';
 
 type Props = {
   jewHashtag: JewHashtag;
+  jewelryID: IDCollection
 };
 
-function HashtagJewelryChangeAdmin({ jewHashtag }: Props): JSX.Element {
+function HashtagJewelryChangeAdmin({ jewHashtag, jewelryID }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   const del = ():void => {
-    dispatch(delHashTag(jewHashtag.id)).catch(console.log)
+    dispatch(delHashTag({jewHashtagid: +jewHashtag.id, jewelryID})).catch(console.log)
   }
 
   return (
     <div className='hashcontent'>
-    <div>{jewHashtag.Hashtag?.title}</div>
+    <div>{jewHashtag.Hashtag.title}</div>
     <button type='button' onClick={del}>X</button>
     </div>
   );

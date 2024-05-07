@@ -136,16 +136,16 @@ export const initTypesFetch = async (): Promise<Type[]> => {
 };
 
 // Hashtag
-export const delHashtagFetch = async (id: IDCollection): Promise<IDCollection> => {
-  const res = await fetch(`/api/admin/hashtag/${id}`, { method: 'DELETE' });
+export const delHashtagFetch = async (obj:{jewHashtagid: number, jewelryID: IDCollection}): Promise<{jewelryID: number, jewHashtagid: IDCollection}> => {
+  const res = await fetch(`/api/admin/hashtag/${obj.jewHashtagid}`, { method: 'DELETE' });
   const data = await res.json();
   if (res.ok) {
-    return data;
+    return {jewelryID: +obj.jewelryID, jewHashtagid: data };
   }
   throw data.message;
 };
 
-export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHashtag, id:IDCollection}> => {
+export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHashtag, id:IDCollection, hashtag:Hashtag}> => {
   const res = await fetch('/api/admin/hashtag', {
     method: 'post',
     headers: { 'content-type': 'application/json' },
@@ -158,4 +158,11 @@ export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHas
   }
   const data = await res.json();
   throw data.message;
+};
+
+
+export const initHashtagFetch = async (): Promise<Hashtag[]> => {
+  const res = await fetch('/api/admin/hashtags');
+  const data = await res.json();
+  return data.hashtags;
 };

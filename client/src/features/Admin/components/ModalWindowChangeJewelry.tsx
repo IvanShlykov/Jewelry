@@ -18,6 +18,10 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
   const collections = useSelector((store: RootState) => store.adminState.collections);
   const types = useSelector((store: RootState) => store.adminState.types);
   const metalls = useSelector((store: RootState) => store.adminState.metalls);
+  const hashtags = useSelector((store: RootState) => store.adminState.hashtags);
+  
+  console.log(hashtags);
+  
 
   const [addHash, setAddHash] = useState(true);
 
@@ -135,11 +139,11 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
               {addHash ? (
                 <div className="HashCont">
                   {jewelry.JewHashtags?.map((el) => (
-                    <HashtagJewelryChangeAdmin key={el.id} jewHashtag={el} />
+                    <HashtagJewelryChangeAdmin key={el.id} jewHashtag={el} jewelryID={jewelry.id} />
                   ))}
-                  <button type="button" onClick={() => setAddHash((prev) => !prev)}>
+                  {/* <button type="button" onClick={() => setAddHash(false)}>
                     Добавить
-                  </button>
+                  </button> */}
                 </div>
               ) : (
                 <>
@@ -152,11 +156,11 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                   <button type="button" onClick={addHashtag}>
                     Сохранить
                   </button>
-                  <button type="button" onClick={() => setAddHash((prev) => !prev)}>
-                    Закрыть
-                  </button>
                 </>
               )}
+              <button type="button" onClick={() => setAddHash(!addHash)}>
+                {addHash? `Добавить` : 'Закрыть'}
+              </button>
             </div>
           </label>
 

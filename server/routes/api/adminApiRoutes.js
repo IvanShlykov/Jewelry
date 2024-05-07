@@ -202,6 +202,8 @@ router.get('/types', async (req, res) => {
   }
 });
 
+// Hashtag
+
 router.delete('/hashtag/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -217,11 +219,24 @@ router.post('/hashtag', async (req, res) => {
     const { title, id } = req.body;
     let hashtag = await Hashtag.findOne({ where: { title } });
     if (!hashtag) hashtag = await Hashtag.create({ title });
-    const jewHashtag = await JewHashtag.create({
+    let jewHashtag = await JewHashtag.create({
       hashtagID: hashtag.id,
       jewelryID: id,
     });
-    res.status(200).json({ jewHashtag, id });
+    jewHashtag = await JewHashtag.findOne({
+      where: { id: jewHashtag.id },
+      include: Hashtag,
+    });
+    res.status(200).json({ jewHashtag, id, hashtag });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/hashtags', async (req, res) => {
+  try {
+    const hashtags = await Hashtag.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ hashtags });
   } catch ({ message }) {
     res.status(500).json({ message });
   }

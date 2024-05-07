@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
-import { addCollection, initJewelrys } from '../adminSlice';
+import { addCollection, initHashtag, initJewelrys } from '../adminSlice';
 import JewelryUno from './JewelryUno';
 import '../jewelryPage.css';
 
@@ -19,6 +19,7 @@ function JewelryPageAdmin(): JSX.Element {
 
   useEffect(() => {
     dispatch(initJewelrys()).catch(console.log);
+
   }, []);
 
   const addCollectionForm = (e: React.FormEvent<HTMLFormElement>): void => {

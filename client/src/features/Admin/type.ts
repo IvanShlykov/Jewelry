@@ -4,6 +4,7 @@ export type State = {
   metalls: Metall[];
   jewelrys: Jewelry[];
   types: Type[];
+  hashtags: Hashtag[]
   error: undefined | string;
 };
 
