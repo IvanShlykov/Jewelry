@@ -74,19 +74,19 @@ function JewelryPage(): JSX.Element {
           )}
           <hr className="create-line" />
           <div className="jewelry-details-options">
-            {jewelry.Stocks && jewelry.Stocks.length > 0 ? (
-              <div className="jewelry-details__option">
-                <span className="jewelry-details__option-title">Размеры</span>
-                <span className="jewelry-details__option-value size">
-                  {jewelry.Stocks.map((stock) => (
-                    <span key={stock.Size.id}>{stock.Size.scale} </span>
-                  ))}
-                </span>
-              </div>
-            ) : (
-              <div>Размеры отсутствуют</div>
+            {jewelry.Stocks && jewelry.Stocks.length > 0 && (
+              <>
+                <div className="jewelry-details__option">
+                  <span className="jewelry-details__option-title">Размеры</span>
+                  <span className="jewelry-details__option-value size">
+                    {jewelry.Stocks.map((stock) => (
+                      <span key={stock.Size.id}>{stock.Size.scale} </span>
+                    ))}
+                  </span>
+                </div>
+                <hr className="create-line" />
+              </>
             )}
-            <hr className="create-line" />
           </div>
         </div>
 
