@@ -285,12 +285,81 @@ router.get('/sizes', async (req, res) => {
 
 router.post('/stock', async (req, res) => {
   try {
-    let stock = req.body;
-    stock = await Stock.create(stock);
-    res.status(200).json({ stock });
+    const stock = req.body;
+    const data = await Stock.findOne({
+      where: {
+        jewelryID: stock.jewelryID,
+        sizeID: stock.sizeID,
+      },
+    });
+
+    if (data) {
+      await Stock.update(
+        { count: stock.count + data.count },
+        { where: { id: data.id } }
+      );
+    } else {
+      await Stock.create(stock);
+    }
+
+    const stocks = await Stock.findAll({
+      where: { jewelryID: stock.jewelryID },
+      include: Size,
+      order: [['sizeID', 'ASC']],
+    });
+    res.status(200).json({ stocks });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
 });
 
+router.delete('/stock/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Stock.destroy({ where: { id } });
+    res.status(200).json({ message: 'ok' });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.put('/jewelry/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.body);
+    
+    const { name, price, description, collectionID, typeID, isNew, metallID } =
+      req.body;
+    await Jewelry.update(
+      {
+        name,
+        price,
+        description,
+        collectionID,
+        typeID,
+        isNew,
+        metallID: +metallID,
+      },
+      { where: { id: +id } }
+    );
+    console.log(111);
+    const jewelry = await Jewelry.findOne({
+      where: { id: +id },
+      include: [
+        { model: Collection },
+        { model: Metall },
+        { model: Type },
+        { model: JewHashtag, include: [{ model: Hashtag }] },
+        { model: Stock, include: [{ model: Size }] },
+        { model: Photo },
+        { model: JewStone },
+      ],
+    });
+    console.log(jewelry);
+    res.status(200).json({ jewelry });
+  } catch ({ message }) {
+    console.log(message);
+    res.status(500).json({ message });
+  }
+});
 module.exports = router;
