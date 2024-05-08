@@ -6,10 +6,13 @@ import type {
   Hashtag,
   HashtagAdd,
   IDCollection,
+  JewelryAdd,
+  JewelryChange,
   Metall,
   MetallAdd,
   Photo,
   State,
+  Stock,
   StockAdd,
 } from './type';
 
@@ -94,6 +97,13 @@ export const initSizes = createAsyncThunk('sizes/init', () => api.initSizesFetch
 
 export const addStock = createAsyncThunk('stock/add', (obj: StockAdd) =>
   api.addSizeFetch(obj),
+);
+
+
+export const delStock = createAsyncThunk('stock/del', (stock: Stock) => api.delStockFetch(stock));
+
+export const changeJewelry = createAsyncThunk('jewelry/change', (obj: JewelryChange) =>
+  api.changeJewelryFetch(obj),
 );
 
 
@@ -221,8 +231,6 @@ const adminSlice = createSlice({
         state.error = undefined;
       })
       .addCase(delPhoto.fulfilled, (state, action) => {
-        console.log(action.payload);
-        
         state.jewelrys = state.jewelrys.map((el) =>
           el.id === action.payload.jewelryID
             ? {
@@ -248,13 +256,32 @@ const adminSlice = createSlice({
         state.sizes = action.payload;
         state.error = undefined;
       })
-      .addCase(addStock.fulfilled, (state, action) => {
+      .addCase(addStock.fulfilled, (state, action) => {       
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.id
+            ? {
+                ...el,
+                Stocks:action.payload.stocks,
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(delStock.fulfilled, (state, action) => {
         state.jewelrys = state.jewelrys.map((el) =>
           el.id === action.payload.jewelryID
             ? {
                 ...el,
-                Stocks: [...el.Stocks, action.payload],
+                Stocks: el.Stocks.filter((elem) => elem.id !== action.payload.id),
               }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(changeJewelry.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.id
+            ? action.payload
             : el,
         );
         state.error = undefined;

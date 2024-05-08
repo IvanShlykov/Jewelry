@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.modal {
+.adminmodal {
   height: 100vh;
   width: 100vw;
   background-color: rgb(0, 0, 0, 0.2);
@@ -19,14 +19,14 @@
   transition: 0.5s;
 }
 
-.modal.active {
+.adminmodal.active {
   opacity: 1;
   pointer-events: all;
   color: rgba(22, 19, 19, 0.774);
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.modal_content {
+.adminmodal_content {
   padding: 20px;
   border-radius: 12px;
   background-color: rgb(127, 123, 128);
@@ -40,8 +40,8 @@
 .formChangeJewelry {
   display: flex;
   flex-direction: column;
-  min-width: 450px;
-  
+  min-width: 500px;
+
   label {
     display: flex;
     flex-wrap: wrap;
@@ -64,52 +64,97 @@ textarea {
 
 .HashCont {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 10px;
-  margin-right: 15px;
-  max-width: 300px;
+  flex-grow: 1;
+  justify-content: space-between;
+  button {
+    border: 1px solid black;
+    border-radius: 10px;
+    min-width: 100px;
+    height: 30px;
+  }
+  .hashContent {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 290px;
+  }
+
   .hashcontent {
     display: flex;
     /* min-width: 100px; */
     justify-content: space-between;
-    margin-right: 15px;
-
-    button {
+    align-items: center;
+    margin-right: 5px;
+    button#btnHash {
       background-color: rgb(127, 123, 128);
       border: 0;
       margin-left: 5px;
       cursor: pointer;
-      width: 15px;
+      min-width: 15px;
       height: 15px;
     }
   }
 }
 
-.photoConteiner{
+.photoConteiner {
   display: flex;
   flex-wrap: wrap;
   max-width: 300px;
   flex-grow: 1;
   /* justify-content: space-between; */
 
-  .photoContent{
+  .photoContent {
     width: 80px;
     height: 80px;
     background-size: 100% 100%;
     display: flex;
     justify-content: end;
     margin-right: 10px;
+    margin-bottom: 5px;
+
     button {
       width: 20px;
       height: 20px;
       background-color: brown;
       border: 0;
-      cursor: pointer; 
+      cursor: pointer;
     }
   }
 }
 
-.descriptionLabel{
+.descriptionLabel {
   min-width: 100px;
   margin-right: 10px;
 }
+
+.stockAdmin {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.stockInput{
+  height: 27px;
+  margin-left: 5px;
+  margin-top: 5px;
+  flex-grow: 1;
+}
+
+.btnForm{
+  margin-top: 15px;
+  margin-left: 110px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.apply{
+  background-color: yellowgreen;
+}
+.change{
+  background-color: yellow;
+}
+
+.del{
+  background-color: rgba(223, 72, 72, 0.808);
+}
+
+

@@ -19,7 +19,7 @@ function HashtagJewelryChangeAdmin({ jewHashtag }: Props): JSX.Element {
   return (
     <div className="hashcontent" >
       <div>{jewHashtag.Hashtag.title}</div>
-      <button type="button" onClick={delHashtag}>
+      <button type="button" onClick={delHashtag} id='btnHash'>
         X
       </button>
     </div>
