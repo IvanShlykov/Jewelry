@@ -49,16 +49,18 @@ function JewelryPage(): JSX.Element {
             <div className="no-photo">К сожалению, фото отсутствует</div>
           )}
         </div>
-        <Link to={`/types/${jewelry.Type.id}`}>
-          <p>
-            {jewelry.Type.id === jewelry.typeID
-              ? jewelry.Type.name
-              : 'ко всем украшениям такого же типа'}
-          </p>
-        </Link>
-        <Link to={`/collections/${jewelry.Collection.id}`}>
-          <h3>{jewelry.Collection.name}</h3>
-        </Link>
+        <div className="pagination">
+          <Link to={`/types/${jewelry.Type.id}`}>
+            <p>
+              {jewelry.Type.id === jewelry.typeID
+                ? jewelry.Type.name
+                : 'ко всем украшениям такого же типа'}
+            </p>
+          </Link>
+          <Link to={`/collections/${jewelry.Collection.id}`}>
+            <h3>{jewelry.Collection.name}</h3>
+          </Link>
+        </div>
         <h1>{jewelry.name}</h1>
         <p>{`${jewelry.price} ₽`}</p>
         <p>{jewelry.description}</p>
