@@ -1,13 +1,13 @@
 .jewelry-slider-container .slick-slide img {
-  width: 100%;  
-  height: auto; 
+  width: 100%;
+  height: auto;
 }
 
 .jewelry-slider-container .slick-slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px; 
+  height: 300px;
 }
 
 .jewelry-slider-container {
@@ -44,8 +44,6 @@
   width: 100%; /* Изображения будут занимать всю ширину слайда */
   height: auto; /* Высота изменяется пропорционально */
 }
-
-
 
 .image-container {
   position: relative;
@@ -85,6 +83,105 @@
   align-items: center;
   justify-content: center;
   font-size: 18px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  margin: 0px 0px 24px;
+}
+
+.pagination span {
+  padding: 10px;
+}
+
+.jewelry-card h1 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.07em;
+  padding-bottom: 40px;
+  padding-left: 2%;
+}
+
+.jewelry-price {
+  text-align: center;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0px 0px 20px 0px;
+}
+
+.create-line {
+  width: 95%;
+  margin: 0px 2% 0px 2%;
+  border-top: 1px solid black;
+}
+
+.jewelry-details__option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000;
+}
+
+.jewelry-details__option-title {
+  padding: 0px 2%;
+  flex: 0 0 25%;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #818181;
+  width: 25%;
+}
+
+.jewelry-details__option-value {
+  flex: 0 0 75%;
+  padding: 0px 2%;
+  text-align: right;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.btn {
+  padding: 26px 16px;
+  display: flex; /* выставляем display на flex для правильного выравнивания */
+  align-items: center; /* выравнивание по вертикали */
+  justify-content: center; /* выравнивание по горизонтали */
+  font-size: 18px;
+  color: #fff;
+  background: #000;
+  width: 100%;
+  border-radius: 0; /* убирается скругление углов */
+  margin: 2% 2%; /* автоматический отступ с обеих сторон для горизонтального центрирования */
+}
+
+.product-details__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* убеждаемся, что align-items настроено правильно для центрирования дочерних элементов по вертикали */
+}
+
+.jewelry-details__text {
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 24px;
+  padding: 24px;
+  line-height: 18px;
+}
+
+.jewelry-details__text .title {
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
 }
 
 /* Медиа-запросы для адаптивной верстки */
