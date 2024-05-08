@@ -242,4 +242,55 @@ router.get('/hashtags', async (req, res) => {
   }
 });
 
+router.delete('/photo/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Photo.destroy({ where: { id } });
+    res.status(200).json({ message: 'ok' });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/photo', async (req, res) => {
+  try {
+    const file = req.files && req.files.photo;
+    let img;
+    if (file) {
+      img = await fileupload(file);
+    } else {
+      img = '/img/placeholder.png';
+    }
+    const { jewelryID } = req.body;
+
+    const photo = await Photo.create({
+      jewelryID,
+      url: img,
+    });
+
+    res.status(200).json({ photo });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/sizes', async (req, res) => {
+  try {
+    const sizes = await Size.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ sizes });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/stock', async (req, res) => {
+  try {
+    let stock = req.body;
+    stock = await Stock.create(stock);
+    res.status(200).json({ stock });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;

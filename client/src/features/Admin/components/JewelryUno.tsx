@@ -38,7 +38,7 @@ function JewelryUno({ jewelry, i }: Props): JSX.Element {
       )) : <td colSpan={2}>Нет на складе</td>}
       <td>{jewelry.Metall?.name}</td>
       <td>
-      <ModalWindowChangeJewelry jewelry={jewelry} state={state} setState={setState}/>
+      <ModalWindowChangeJewelry jewelry={jewelry} state={state} setState={setState} />
         <button type="button" onClick={() => setState(true)}>
           Изменить
         </button>

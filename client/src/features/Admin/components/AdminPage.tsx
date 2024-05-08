@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
-import { initColPhotos, initCollections, initHashtag, initJewelrys, initMetalls, initTypes } from '../adminSlice';
+import { initColPhotos, initCollections, initHashtag, initJewelrys, initMetalls, initSizes, initTypes } from '../adminSlice';
 import AddCollection from './AddCollection';
 import { logout } from '../../Auth/authSlice';
 import AddColPhoto from './AddColPhoto';
@@ -16,6 +16,7 @@ function AdminPage(): JSX.Element {
   const colPhotos = useSelector((store: RootState) => store.adminState.colPhotos);
   const metalls = useSelector((store: RootState) => store.adminState.metalls);
   const types = useSelector((store: RootState) => store.adminState.types);
+
 
   const user = useSelector((store: RootState) => store.authState.user);
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ function AdminPage(): JSX.Element {
     dispatch(initMetalls()).catch(console.log)
     dispatch(initTypes()).catch(console.log)
     dispatch(initHashtag()).catch(console.log);
+    dispatch(initSizes()).catch(console.log);
+
 
   }, []);
 

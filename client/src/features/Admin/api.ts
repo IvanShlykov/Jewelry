@@ -1,4 +1,4 @@
-import type { ColPhoto, Collection, CollectionAdd, Hashtag, HashtagAdd, IDCollection, JewHashtag, Jewelry, Metall, MetallAdd, Type } from './type';
+import type { ColPhoto, Collection, CollectionAdd, Hashtag, HashtagAdd, IDCollection, JewHashtag, Jewelry, Metall, MetallAdd, Photo, Size, SizeAdd, Stock, StockAdd, Type } from './type';
 
 export const initCollectionFetch = async (): Promise<Collection[]> => {
   const res = await fetch('/api/admin/collection');
@@ -165,4 +165,49 @@ export const initHashtagFetch = async (): Promise<Hashtag[]> => {
   const res = await fetch('/api/admin/hashtags');
   const data = await res.json();
   return data.hashtags;
+};
+
+export const initSizesFetch = async (): Promise<Size[]> => {
+  const res = await fetch('/api/admin/sizes');
+  const data = await res.json();
+  return data.sizes;
+};
+
+
+export const delPhotoFetch = async (photo:Photo): Promise<Photo> => {
+  const res = await fetch(`/api/admin/photo/${photo.id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return photo;
+  }
+  throw data.message;
+};
+
+export const addPhotoFetch = async (formData: FormData): Promise<Photo> => {
+  const res = await fetch('/api/admin/photo', {
+    method: 'post',
+    body: formData,
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data.photo;
+  }
+  const data = await res.json();
+  throw data.message;
+};
+
+export const addSizeFetch = async (obj: StockAdd): Promise<Stock> => {
+  const res = await fetch('/api/admin/stock', {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(obj),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data;
+  }
+  const data = await res.json();
+  throw data.message;
 };

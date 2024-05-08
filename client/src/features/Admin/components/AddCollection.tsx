@@ -11,8 +11,12 @@ type Props = {
 function AddCollection({ collections }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
+  
+
   const [nameCollection, setNameCollection] = useState('');
   const [img, setImg] = useState<File>();
+
+
 
   const addCollectionForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();

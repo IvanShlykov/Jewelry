@@ -6,20 +6,22 @@ import CollectionUno from './CollectionUno';
 
 type Props = {
   jewHashtag: JewHashtag;
-  jewelryID: IDCollection
 };
 
-function HashtagJewelryChangeAdmin({ jewHashtag, jewelryID }: Props): JSX.Element {
+function HashtagJewelryChangeAdmin({ jewHashtag }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const del = ():void => {
-    dispatch(delHashTag({jewHashtagid: +jewHashtag.id, jewelryID})).catch(console.log)
-  }
+  const delHashtag = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    dispatch(delHashTag({ jewHashtagid: jewHashtag.id, jewelryID: jewHashtag.jewelryID })).catch(console.log);
+  };
 
   return (
-    <div className='hashcontent'>
-    <div>{jewHashtag.Hashtag.title}</div>
-    <button type='button' onClick={del}>X</button>
+    <div className="hashcontent" >
+      <div>{jewHashtag.Hashtag.title}</div>
+      <button type="button" onClick={delHashtag}>
+        X
+      </button>
     </div>
   );
 }

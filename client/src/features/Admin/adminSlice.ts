@@ -8,7 +8,9 @@ import type {
   IDCollection,
   Metall,
   MetallAdd,
+  Photo,
   State,
+  StockAdd,
 } from './type';
 
 const initialState: State = {
@@ -17,8 +19,8 @@ const initialState: State = {
   metalls: [],
   jewelrys: [],
   types: [],
+  sizes: [],
   hashtags: [],
-  
 
   error: undefined,
 };
@@ -79,7 +81,20 @@ export const addHashtagSlice = createAsyncThunk('hashtag/add', (obj: Hashtag) =>
 );
 // Hashtag
 
-export const initHashtag= createAsyncThunk('hashtag/init', () => api.initHashtagFetch());
+export const initHashtag = createAsyncThunk('hashtag/init', () => api.initHashtagFetch());
+
+export const delPhoto = createAsyncThunk('photo/del', (photo: Photo) => api.delPhotoFetch(photo));
+
+export const addPhotoSlice = createAsyncThunk('photo/add', (formData: FormData) =>
+  api.addPhotoFetch(formData),
+);
+
+export const initSizes = createAsyncThunk('sizes/init', () => api.initSizesFetch());
+
+
+export const addStock = createAsyncThunk('stock/add', (obj: StockAdd) =>
+  api.addSizeFetch(obj),
+);
 
 
 const adminSlice = createSlice({
@@ -198,13 +213,53 @@ const adminSlice = createSlice({
               }
             : el,
         );
-        state.hashtags = [...state.hashtags, action.payload.hashtag]
+        state.hashtags = [...state.hashtags, action.payload.hashtag];
         state.error = undefined;
       })
       .addCase(initHashtag.fulfilled, (state, action) => {
         state.hashtags = action.payload;
         state.error = undefined;
       })
+      .addCase(delPhoto.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Photos: el.Photos.filter((elem) => elem.id !== action.payload.id),
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(addPhotoSlice.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Photos: [...el.Photos, action.payload],
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(initSizes.fulfilled, (state, action) => {
+        state.sizes = action.payload;
+        state.error = undefined;
+      })
+      .addCase(addStock.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Stocks: [...el.Stocks, action.payload],
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      
   },
 });
 
