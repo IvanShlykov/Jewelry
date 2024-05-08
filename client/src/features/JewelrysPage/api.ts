@@ -1,7 +1,7 @@
 import type { CollectionHome, Jewelry } from './type';
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
-  const res = await fetch('/api/jewelry');
+  const res = await fetch('/api/admin/jewelrys');
   const data = await res.json();
   return data.jewelrys;
 };
