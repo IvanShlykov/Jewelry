@@ -1,18 +1,88 @@
-import type { IDCollection } from '../Admin/type';
+export type JewStoneAdd = {
+  jewelryID: number;
+  stoneID: number;
+};
 
-export type Jewelry = {
-  id: number;
+export type JewStone = JewStoneAdd & { id: number };
+
+
+export type State = {
+  collections: Collection[];
+  colPhotos: ColPhoto[];
+  metalls: Metall[];
+  jewelrys: Jewelry[];
+  types: Type[];
+  hashtags: Hashtag[]
+  sizes: Size[]
+  error: undefined | string;
+};
+
+export type CollectionAdd = {
+  name: string;
+  photo: string;
+};
+
+export type Collection = CollectionAdd & { id: number };
+export type IDCollection = Collection['id'];
+
+export type ColPhotoAdd = {
+  url: string;
+  collectionID: IDCollection;
+};
+
+export type ColPhoto = ColPhotoAdd & { id: number; Collection: Collection };
+export type IDColPhoto = ColPhoto['id'];
+
+export type JewelryAdd = {
   name: string;
   price: number;
   description: string;
-  collectionId: IDCollection;
-  typeId: number;
+  collectionID: number;
+  typeID: number;
   isSpecial: boolean;
   isNew: boolean;
   discountPrice: number;
-  metallId: number;
+  metallID: number;
+  Collection: Collection;
+  Metall: Metall;
+  Type: Type;
+  JewHashtags: JewHashtag[];
+  Stocks: Stock[];
   Photos: Photo[];
+  JewStones: JewStone[];
 };
+
+export type JewHashtagAdd = {
+  jewelryID: number;
+  hashtagID: number;
+};
+
+export type JewHashtag = JewHashtagAdd & { id: number, Hashtag: Hashtag };
+
+export type HashtagAdd = {
+  title: string;
+};
+
+export type Hashtag = HashtagAdd & { id: number };
+
+
+export type Jewelry = JewelryAdd & { id: number };
+export type IDJewelryAdd = Jewelry['id'];
+
+
+export type StockAdd = {
+  sizeID: number;
+  jewelryID: number;
+  count: number
+};
+
+  export type Stock = StockAdd & { id: number, Size: Size  };
+
+export type StoneAdd = {
+  title: string;
+};
+
+export type Stone = StoneAdd & { id: number };
 
 export type Photo = {
   id: number;
@@ -48,8 +118,9 @@ export type CollectionHome = {
   ColPhotos: PhotoCol[];
 };
 
-export type State = {
-  jewelrys: Jewelry[];
-  collections: CollectionHome[];
-  error: undefined | string;
+
+export type SizeAdd = {
+  scale: string;
 };
+
+export type Size = SizeAdd & { id: number };
