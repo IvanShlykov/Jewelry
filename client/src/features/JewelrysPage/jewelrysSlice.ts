@@ -2,10 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
 import type { State } from './type';
 
-const initialState: State = { jewelrys: [], collections: [], error: undefined };
+const initialState: State = { 
+  collections: [],
+  colPhotos: [],
+  metalls: [],
+  jewelrys: [],
+  types: [],
+  sizes: [],
+  hashtags: [],
+  error: undefined };
 
 export const initJewelrys = createAsyncThunk(
-  'jewelrys/init',
+  'jewelrysAdmin/init',
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   () => api.initJewelryFetch(),
 );
