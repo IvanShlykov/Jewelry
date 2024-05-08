@@ -16,7 +16,6 @@ function CollectionUno({ collection, i }: Props): JSX.Element {
   const [state, setState] = useState(false);
   const [modal, setModal] = useState(false);
 
-
   const deleteItem = (id: IDCollection): void => {
     dispatch(delCollection(id)).catch(console.log);
   };
@@ -29,7 +28,7 @@ function CollectionUno({ collection, i }: Props): JSX.Element {
         <img src={collection.photo} alt="Не загрузилось" width="50px" height="50px" />
       </td>
       <td>
-      <ModalWindowChange collection={collection} state={state} setState={setState}/>
+        <ModalWindowChange collection={collection} state={state} setState={setState} />
         <button type="button" onClick={() => setState(true)}>
           Изменить
         </button>

@@ -1,8 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
-import type { Collection, CollectionAdd, IDCollection, Metall, MetallAdd, State } from './type';
+import type {
+  Collection,
+  CollectionAdd,
+  Hashtag,
+  HashtagAdd,
+  IDCollection,
+  Metall,
+  MetallAdd,
+  Photo,
+  State,
+  StockAdd,
+} from './type';
 
-const initialState: State = { collections: [], colPhotos: [], metalls: [], error: undefined };
+const initialState: State = {
+  collections: [],
+  colPhotos: [],
+  metalls: [],
+  jewelrys: [],
+  types: [],
+  sizes: [],
+  hashtags: [],
+
+  error: undefined,
+};
 
 export const initCollections = createAsyncThunk('collections/init', () =>
   api.initCollectionFetch(),
@@ -45,6 +66,36 @@ export const delMetall = createAsyncThunk('metall/del', (id: IDCollection) =>
 export const changeMetall = createAsyncThunk('metall/change', (obj: Metall) =>
   api.changeMetallFetch(obj),
 );
+
+export const initJewelrys = createAsyncThunk('jewelrysAdmin/init', () => api.initJewelrysFetch());
+
+export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
+
+export const delHashTag = createAsyncThunk(
+  'hashtag/del',
+  (obj: { jewHashtagid: number; jewelryID: IDCollection }) => api.delHashtagFetch(obj),
+);
+
+export const addHashtagSlice = createAsyncThunk('hashtag/add', (obj: Hashtag) =>
+  api.addHashtagFetch(obj),
+);
+// Hashtag
+
+export const initHashtag = createAsyncThunk('hashtag/init', () => api.initHashtagFetch());
+
+export const delPhoto = createAsyncThunk('photo/del', (photo: Photo) => api.delPhotoFetch(photo));
+
+export const addPhotoSlice = createAsyncThunk('photo/add', (formData: FormData) =>
+  api.addPhotoFetch(formData),
+);
+
+export const initSizes = createAsyncThunk('sizes/init', () => api.initSizesFetch());
+
+
+export const addStock = createAsyncThunk('stock/add', (obj: StockAdd) =>
+  api.addSizeFetch(obj),
+);
+
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -131,7 +182,84 @@ const adminSlice = createSlice({
           el.id === action.payload.id ? action.payload : el,
         );
         state.error = undefined;
-      });
+      })
+      .addCase(initJewelrys.fulfilled, (state, action) => {
+        state.jewelrys = action.payload;
+        state.error = undefined;
+      })
+      .addCase(initTypes.fulfilled, (state, action) => {
+        state.types = action.payload;
+        state.error = undefined;
+      })
+      .addCase(delHashTag.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          +el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                JewHashtags: el.JewHashtags.filter(
+                  (elem) => elem.id !== action.payload.jewHashtagid,
+                ),
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(addHashtagSlice.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.id
+            ? {
+                ...el,
+                JewHashtags: [...el.JewHashtags, action.payload.jewHashtag],
+              }
+            : el,
+        );
+        state.hashtags = [...state.hashtags, action.payload.hashtag];
+        state.error = undefined;
+      })
+      .addCase(initHashtag.fulfilled, (state, action) => {
+        state.hashtags = action.payload;
+        state.error = undefined;
+      })
+      .addCase(delPhoto.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Photos: el.Photos.filter((elem) => elem.id !== action.payload.id),
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(addPhotoSlice.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Photos: [...el.Photos, action.payload],
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      .addCase(initSizes.fulfilled, (state, action) => {
+        state.sizes = action.payload;
+        state.error = undefined;
+      })
+      .addCase(addStock.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.map((el) =>
+          el.id === action.payload.jewelryID
+            ? {
+                ...el,
+                Stocks: [...el.Stocks, action.payload],
+              }
+            : el,
+        );
+        state.error = undefined;
+      })
+      
   },
 });
 

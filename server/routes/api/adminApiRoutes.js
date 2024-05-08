@@ -1,5 +1,18 @@
 const router = require('express').Router();
-const { Collection, Jewelry, ColPhoto, Metall } = require('../../db/models');
+const {
+  Collection,
+  Jewelry,
+  ColPhoto,
+  Metall,
+  Type,
+  JewHashtag,
+  Stock,
+  Photo,
+  Stone,
+  JewStone,
+  Hashtag,
+  Size,
+} = require('../../db/models');
 const fileupload = require('../../utils/fileUpload');
 
 router.get('/collection', async (req, res) => {
@@ -155,6 +168,126 @@ router.put('/metall/:id', async (req, res) => {
     await Metall.update({ name }, { where: { id } });
     const metall = await Metall.findOne({ where: { id } });
     res.status(200).json({ metall });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+// Jewelry
+router.get('/jewelrys', async (req, res) => {
+  try {
+    const jewelrys = await Jewelry.findAll({
+      include: [
+        { model: Collection },
+        { model: Metall },
+        { model: Type },
+        { model: JewHashtag, include: [{ model: Hashtag }] },
+        { model: Stock, include: [{ model: Size }] },
+        { model: Photo },
+        { model: JewStone },
+      ],
+    });
+    res.status(200).json({ jewelrys });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/types', async (req, res) => {
+  try {
+    const types = await Type.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ types });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+// Hashtag
+
+router.delete('/hashtag/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await JewHashtag.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/hashtag', async (req, res) => {
+  try {
+    const { title, id } = req.body;
+    let hashtag = await Hashtag.findOne({ where: { title } });
+    if (!hashtag) hashtag = await Hashtag.create({ title });
+    let jewHashtag = await JewHashtag.create({
+      hashtagID: hashtag.id,
+      jewelryID: id,
+    });
+    jewHashtag = await JewHashtag.findOne({
+      where: { id: jewHashtag.id },
+      include: Hashtag,
+    });
+    res.status(200).json({ jewHashtag, id, hashtag });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/hashtags', async (req, res) => {
+  try {
+    const hashtags = await Hashtag.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ hashtags });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/photo/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Photo.destroy({ where: { id } });
+    res.status(200).json({ message: 'ok' });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/photo', async (req, res) => {
+  try {
+    const file = req.files && req.files.photo;
+    let img;
+    if (file) {
+      img = await fileupload(file);
+    } else {
+      img = '/img/placeholder.png';
+    }
+    const { jewelryID } = req.body;
+
+    const photo = await Photo.create({
+      jewelryID,
+      url: img,
+    });
+
+    res.status(200).json({ photo });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/sizes', async (req, res) => {
+  try {
+    const sizes = await Size.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ sizes });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/stock', async (req, res) => {
+  try {
+    let stock = req.body;
+    stock = await Stock.create(stock);
+    res.status(200).json({ stock });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
