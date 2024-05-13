@@ -1,4 +1,4 @@
- .authmodal {
+.authmodal {
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -10,7 +10,6 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s;
-
 }
 
 .authmodal.active {
@@ -22,7 +21,7 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
- .authmodal-content {
+.authmodal-content {
   width: 90vw;
   /* height: 70vh; */
   border: 1px solid black;
@@ -30,33 +29,69 @@
   flex-direction: column;
   background-color: rgb(199, 196, 196);
   border-radius: 15px;
-  
-} 
+}
 
-.close{
+.close {
   padding-left: 95%;
 }
 
-.btnAuthdiv{
+.btnAuthdiv {
   display: flex;
   justify-content: space-around;
 }
 
-.btn{
-  width: 100px;
+.btnAuth {
+  min-width: 100px;
+  padding: 8px;
   height: 30px;
   border-radius: 15px;
   border: 1px solid black;
   background-color: aliceblue;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.auth{
-  width: 80vw;
-  margin: 10%;
+.authCont {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  .auth {
+    max-width: 300px;
+    flex-grow: 1;
+    .authForm {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      input {
+        border-radius: 15px;
+        border: 1px solid black;
+        padding: 8px;
+        width: 100%;
+        height: 30px;
+        margin-top: 10px;
+        font-size: 20px;
+      }
+
+      span {
+        font-size: 20px;
+        padding-left: 10px;
+        color: rgb(252, 48, 48);
+      }
+
+      button {
+        margin-top: 10px;
+        font-size: 20px;
+      }
+    }
+  }
 }
 
-.inputAuth{
-  width: 85%
+.inputAuth {
+  width: 85%;
 }
 .modal-body {
   overflow-y: auto;
@@ -64,4 +99,8 @@
 
 .scrollable-content {
   padding: 10px;
+}
+
+.Auth {
+  background-color: rgb(216, 213, 12);
 }

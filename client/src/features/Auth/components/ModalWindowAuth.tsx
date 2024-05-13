@@ -21,10 +21,10 @@ function ModalWindowAuth({
           </span>
         </div>
         <div className="btnAuthdiv">
-          <button className="btn Auth" type="button" onClick={()=>setState(true)}>
-            Войти
+          <button className={state? 'btnAuth Auth' : 'btnAuth' } type="button" onClick={()=>setState(true)}>
+            Вход
           </button>
-          <button className="btn Reg" type="button" onClick={()=>setState(false)}>
+          <button className={state? 'btnAuth' : 'btnAuth Auth' }  type="button" onClick={()=>setState(false)}>
             Регистрация
           </button>
         </div>
