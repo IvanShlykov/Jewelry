@@ -1,15 +1,17 @@
-import type { Application, ApplicationWithOutID } from './type';
+import type { Application } from './type';
 
-export const addCollectionFetch = async (obj:ApplicationWithOutID): Promise<Application> => {
+export const addCollectionFetch = async (formData: FormData): Promise<Application> => {
     const res = await fetch('/api/application', {
       method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body:JSON.stringify(obj)
+      body:formData
     });
-  
-    const data = await res.json()
-    return data
+    console.log(formData);
+    
+if (res.ok) {
+    const data = await res.json();
+    return data.application;
   }
+  const data = await res.json();
+  throw data.message;
+};
   export default addCollectionFetch
