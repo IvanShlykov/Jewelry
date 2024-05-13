@@ -35,7 +35,6 @@ function AdminPage(): JSX.Element {
     dispatch(initHashtag()).catch(console.log);
     dispatch(initSizes()).catch(console.log);
 
-
   }, []);
 
   useEffect(() => {

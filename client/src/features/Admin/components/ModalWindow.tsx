@@ -11,8 +11,8 @@ type Props = {
 
 function ModalWindow({ deleteItem, modal, setModal, id }: Props): JSX.Element {
   return (
-    <div className={modal ? 'modal active' : 'modal'}>
-      <div className="modal_content">
+    <div className={modal ? 'adminmodal active' : 'adminmodal'}>
+      <div className="adminmodal_content">
         <div>Вы уверены?</div>
         <button
           type="button"
@@ -20,11 +20,11 @@ function ModalWindow({ deleteItem, modal, setModal, id }: Props): JSX.Element {
             deleteItem(id);
             setModal(false);
           }}
-          className="close-button"
+        
         >
           Да
         </button>
-        <button type="button" onClick={() => setModal(false)} className="close-button">
+        <button type="button" onClick={() => setModal(false)}>
           Закрыть
         </button>
       </div>

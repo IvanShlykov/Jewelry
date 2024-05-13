@@ -1,5 +1,13 @@
 const router = require("express").Router();
-const { Jewelry, Photo, Type, Collection, Metall } = require("../../db/models");
+const {
+  Jewelry,
+  Photo,
+  Type,
+  Collection,
+  Metall,
+  Stock,
+  Size,
+} = require("../../db/models");
 
 router.get("/", async (req, res) => {
   try {
@@ -27,6 +35,7 @@ router.get("/:id", async (req, res) => {
         { model: Type },
         { model: Collection },
         { model: Metall },
+        { model: Stock, include: [{ model: Size }] },
       ],
     });
     if (jewelry) {

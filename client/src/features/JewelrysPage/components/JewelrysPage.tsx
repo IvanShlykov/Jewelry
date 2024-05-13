@@ -64,7 +64,3 @@ function JewelrysPage(): JSX.Element {
 }
 
 export default JewelrysPage;
-
-
-
-

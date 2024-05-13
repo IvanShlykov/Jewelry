@@ -33,12 +33,18 @@ function JewelryUno({ jewelry, i }: Props): JSX.Element {
       <td>{jewelry.isNew ? 'Да' : 'Нет'}</td>
       <td>{jewelry.JewHashtags?.map((el) => <div key={el.id}>{el.Hashtag?.title}</div>)}</td>
 
-      {jewelry.Stocks?.length ? jewelry.Stocks.map((el) => (
-        <StockMap key={el.id} stock={el}/>
-      )) : <td colSpan={2}>Нет на складе</td>}
+      {jewelry.Stocks?.length ? (
+        <td colSpan={2}>
+          {jewelry.Stocks.map((el) => (
+            <StockMap key={el.id} stock={el} isChange={false}/>
+          ))}
+        </td>
+      ) : (
+        <td colSpan={2}>Нет на складе</td>
+      )}
       <td>{jewelry.Metall?.name}</td>
       <td>
-      <ModalWindowChangeJewelry jewelry={jewelry} state={state} setState={setState} />
+        <ModalWindowChangeJewelry jewelry={jewelry} state={state} setState={setState} />
         <button type="button" onClick={() => setState(true)}>
           Изменить
         </button>

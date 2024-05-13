@@ -31,7 +31,8 @@ export type MetallAdd = {
 
 export type Metall = MetallAdd & { id: number };
 
-export type JewelryAdd = {
+export type Jewelry= {
+  id: number
   name: string;
   price: number;
   description: string;
@@ -49,6 +50,17 @@ export type JewelryAdd = {
   Photos: Photo[];
   JewStones: JewStone[];
 };
+export type JewelryAdd = {
+  name: string;
+  price: number;
+  description: string;
+  collectionID: number;
+  typeID: number;
+  isNew: boolean;
+  metallID: number;
+}
+
+export type JewelryChange = JewelryAdd & {id : number}
 
 export type JewHashtagAdd = {
   jewelryID: number;
@@ -64,7 +76,6 @@ export type HashtagAdd = {
 export type Hashtag = HashtagAdd & { id: number };
 
 
-export type Jewelry = JewelryAdd & { id: number };
 export type IDJewelryAdd = Jewelry['id'];
 
 export type TypeAdd = {

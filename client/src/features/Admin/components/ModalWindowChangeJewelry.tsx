@@ -4,7 +4,12 @@ import { useSelector } from 'react-redux';
 import type { Jewelry } from '../type';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
-import { addHashtagSlice, addPhotoSlice, addStock, changeCollection } from '../adminSlice';
+import {
+  addHashtagSlice,
+  addPhotoSlice,
+  addStock,
+  changeJewelry,
+} from '../adminSlice';
 import HashtagJewelryChangeAdmin from './HashtagJewelryChangeAdmin';
 import PhotoJewelryChangeAdmin from './PhotoJewelryChangeAdmin';
 import StockMap from './StockMap';
@@ -22,8 +27,6 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
   const metalls = useSelector((store: RootState) => store.adminState.metalls);
   const sizes = useSelector((store: RootState) => store.adminState.sizes);
 
-  // console.log(hashtags);
-
   const [addHash, setAddHash] = useState(true);
   const [addPhoto, setPhotoAdd] = useState(true);
   const [addStockState, setStockAdd] = useState(true);
@@ -32,34 +35,30 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
   const [collectionID, setCollectionID] = useState(jewelry.collectionID);
   const [typeID, setTypeID] = useState(jewelry.typeID);
   const [isNew, setIsNew] = useState(jewelry.isNew);
-  const [metall, setMetall] = useState(jewelry.metallID);
+  const [metallID, setID] = useState(jewelry.metallID);
   const [description, setDescription] = useState(jewelry.description);
   const [price, setPrice] = useState(jewelry.price);
   const [hashtag, setHashtag] = useState('');
   const [img, setImg] = useState<File | null>();
   const [count, setCount] = useState(1);
-  const [sizeID,setIDSize] = useState(1)
-
-
-
-  // useEffect(() => {
-  //   if (jewelry.Collection) {
-  //     setCollection(jewelry.Collection.name);
-  //     setType(jewelry.Type.name);
-  //   }
-  // }, [jewelry]);
-
-  // const [newImg, setNewImg] = useState<File>();
+  const [sizeID, setIDSize] = useState(1);
+  const isChange = true;
 
   const changeItem = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // const formData = new FormData();
-    // if (newImg) {
-    //   formData.append('photo', newImg);
-    // }
-    // formData.append('name', name);
-    // dispatch(changeCollection({ formData, id: jewelry.id })).catch(console.log);
-    // setState(!state);
+    dispatch(
+      changeJewelry({
+        id: jewelry.id,
+        name,
+        price,
+        description,
+        collectionID,
+        typeID,
+        isNew,
+        metallID,
+      }),
+    ).catch(console.log);
+    setState(!state);
   };
   const addHashtag = useCallback(() => {
     dispatch(addHashtagSlice({ title: hashtag, id: jewelry.id })).catch(console.log);
@@ -76,14 +75,17 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
     dispatch(addPhotoSlice(formData)).catch(console.log);
     setPhotoAdd(!addPhoto);
   };
+  console.log(addStockState);
 
   const addStockFunc = (): void => {
-    dispatch(addStock({sizeID, count, jewelryID: jewelry.id})).catch(console.log);
+    dispatch(addStock({ sizeID, count, jewelryID: jewelry.id })).catch(console.log);
+    setCount(1);
+    setStockAdd(true);
   };
 
   return (
-    <div className={state ? 'modal active' : 'modal'}>
-      <div className="modal_content" style={{ minWidth: '300px' }}>
+    <div className={state ? 'adminmodal active' : 'adminmodal'}>
+      <div className="adminmodal_content" style={{ minWidth: '300px' }}>
         <form onSubmit={changeItem} className="formChangeJewelry">
           <label>
             <div className="descriptionLabel">Название</div>
@@ -134,10 +136,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
 
           <label>
             <div className="descriptionLabel">Металл</div>
-            <select
-              onChange={(e) => setMetall(Number(e.target.value))}
-              defaultValue={jewelry.metallID}
-            >
+            <select onChange={(e) => setID(Number(e.target.value))} defaultValue={jewelry.metallID}>
               {metalls.map((el) => (
                 <option key={el.id} value={el.id}>
                   {el.name}
@@ -159,7 +158,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
             <div className="descriptionLabel">Хэштеги</div>
             <div className="HashCont">
               {addHash ? (
-                <div className="HashCont">
+                <div className='hashContent'>
                   {jewelry.JewHashtags?.map((el) => (
                     <HashtagJewelryChangeAdmin key={el.id} jewHashtag={el} />
                   ))}
@@ -193,7 +192,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                       <PhotoJewelryChangeAdmin key={el.id} photo={el} />
                     ))}
                   </div>
-                  <button type="button" onClick={() => setPhotoAdd(!addPhoto)}>
+                  <button type="button" className='btn' onClick={() => setPhotoAdd(!addPhoto)}>
                     Добавить
                   </button>
                 </div>
@@ -209,7 +208,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                         setImg(event.target.files[0]);
                     }}
                   />
-                  <button type="button" onClick={addPhotoFunc}>
+                  <button type="button" className='btn' onClick={addPhotoFunc}>
                     Сохранить
                   </button>
                 </div>
@@ -219,35 +218,26 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
 
           <label>
             <div className="descriptionLabel">Склад</div>
-            {addStockState ? (
+
+            <div>
               <div>
                 {jewelry.Stocks?.length ? (
-                  <>
-                    <table>
+                  <table>
+                    <tbody>
                       <tr>
                         <td>Размер</td>
                         <td>Кол-во</td>
+                        <td>Удалить</td>
                       </tr>
-                      <tr>
-                        {jewelry.Stocks.map((el) => (
-                          <StockMap key={el.id} stock={el} />
-                        ))}
-                      </tr>
-                    </table>
-                    <button type="button" onClick={() => setStockAdd(!addStockState)}>
-                      Добавить
-                    </button>
-                  </>
+                      {jewelry.Stocks.map((el) => (
+                        <StockMap key={el.id} stock={el} isChange={isChange} />
+                      ))}
+                    </tbody>
+                  </table>
                 ) : (
-                  <div>
-                    Нет на складе
-                    <button type="button" onClick={() => setStockAdd(!addStockState)}>
-                      Добавить
-                    </button>
-                  </div>
+                  <div>Нет на складе</div>
                 )}
               </div>
-            ) : (
               <div>
                 <select onChange={(e) => setIDSize(Number(e.target.value))}>
                   {sizes.map((el) => (
@@ -259,27 +249,29 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                 <input
                   type="number"
                   placeholder="Количество"
+                  className='stockInput'
                   value={count}
                   onChange={(e) => setCount(Number(e.target.value))}
                 />
-                <button type="button" onClick={addStockFunc}>
-                  Сохранить
+                <button type="button" className='btn' onClick={addStockFunc}>
+                  Добавить
                 </button>
               </div>
-            )}
+            </div>
           </label>
 
           <label>
             <div className="descriptionLabel">Описание</div>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </label>
-
-          <button className="btn" type="submit">
+          <div className='btnForm'>     
+          <button className="btn apply" type="submit">
             Сохранить
           </button>
-          <button className="btn" type="button" onClick={() => setState(false)}>
+          <button className="btn change" type="button" onClick={() => setState(false)}>
             Закрыть
           </button>
+          </div>  
         </form>
       </div>
     </div>

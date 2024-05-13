@@ -1,4 +1,23 @@
-import type { ColPhoto, Collection, CollectionAdd, Hashtag, HashtagAdd, IDCollection, JewHashtag, Jewelry, Metall, MetallAdd, Photo, Size, SizeAdd, Stock, StockAdd, Type } from './type';
+import type {
+  ColPhoto,
+  Collection,
+  CollectionAdd,
+  Hashtag,
+  HashtagAdd,
+  IDCollection,
+  JewHashtag,
+  Jewelry,
+  JewelryAdd,
+  JewelryChange,
+  Metall,
+  MetallAdd,
+  Photo,
+  Size,
+  SizeAdd,
+  Stock,
+  StockAdd,
+  Type,
+} from './type';
 
 export const initCollectionFetch = async (): Promise<Collection[]> => {
   const res = await fetch('/api/admin/collection');
@@ -136,16 +155,21 @@ export const initTypesFetch = async (): Promise<Type[]> => {
 };
 
 // Hashtag
-export const delHashtagFetch = async (obj:{jewHashtagid: number, jewelryID: IDCollection}): Promise<{jewelryID: number, jewHashtagid: IDCollection}> => {
+export const delHashtagFetch = async (obj: {
+  jewHashtagid: number;
+  jewelryID: IDCollection;
+}): Promise<{ jewelryID: number; jewHashtagid: IDCollection }> => {
   const res = await fetch(`/api/admin/hashtag/${obj.jewHashtagid}`, { method: 'DELETE' });
   const data = await res.json();
   if (res.ok) {
-    return {jewelryID: +obj.jewelryID, jewHashtagid: data };
+    return { jewelryID: +obj.jewelryID, jewHashtagid: data };
   }
   throw data.message;
 };
 
-export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHashtag, id:IDCollection, hashtag:Hashtag}> => {
+export const addHashtagFetch = async (
+  obj: Hashtag,
+): Promise<{ jewHashtag: JewHashtag; id: IDCollection; hashtag: Hashtag }> => {
   const res = await fetch('/api/admin/hashtag', {
     method: 'post',
     headers: { 'content-type': 'application/json' },
@@ -160,7 +184,6 @@ export const addHashtagFetch = async (obj: Hashtag): Promise<{jewHashtag: JewHas
   throw data.message;
 };
 
-
 export const initHashtagFetch = async (): Promise<Hashtag[]> => {
   const res = await fetch('/api/admin/hashtags');
   const data = await res.json();
@@ -173,8 +196,7 @@ export const initSizesFetch = async (): Promise<Size[]> => {
   return data.sizes;
 };
 
-
-export const delPhotoFetch = async (photo:Photo): Promise<Photo> => {
+export const delPhotoFetch = async (photo: Photo): Promise<Photo> => {
   const res = await fetch(`/api/admin/photo/${photo.id}`, { method: 'DELETE' });
   const data = await res.json();
   if (res.ok) {
@@ -197,7 +219,7 @@ export const addPhotoFetch = async (formData: FormData): Promise<Photo> => {
   throw data.message;
 };
 
-export const addSizeFetch = async (obj: StockAdd): Promise<Stock> => {
+export const addSizeFetch = async (obj: StockAdd): Promise<{ id: number; stocks: Stock[] }> => {
   const res = await fetch('/api/admin/stock', {
     method: 'post',
     headers: { 'content-type': 'application/json' },
@@ -206,7 +228,32 @@ export const addSizeFetch = async (obj: StockAdd): Promise<Stock> => {
 
   if (res.ok) {
     const data = await res.json();
-    return data;
+    return { id: obj.jewelryID, stocks: data.stocks };
+  }
+  const data = await res.json();
+  throw data.message;
+};
+
+export const delStockFetch = async (stock: Stock): Promise<Stock> => {
+  const res = await fetch(`/api/admin/stock/${stock.id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return stock;
+  }
+  throw data.message;
+};
+
+
+export const changeJewelryFetch = async (obj: JewelryChange): Promise<Jewelry> => {
+  const res = await fetch(`/api/admin/jewelry/${obj.id}`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(obj),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data.jewelry;
   }
   const data = await res.json();
   throw data.message;

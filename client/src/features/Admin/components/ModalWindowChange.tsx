@@ -28,8 +28,8 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
   };
 
   return (
-    <div className={state ? 'modal active' : 'modal'}>
-      <div className="modal_content">
+    <div className={state ? 'adminmodal active' : 'adminmodal'}>
+      <div className="adminmodal_content">
         <form onSubmit={changeItem}>
           <input
             type="text"
@@ -50,7 +50,7 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
             Сохранить
           </button>
         </form>
-        <button type="button" onClick={() => setState(false)} className="close-button">
+        <button type="button" onClick={() => setState(false)} >
           Закрыть
         </button>
       </div>
