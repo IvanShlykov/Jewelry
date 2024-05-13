@@ -14,6 +14,7 @@ module.exports = {
           model: 'Jewelry',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       stoneID: {
         type: Sequelize.INTEGER,

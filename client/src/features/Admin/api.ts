@@ -243,7 +243,6 @@ export const delStockFetch = async (stock: Stock): Promise<Stock> => {
   throw data.message;
 };
 
-
 export const changeJewelryFetch = async (obj: JewelryChange): Promise<Jewelry> => {
   const res = await fetch(`/api/admin/jewelry/${obj.id}`, {
     method: 'PUT',
@@ -256,5 +255,29 @@ export const changeJewelryFetch = async (obj: JewelryChange): Promise<Jewelry> =
     return data.jewelry;
   }
   const data = await res.json();
+  throw data.message;
+};
+
+export const addJewelryFetch = async (obj: JewelryAdd): Promise<Jewelry> => {
+  const res = await fetch('/api/admin/jewelry', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(obj),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data.jewelry;
+  }
+  const data = await res.json();
+  throw data.message;
+};
+
+export const delJewelryFetch = async (id: IDCollection): Promise<IDCollection> => {
+  const res = await fetch(`/api/admin/jewelry/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  }
   throw data.message;
 };

@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import type { ColPhoto, IDCollection } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import { delColPhoto, delCollection } from '../adminSlice';
+import { delColPhoto } from '../adminSlice';
 
 
 type Props = {

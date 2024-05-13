@@ -31,7 +31,7 @@ function AddMetall({ metalls }: Props): JSX.Element {
           value={nameCollection}
           onChange={(e) => setNameCollection(e.target.value)}
         />
-        <button className="btn" type="submit">
+        <button className="btnAdmin" type="submit">
           Добавить
         </button>
       </form>

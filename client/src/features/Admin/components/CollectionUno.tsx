@@ -1,8 +1,8 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo,  useState } from 'react';
 import type { Collection, IDCollection } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import { changeCollection, delCollection } from '../adminSlice';
+import {  delCollection } from '../adminSlice';
 import ModalWindowChange from './ModalWindowChange';
 
 type Props = {

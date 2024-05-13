@@ -1,8 +1,7 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { useAppDispatch } from '../../../store/store';
-import { addCollection, delHashTag } from '../adminSlice';
-import type { Collection, IDCollection, JewHashtag } from '../type';
-import CollectionUno from './CollectionUno';
+import { delHashTag } from '../adminSlice';
+import type { JewHashtag } from '../type';
 
 type Props = {
   jewHashtag: JewHashtag;
@@ -13,13 +12,15 @@ function HashtagJewelryChangeAdmin({ jewHashtag }: Props): JSX.Element {
 
   const delHashtag = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.stopPropagation();
-    dispatch(delHashTag({ jewHashtagid: jewHashtag.id, jewelryID: jewHashtag.jewelryID })).catch(console.log);
+    dispatch(delHashTag({ jewHashtagid: jewHashtag.id, jewelryID: jewHashtag.jewelryID })).catch(
+      console.log,
+    );
   };
 
   return (
-    <div className="hashcontent" >
+    <div className="hashcontent">
       <div>{jewHashtag.Hashtag.title}</div>
-      <button type="button" onClick={delHashtag} id='btnHash'>
+      <button type="button" onClick={delHashtag} id="btnHash">
         X
       </button>
     </div>

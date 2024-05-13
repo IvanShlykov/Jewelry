@@ -12,7 +12,6 @@ function StockMap({ stock, isChange }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const delStockFunc = (): void => {
     dispatch(delStock(stock)).catch(console.log);
-
   };
 
   return !isChange ? (
@@ -25,7 +24,7 @@ function StockMap({ stock, isChange }: Props): JSX.Element {
       <td>{stock.Size.scale}</td>
       <td>{stock.count}</td>
       <td>
-        <button type="button" className='btn del' onClick={delStockFunc}>
+        <button type="button" className='btnAdmin del' onClick={delStockFunc}>
           Удалить
         </button>
       </td>

@@ -2,60 +2,28 @@ import React, { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
-import { addCollection, initHashtag, initJewelrys } from '../adminSlice';
+import { initJewelrys } from '../adminSlice';
 import JewelryUno from './JewelryUno';
 import '../jewelryPage.css';
-
-// type Props = {
-//   jewelrys: Jewelry[];
-// };
+import AddJewelryModalAdmin from './AddJewelryModalAdmin';
 
 function JewelryPageAdmin(): JSX.Element {
   const dispatch = useAppDispatch();
   const jewelrys = useSelector((store: RootState) => store.adminState.jewelrys);
 
-  const [nameCollection, setNameCollection] = useState('');
-  const [img, setImg] = useState<File>();
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     dispatch(initJewelrys()).catch(console.log);
-
   }, []);
 
-  const addCollectionForm = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = new FormData();
-    if (img) {
-      formData.append('photo', img);
-    }
-    formData.append('name', nameCollection);
-    dispatch(addCollection(formData)).catch(console.log);
-    setNameCollection('');
-  };
 
   return (
     <div>
-      <div>Добавить коллекцию</div>
-      <form onSubmit={addCollectionForm}>
-        <input
-          name="name"
-          type="text"
-          placeholder="Название коллекции"
-          value={nameCollection}
-          onChange={(e) => setNameCollection(e.target.value)}
-        />
-        <input
-          name="photo"
-          type="file"
-          placeholder="Фото"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            if (event.target.files && event.target.files.length > 0) setImg(event.target.files[0]);
-          }}
-        />
-        <button className="btn" type="submit">
-          Добавить
-        </button>
-      </form>
+      <div>
+        <div>Добавить украшение <button className='btnAdmin' type='button' onClick={()=> setState(true)}>Добавить</button></div>
+        <AddJewelryModalAdmin state={state} setState={setState}/>
+      </div>
       <table className="jewelrysAdmin">
         <thead>
           <tr>

@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Jewelry',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+
       },
       price: DataTypes.INTEGER,
       count: DataTypes.INTEGER,

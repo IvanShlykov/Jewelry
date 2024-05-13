@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../modalStyle.css';
-import type { Collection, IDCollection, Metall } from '../type';
+import type {  Metall } from '../type';
 import { useAppDispatch } from '../../../store/store';
-import { changeCollection, changeMetall } from '../adminSlice';
+import {  changeMetall } from '../adminSlice';
 
 type Props = {
   metall: Metall;
@@ -31,7 +31,7 @@ function ModalWindowChangeMetall({ metall, state, setState }: Props): JSX.Elemen
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
           />
-          <button className="btn" type="submit">
+          <button className="btnAdmin" type="submit">
             Сохранить
           </button>
         </form>

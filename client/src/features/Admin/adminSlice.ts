@@ -94,11 +94,7 @@ export const addPhotoSlice = createAsyncThunk('photo/add', (formData: FormData) 
 
 export const initSizes = createAsyncThunk('sizes/init', () => api.initSizesFetch());
 
-
-export const addStock = createAsyncThunk('stock/add', (obj: StockAdd) =>
-  api.addSizeFetch(obj),
-);
-
+export const addStock = createAsyncThunk('stock/add', (obj: StockAdd) => api.addSizeFetch(obj));
 
 export const delStock = createAsyncThunk('stock/del', (stock: Stock) => api.delStockFetch(stock));
 
@@ -106,6 +102,13 @@ export const changeJewelry = createAsyncThunk('jewelry/change', (obj: JewelryCha
   api.changeJewelryFetch(obj),
 );
 
+export const addJewelry = createAsyncThunk('jewelry/add', (obj: JewelryAdd) =>
+  api.addJewelryFetch(obj),
+);
+
+export const delJewelry = createAsyncThunk('jewelry/del', (id: IDCollection) =>
+  api.delJewelryFetch(id),
+);
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -256,12 +259,12 @@ const adminSlice = createSlice({
         state.sizes = action.payload;
         state.error = undefined;
       })
-      .addCase(addStock.fulfilled, (state, action) => {       
+      .addCase(addStock.fulfilled, (state, action) => {
         state.jewelrys = state.jewelrys.map((el) =>
           el.id === action.payload.id
             ? {
                 ...el,
-                Stocks:action.payload.stocks,
+                Stocks: action.payload.stocks,
               }
             : el,
         );
@@ -280,13 +283,21 @@ const adminSlice = createSlice({
       })
       .addCase(changeJewelry.fulfilled, (state, action) => {
         state.jewelrys = state.jewelrys.map((el) =>
-          el.id === action.payload.id
-            ? action.payload
-            : el,
+          el.id === action.payload.id ? action.payload : el,
         );
         state.error = undefined;
       })
-      
+      .addCase(addJewelry.fulfilled, (state, action) => {
+        state.jewelrys.push(action.payload);
+        state.error = undefined;
+      })
+      .addCase(addJewelry.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(delJewelry.fulfilled, (state, action) => {
+        state.jewelrys = state.jewelrys.filter((el) => el.id !== action.payload);
+        state.error = undefined;
+      });
   },
 });
 
