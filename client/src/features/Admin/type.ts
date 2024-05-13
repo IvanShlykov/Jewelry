@@ -4,8 +4,10 @@ export type State = {
   metalls: Metall[];
   jewelrys: Jewelry[];
   types: Type[];
-  hashtags: Hashtag[]
-  sizes: Size[]
+  hashtags: Hashtag[];
+  sizes: Size[];
+  locations: Location[];
+  applications: Application[];
   error: undefined | string;
 };
 
@@ -31,8 +33,8 @@ export type MetallAdd = {
 
 export type Metall = MetallAdd & { id: number };
 
-export type Jewelry= {
-  id: number
+export type Jewelry = {
+  id: number;
   name: string;
   price: number;
   description: string;
@@ -58,23 +60,22 @@ export type JewelryAdd = {
   typeID: number;
   isNew: boolean;
   metallID: number;
-}
+};
 
-export type JewelryChange = JewelryAdd & {id : number}
+export type JewelryChange = JewelryAdd & { id: number };
 
 export type JewHashtagAdd = {
   jewelryID: number;
   hashtagID: number;
 };
 
-export type JewHashtag = JewHashtagAdd & { id: number, Hashtag: Hashtag };
+export type JewHashtag = JewHashtagAdd & { id: number; Hashtag: Hashtag };
 
 export type HashtagAdd = {
   title: string;
 };
 
 export type Hashtag = HashtagAdd & { id: number };
-
 
 export type IDJewelryAdd = Jewelry['id'];
 
@@ -85,14 +86,13 @@ export type TypeAdd = {
 
 export type Type = TypeAdd & { id: number };
 
-
 export type StockAdd = {
   sizeID: number;
   jewelryID: number;
-  count: number
+  count: number;
 };
 
-  export type Stock = StockAdd & { id: number, Size: Size  };
+export type Stock = StockAdd & { id: number; Size: Size };
 
 export type PhotoAdd = {
   jewelryID: number;
@@ -107,7 +107,6 @@ export type StoneAdd = {
 
 export type Stone = StoneAdd & { id: number };
 
-
 export type JewStoneAdd = {
   jewelryID: number;
   stoneID: number;
@@ -115,11 +114,33 @@ export type JewStoneAdd = {
 
 export type JewStone = JewStoneAdd & { id: number };
 
-
-
-
 export type SizeAdd = {
   scale: string;
 };
 
 export type Size = SizeAdd & { id: number };
+
+export type Location = {
+  id: number;
+  city: string;
+  adress: string;
+  phone: string;
+  time: string;
+  img: string;
+};
+
+export type User = {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+};
+
+export type Application = {
+  id: number;
+  description: string;
+  status: string;
+  photo: string;
+  userID: number;
+  User: User;
+};

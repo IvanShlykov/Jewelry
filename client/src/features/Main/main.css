@@ -144,3 +144,8 @@ a {
   .burger-checkbox:checked ~ .menu-list {
     transform: translateX(0);
   }
+
+  .btnSearch{
+    background-color: white;
+    border: none;
+  }

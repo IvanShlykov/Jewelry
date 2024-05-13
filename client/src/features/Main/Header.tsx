@@ -8,6 +8,7 @@ import { logout } from '../Auth/authSlice';
 import ModalWindowAuth from '../Auth/components/ModalWindowAuth';
 
 import ModalWindowSearch from '../Search/components/ModalWindowSearch';
+import SVG from '../SVG/SVG';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -95,8 +96,8 @@ function Header(): JSX.Element {
 
       {!user ? (
         <>
-          <button type="button" onClick={openModal}>
-            Открыть модальное окно
+          <button type="button" className='btnSearch' onClick={openModal}>
+            <SVG id='search'/>
           </button>
           <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
         </>
