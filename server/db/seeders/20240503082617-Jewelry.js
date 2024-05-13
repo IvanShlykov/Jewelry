@@ -11,7 +11,7 @@ module.exports = {
           collectionID: 1,
           typeID: 1,
           isSpecial: false,
-          isNew: false,
+          isNew: true,
           discountPrice: 800,
           metallID: 1,
         },
