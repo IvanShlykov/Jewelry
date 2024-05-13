@@ -1,3 +1,5 @@
+import type { NewJewelry } from "../NewPage/type";
+
 export type JewStoneAdd = {
   jewelryID: number;
   stoneID: number;

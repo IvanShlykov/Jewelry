@@ -9,22 +9,6 @@ const {
   Size,
 } = require("../../db/models");
 
-router.get("/", async (req, res) => {
-  try {
-    const jewelrys = await Jewelry.findAll({
-      include: [
-        { model: Photo },
-        { model: Type },
-        { model: Collection },
-        { model: Metall },
-      ],
-    });
-    console.log(jewelrys, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    res.status(200).json({ jewelrys });
-  } catch ({ message }) {
-    res.status(500).json({ message });
-  }
-});
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {

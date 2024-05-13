@@ -20,6 +20,7 @@ import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 
 import JewelryPage from '../features/JewelrysPage/components/JewelryPage';
 import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCustomJewelery';
+import NewPage from '../features/NewPage/components/NewPage';
 
 
 function App(): JSX.Element {
@@ -46,8 +47,8 @@ function App(): JSX.Element {
           <Route path="jewelry" element={<JewelrysPage />} />
           <Route path="jewelry/:id" element={<JewelryPage />} />
           {/* <Route path="collections" element={<CollectionsPage />} />
-          <Route path="specials" element={<SpecialsPage />} />
-          <Route path="new" element={<NewPage />} /> */}
+          <Route path="specials" element={<SpecialsPage />} /> */}
+          <Route path="new" element={<NewPage />} />
           <Route path="registration" element={<Registration />} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
