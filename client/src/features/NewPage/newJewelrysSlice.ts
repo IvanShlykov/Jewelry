@@ -10,29 +10,29 @@ const initialState: State = {
   types: [],
   sizes: [],
   hashtags: [],
+  newJewelrys: [],
   error: undefined };
 
-export const initJewelrys = createAsyncThunk(
-  'jewelrysAdmin/init',
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  () => api.initJewelryFetch(),
+export const initNewJewelrys = createAsyncThunk(
+  'newJewelrys/init',
+  () => api.initNewJewelrysFetch(),
 );
 
 export const initCollectionsHome = createAsyncThunk('collectionsHome/init', () =>
   api.initCollectionHomeFetch(),
 );
 
-const jewelrysSlice = createSlice({
-  name: 'jewelrys',
+const newJewelrysSlice = createSlice({
+  name: 'newJewelrys',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(initJewelrys.fulfilled, (state, action) => {
-        state.jewelrys = action.payload;
+      .addCase(initNewJewelrys.fulfilled, (state, action) => {
+        state.newJewelrys = action.payload;
         state.error = undefined;
       })
-      .addCase(initJewelrys.rejected, (state, action) => {
+      .addCase(initNewJewelrys.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(initCollectionsHome.fulfilled, (state, action) => {
@@ -45,4 +45,4 @@ const jewelrysSlice = createSlice({
   },
 });
 
-export default jewelrysSlice.reducer;
+export default newJewelrysSlice.reducer;

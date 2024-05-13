@@ -1,9 +1,9 @@
-import type { CollectionHome, Jewelry } from './type';
+import type { Jewelry, CollectionHome } from './type';
 
-export const initJewelryFetch = async (): Promise<Jewelry[]> => {
-  const res = await fetch('/api/admin/jewelrys');
+export const initNewJewelrysFetch = async (): Promise<Jewelry[]> => {
+  const res = await fetch('/api/new');
   const data = await res.json();
-  return data.jewelrys;
+  return data.newJewelrys;
 };
 
 export const initCollectionHomeFetch = async (): Promise<CollectionHome[]> => {
@@ -12,4 +12,4 @@ export const initCollectionHomeFetch = async (): Promise<CollectionHome[]> => {
   return data.collections;
 };
 
-export default initJewelryFetch;
+export default initNewJewelrysFetch;
