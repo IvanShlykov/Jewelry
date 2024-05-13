@@ -43,6 +43,7 @@ function Header(): JSX.Element {
     dispatch(logout())
       .then(() => {
         setIsModalOpen(false);
+        setCheck((prev) => !prev);
       })
       .catch(console.log);
   };
@@ -91,20 +92,27 @@ function Header(): JSX.Element {
             Заказать индивидуальное украшение
           </NavLink>
         </li>
+        <li>
+          <Link className="menu-item" onClick={logOutHeader} to="/">
+            Выйти
+          </Link>
+        </li>
       </ul>
-      <div><NavLink to="/">DOUGLAS CRAFT</NavLink></div>
+      <div>
+        <NavLink to="/">DOUGLAS CRAFT</NavLink>
+      </div>
       <div className="searchAndLK">
         {!user ? (
           <>
             <button type="button" className="btnSearch" onClick={openModal}>
-              <div className="search" />
+              <div className="LK" />
             </button>
             <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
           </>
         ) : (
-          <Link onClick={logOutHeader} to="/">
-            Выйти
-          </Link>
+          <NavLink to="/basket">
+            <div className="basketHeader" />
+          </NavLink>
         )}
 
         <button type="button" onClick={openModalSearch} className="btnSearch">

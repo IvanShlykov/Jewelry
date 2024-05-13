@@ -21,6 +21,7 @@ import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 import JewelryPage from '../features/JewelrysPage/components/JewelryPage';
 import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCustomJewelery';
 import NewPage from '../features/NewPage/components/NewPage';
+import BasketPage from '../features/Basket/components/BasketPage';
 
 
 function App(): JSX.Element {
@@ -52,6 +53,7 @@ function App(): JSX.Element {
           <Route path="registration" element={<Registration />} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
+          <Route path="basket" element={<BasketPage/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
