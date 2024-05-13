@@ -4,75 +4,61 @@ import JewelryCard from './JewelryCard';
 import type { RootState } from '../../../store/store';
 
 function JewelrysPage(): JSX.Element {
-  const [filters, setFilters] = useState({
-    collection: '',
-    price: '',
-    type: '',
-    metall: '',
-  });
+  const [collectionFilter, setCollectionFilter] = useState('');
+  const [priceFilter, setPriceFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [typeMetall, setTypeMetall] = useState('');
+
+ 
 
   const jewelrysSelect = useSelector((store: RootState) => store.adminState.jewelrys);
 
-  const applyFilters = (jewelry) => {
-    return Object.keys(filters).every((key) => {
-      if (filters[key] === '') {
-        return true;
-      }
-      return jewelry[key].id.toString() === filters[key];
-    });
-  };
+  const searchPriceJewelrys = jewelrysSelect.filter(jewelry =>
+    jewelry.price)
 
-  const filteredJewelrys = jewelrysSelect.filter(applyFilters);
-
-  const handleFilterChange = (filterName, value) => {
-    setFilters({
-      ...filters,
-      [filterName]: value,
-    });
-  };
+  const filteredJewelrys = jewelrysSelect.filter(jewelry => {
+    const matchesCollection = !collectionFilter || jewelry.Collection.id === +collectionFilter;
+    const matchesPrice = !priceFilter || jewelry.price === +priceFilter;
+    const matchesType = !typeFilter || jewelry.Type.id === +typeFilter;
+    const matchesMetall = !typeMetall || jewelry.Metall.id === +typeMetall;
+    
+    return matchesCollection && matchesPrice && matchesType && matchesMetall ;
+  });
 
   return (
     <div className="list">
-      <select
-        value={filters.collection}
-        onChange={(e) => handleFilterChange('collection', e.target.value)}
-      >
+      <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
-        {filteredJewelrys.map((jewelry) => (
-          <option key={jewelry.Collection.id}>{jewelry.Collection.name}</option>
+        {jewelrysSelect.map(jewelry => (
+          <option key={jewelry.Collection.id} value={jewelry.Collection.id}>{jewelry.Collection.name}</option>
         ))}
       </select>
-      <select value={filters.price} onChange={(e) => handleFilterChange('price', e.target.value)}>
+      <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}>
         <option value="">Цена</option>
-        {filteredJewelrys.map((jewelry) => (
-          <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
-          </option>
+        {jewelrysSelect.map(jewelry => (
+          <option key={jewelry.id} value={jewelry.price}>{jewelry.price}</option>
         ))}
       </select>
-      <select value={filters.type} onChange={(e) => handleFilterChange('type', e.target.value)}>
+      <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
         <option value="">Тип</option>
-        {filteredJewelrys.map((jewelry) => (
-          <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
-          </option>
+        {jewelrysSelect.map(jewelry => (
+          <option key={jewelry.Type.id} value={jewelry.Type.id}>{jewelry.Type.name}</option>
         ))}
       </select>
-      <select value={filters.metall} onChange={(e) => handleFilterChange('metall', e.target.value)}>
+      <select value={typeMetall} onChange={(e) => setTypeMetall(e.target.value)}>
         <option value="">Металл</option>
-        {filteredJewelrys.map((jewelry) => (
-          <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
-          </option>
+        {jewelrysSelect.map(jewelry => (
+          <option key={jewelry.Metall.id} value={jewelry.Metall.id}>{jewelry.Metall.name}</option>
         ))}
       </select>
-      {filteredJewelrys.map((jewelry) => (
-        <div className="jewelry-container" key={jewelry.id}>
-          <div className="jewelry-card">
-            <JewelryCard jewelry={jewelry} key={jewelry.id} />
-          </div>
-        </div>
-      ))}
+      
+      {filteredJewelrys.length === 0 ? (
+        <p>Такого украшения нет</p>
+      ) : (
+        filteredJewelrys.map(jewelry => (
+          <JewelryCard key={jewelry.id} jewelry={jewelry} />
+        ))
+      )}
     </div>
   );
 }
