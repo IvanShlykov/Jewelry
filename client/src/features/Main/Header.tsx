@@ -20,8 +20,7 @@ function Header(): JSX.Element {
 
   const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
 
-  const query = useSelector((store: RootState)=> store.search.searchQuery);
-
+  const query = useSelector((store: RootState) => store.search.searchQuery);
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -57,7 +56,7 @@ function Header(): JSX.Element {
         onChange={change}
         checked={check}
       />
-      
+
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="burger-checkbox" className="burger" />
       <ul className="menu-list">
@@ -76,7 +75,7 @@ function Header(): JSX.Element {
             Новинки
           </NavLink>
         </li>
-        
+
         <li>
           <NavLink to="/collections" className="menu-item" onClick={change}>
             Коллекции
@@ -93,26 +92,28 @@ function Header(): JSX.Element {
           </NavLink>
         </li>
       </ul>
+      <div><NavLink to="/">DOUGLAS CRAFT</NavLink></div>
+      <div className="searchAndLK">
+        {!user ? (
+          <>
+            <button type="button" className="btnSearch" onClick={openModal}>
+              <div className="search" />
+            </button>
+            <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
+          </>
+        ) : (
+          <Link onClick={logOutHeader} to="/">
+            Выйти
+          </Link>
+        )}
 
-      {!user ? (
-        <>
-          <button type="button" className='btnSearch' onClick={openModal}>
-            <SVG id='search'/>
-          </button>
-          <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
-        </>
-      ) : (
-        <Link onClick={logOutHeader} to="/">
-          Выйти
-        </Link>
-      )}
-      <button type="button" onClick={openModalSearch}>
-            Поиск
-          </button>
-          <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
+        <button type="button" onClick={openModalSearch} className="btnSearch">
+          <SVG id="search" />
+        </button>
+        <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
+      </div>
     </div>
   );
 }
-
 
 export default Header;
