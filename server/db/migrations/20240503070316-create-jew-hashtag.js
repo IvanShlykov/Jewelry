@@ -15,6 +15,8 @@ module.exports = {
           model: 'Jewelry',
           key: 'id'
         },
+        onDelete: 'CASCADE',
+
       },
       hashtagID: {
         type: Sequelize.INTEGER,

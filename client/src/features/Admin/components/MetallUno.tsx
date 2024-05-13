@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import type {  IDCollection, Metall } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import {  delCollection, delMetall } from '../adminSlice';
+import {  delMetall } from '../adminSlice';
 import ModalWindowChangeMetall from './ModalWindowChangeMetall';
 
 type Props = {

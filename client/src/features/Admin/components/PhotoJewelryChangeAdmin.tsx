@@ -1,8 +1,7 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { useAppDispatch } from '../../../store/store';
-import { addCollection, delHashTag, delPhoto } from '../adminSlice';
-import type { Collection, IDCollection, JewHashtag, Photo } from '../type';
-import CollectionUno from './CollectionUno';
+import { delPhoto } from '../adminSlice';
+import type {  Photo } from '../type';
 
 type Props = {
   photo: Photo;

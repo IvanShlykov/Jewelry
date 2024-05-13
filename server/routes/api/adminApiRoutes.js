@@ -186,12 +186,81 @@ router.get('/jewelrys', async (req, res) => {
         { model: Photo },
         { model: JewStone },
       ],
+      order: [['id', 'ASC']],
     });
     res.status(200).json({ jewelrys });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
 });
+
+router.put('/jewelry/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, price, description, collectionID, typeID, isNew, metallID } =
+      req.body;
+    await Jewelry.update(
+      {
+        name,
+        price,
+        description,
+        collectionID,
+        typeID,
+        isNew,
+        metallID: +metallID,
+      },
+      { where: { id: +id } }
+    );
+    const jewelry = await Jewelry.findOne({
+      where: { id: +id },
+      include: [
+        { model: Collection },
+        { model: Metall },
+        { model: Type },
+        { model: JewHashtag, include: [{ model: Hashtag }] },
+        { model: Stock, include: [{ model: Size }] },
+        { model: Photo },
+        { model: JewStone },
+      ],
+    });
+    res.status(200).json({ jewelry });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/jewelry', async (req, res) => {
+  try {
+    let jewelry = await Jewelry.create(req.body);
+    jewelry = await Jewelry.findOne({
+      where: { id: jewelry.id },
+      include: [
+        { model: Collection },
+        { model: Metall },
+        { model: Type },
+        { model: JewHashtag, include: [{ model: Hashtag }] },
+        { model: Stock, include: [{ model: Size }] },
+        { model: Photo },
+        { model: JewStone },
+      ],
+    });
+    res.status(200).json({ jewelry });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/jewelry/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Jewelry.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+
 
 router.get('/types', async (req, res) => {
   try {
@@ -323,43 +392,5 @@ router.delete('/stock/:id', async (req, res) => {
   }
 });
 
-router.put('/jewelry/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(req.body);
-    
-    const { name, price, description, collectionID, typeID, isNew, metallID } =
-      req.body;
-    await Jewelry.update(
-      {
-        name,
-        price,
-        description,
-        collectionID,
-        typeID,
-        isNew,
-        metallID: +metallID,
-      },
-      { where: { id: +id } }
-    );
-    console.log(111);
-    const jewelry = await Jewelry.findOne({
-      where: { id: +id },
-      include: [
-        { model: Collection },
-        { model: Metall },
-        { model: Type },
-        { model: JewHashtag, include: [{ model: Hashtag }] },
-        { model: Stock, include: [{ model: Size }] },
-        { model: Photo },
-        { model: JewStone },
-      ],
-    });
-    console.log(jewelry);
-    res.status(200).json({ jewelry });
-  } catch ({ message }) {
-    console.log(message);
-    res.status(500).json({ message });
-  }
-});
+
 module.exports = router;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../modalStyle.css';
-import type { Collection, IDCollection, Metall } from '../type';
+import type { Collection} from '../type';
 import { useAppDispatch } from '../../../store/store';
 import { changeCollection } from '../adminSlice';
 
@@ -46,7 +46,7 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
                 setNewImg(event.target.files[0]);
             }}
           />
-          <button className="btn" type="submit">
+          <button className="btnAdmin" type="submit">
             Сохранить
           </button>
         </form>

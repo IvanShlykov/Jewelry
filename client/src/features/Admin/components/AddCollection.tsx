@@ -48,7 +48,7 @@ function AddCollection({ collections }: Props): JSX.Element {
             if (event.target.files && event.target.files.length > 0) setImg(event.target.files[0]);
           }}
         />
-        <button className="btn" type="submit">
+        <button className="btnAdmin" type="submit">
           Добавить
         </button>
       </form>

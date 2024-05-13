@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Jewelry',
           key: 'id',
         },
+        onDelete: 'CASCADE',
+
       },
     },
     {

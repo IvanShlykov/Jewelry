@@ -14,6 +14,8 @@ module.exports = {
           model: 'Jewelry',
           key: 'id'
         },
+        onDelete: 'CASCADE',
+
       },
       url: {
         type: Sequelize.STRING,

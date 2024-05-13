@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback,  useState } from 'react';
 import '../modalStyle.css';
 import { useSelector } from 'react-redux';
 import type { Jewelry } from '../type';
@@ -87,7 +87,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
     <div className={state ? 'adminmodal active' : 'adminmodal'}>
       <div className="adminmodal_content" style={{ minWidth: '300px' }}>
         <form onSubmit={changeItem} className="formChangeJewelry">
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Название</div>
             <input
               type="text"
@@ -95,8 +95,8 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-          </label>
-          <label>
+          </div>
+          <div className='label'>
             <div className="descriptionLabel">Коллекция</div>
             <select
               onChange={(e) => setCollectionID(Number(e.target.value))}
@@ -108,8 +108,8 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                 </option>
               ))}
             </select>
-          </label>
-          <label>
+          </div>
+          <div className='label'>
             <div className="descriptionLabel">Тип</div>
             <select
               onChange={(e) => setTypeID(Number(e.target.value))}
@@ -121,9 +121,9 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                 </option>
               ))}
             </select>
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Новинка</div>
             <select
               onChange={(e) => setIsNew(e.target.value === 'да')}
@@ -132,9 +132,9 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
               <option value="да">Да</option>
               <option value="нет">Нет</option>
             </select>
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Металл</div>
             <select onChange={(e) => setID(Number(e.target.value))} defaultValue={jewelry.metallID}>
               {metalls.map((el) => (
@@ -143,8 +143,8 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                 </option>
               ))}
             </select>
-          </label>
-          <label>
+          </div>
+          <div  className='label'>
             <div className="descriptionLabel">Цена</div>
             <input
               type="number"
@@ -152,9 +152,9 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
             />
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Хэштеги</div>
             <div className="HashCont">
               {addHash ? (
@@ -180,9 +180,9 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                 {addHash ? `Добавить` : 'Закрыть'}
               </button>
             </div>
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Фото</div>
             <div>
               {addPhoto ? (
@@ -192,7 +192,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                       <PhotoJewelryChangeAdmin key={el.id} photo={el} />
                     ))}
                   </div>
-                  <button type="button" className='btn' onClick={() => setPhotoAdd(!addPhoto)}>
+                  <button type="button" className='btnAdmin' onClick={() => setPhotoAdd(!addPhoto)}>
                     Добавить
                   </button>
                 </div>
@@ -208,15 +208,15 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                         setImg(event.target.files[0]);
                     }}
                   />
-                  <button type="button" className='btn' onClick={addPhotoFunc}>
+                  <button type="button" className='btnAdmin' onClick={addPhotoFunc}>
                     Сохранить
                   </button>
                 </div>
               )}
             </div>
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Склад</div>
 
             <div>
@@ -253,22 +253,22 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                   value={count}
                   onChange={(e) => setCount(Number(e.target.value))}
                 />
-                <button type="button" className='btn' onClick={addStockFunc}>
+                <button type="button" className='btnAdmin' onClick={addStockFunc}>
                   Добавить
                 </button>
               </div>
             </div>
-          </label>
+          </div>
 
-          <label>
+          <div className='label'>
             <div className="descriptionLabel">Описание</div>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-          </label>
+          </div>
           <div className='btnForm'>     
-          <button className="btn apply" type="submit">
+          <button className="btnAdmin apply" type="submit">
             Сохранить
           </button>
-          <button className="btn change" type="button" onClick={() => setState(false)}>
+          <button className="btnAdmin change" type="button" onClick={() => setState(false)}>
             Закрыть
           </button>
           </div>  

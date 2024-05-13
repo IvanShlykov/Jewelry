@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
-import { initColPhotos, initCollections, initHashtag, initJewelrys, initMetalls, initSizes, initTypes } from '../adminSlice';
+import { initColPhotos, initCollections, initHashtag, initMetalls, initSizes, initTypes } from '../adminSlice';
 import AddCollection from './AddCollection';
 import { logout } from '../../Auth/authSlice';
 import AddColPhoto from './AddColPhoto';

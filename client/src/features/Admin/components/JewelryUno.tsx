@@ -1,9 +1,8 @@
-import React, { memo, useEffect, useState } from 'react';
-import type { Collection, IDCollection, Jewelry } from '../type';
+import React, { memo,  useState } from 'react';
+import type { IDCollection, Jewelry } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import { changeCollection, delCollection } from '../adminSlice';
-import ModalWindowChange from './ModalWindowChange';
+import {  delCollection, delJewelry } from '../adminSlice';
 import StockMap from './StockMap';
 import ModalWindowChangeJewelry from './ModalWindowChangeJewelry';
 
@@ -19,7 +18,7 @@ function JewelryUno({ jewelry, i }: Props): JSX.Element {
   const [modal, setModal] = useState(false);
 
   const deleteItem = (id: IDCollection): void => {
-    dispatch(delCollection(id)).catch(console.log);
+    dispatch(delJewelry(id)).catch(console.log);
   };
 
   return (
