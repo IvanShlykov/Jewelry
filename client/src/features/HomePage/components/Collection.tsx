@@ -6,7 +6,7 @@ import type { CollectionHome } from '../../JewelrysPage/type';
 function Collection({ collection }: { collection: CollectionHome }): JSX.Element {
   return (
     <div>
-      <Link className="banner-specials" to="/specials">
+      <Link className="banner-specials" to={`/collections/${collection.id}`}>
         <div className="image-container specials" style={{backgroundImage: `url(${collection.photo})`}}>
           <span className="banner-collections-text">{collection.name}</span>
         </div>

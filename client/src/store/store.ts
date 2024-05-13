@@ -7,6 +7,8 @@ import adminSlice from '../features/Admin/adminSlice';
 import  addCustomJewelerySlice  from '../features/AddCustomJewelery/jewelrysSlice';
 import searchReducer from '../features/Search/searchSlice';
 import newJewelrysSlice from '../features/NewPage/newJewelrysSlice';
+import collectionsSlice from '../features/CollectionsPage/specificCollectionSlice';
+import specificCollectionSlice from '../features/CollectionsPage/specificCollectionSlice';
 
 
 
@@ -19,6 +21,8 @@ const store = configureStore({
     customJewelerysState: addCustomJewelerySlice,
     search: searchReducer,
     newJewelrysState: newJewelrysSlice,
+    collectionsState: collectionsSlice,
+    specificCollectionState: specificCollectionSlice,
   },
 });
 
