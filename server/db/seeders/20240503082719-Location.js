@@ -7,7 +7,7 @@ module.exports = {
         {
           city: 'СПБ',
           adress: 'Боткинская 15',
-          phone: '8-931-239-11-03',
+          phone: '89312391103',
           time: '11:00',
           img: 'https://etu.ru/assets/cache/images/en/why-us/cultural-capital/1280x854-spb-view-bridges01.0cb.jpg',
         },
