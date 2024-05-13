@@ -20,6 +20,7 @@ import AddMetall from './AddMetall';
 import JewelryPageAdmin from './JewelryPageAdmin';
 import AddFindUs from './AddFindUs';
 import OrderAdminPage from './OrderAdminPage';
+import '../admin.css';
 
 function AdminPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -57,29 +58,35 @@ function AdminPage(): JSX.Element {
   }, [user]);
 
   return (
-    <div>
-      <a onClick={logOutHeader} href="/">
-        Выйти
-      </a>
-      <button type="button" onClick={() => setState('bd')}>
-        Работа с БД
-      </button>
-      <button type="button" onClick={() => setState('jewelry')}>
-        Работа с украшениями
-      </button>
-      <button type="button" onClick={() => setState('order')}>
-        Работа с заказами
-      </button>
-      {state === 'bd' && (
-        <>
-          <AddCollection collections={collections} />
-          <AddColPhoto colPhotos={colPhotos} collections={collections} />
-          <AddMetall metalls={metalls} />
-          <AddFindUs locations={locations} />
-        </>
-      )}
-      {state === 'jewelry' && <JewelryPageAdmin />}
-      {state === 'order' && <OrderAdminPage applications={applications} />}
+    <div className="containerAdmin">
+      <div className="containerAdminContent">
+        <div className="headerAdmin">
+          <div className='selectorAdmin'>
+            <button type="button" className='selectorButton' onClick={() => setState('bd')}>
+              Работа с БД
+            </button>
+            <button type="button" className='selectorButton' onClick={() => setState('jewelry')}>
+              Работа с украшениями
+            </button>
+            <button type="button" className='selectorButton' onClick={() => setState('order')}>
+              Работа с заказами
+            </button>
+          </div>
+          <a onClick={logOutHeader} href="/">
+              Выйти
+            </a>
+        </div>
+        {state === 'bd' && (
+          <>
+            <AddCollection collections={collections} />
+            <AddColPhoto colPhotos={colPhotos} collections={collections} />
+            <AddMetall metalls={metalls} />
+            <AddFindUs locations={locations} />
+          </>
+        )}
+        {state === 'jewelry' && <JewelryPageAdmin />}
+        {state === 'order' && <OrderAdminPage applications={applications} />}
+      </div>
     </div>
   );
 }

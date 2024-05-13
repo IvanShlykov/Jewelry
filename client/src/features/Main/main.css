@@ -9,7 +9,9 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-size: 25px;
+  font-family: Montserrat;
 }
+
 
 a {
   text-decoration: none;
@@ -95,7 +97,7 @@ a {
   position: relative;
   border: none;
   background: transparent;
-  width: 40px;
+  width: 75px;
   height: 26px;
 }
 .burger::before,
@@ -104,7 +106,7 @@ a {
   left: 0;
   position: absolute;
   display: block;
-  width: 100%;
+  width: 35px;
   height: 4px;
   border-radius: 10px;
   background: #000;
@@ -179,6 +181,7 @@ a {
 .searchAndLK {
   display: flex;
   align-items: start;
+  min-width: 60px;
 }
 
 .LK {

@@ -28,8 +28,8 @@ function AddColPhoto({ colPhotos, collections }: Props): JSX.Element {
 
   return (
     <div>
-      <div>Фото к коллекции</div>
-      <form onSubmit={addCollectionForm}>
+      <div className='textH1'>Фото к коллекции</div>
+      <form onSubmit={addCollectionForm} className='collectionAdd'>
         <select onChange={(e) => setNameCollection(Number(e.target.value))}>
           {collections.slice(1).map((el) => (
             <option key={el.id} value={el.id}>
@@ -49,7 +49,7 @@ function AddColPhoto({ colPhotos, collections }: Props): JSX.Element {
           Добавить
         </button>
       </form>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>№</th>

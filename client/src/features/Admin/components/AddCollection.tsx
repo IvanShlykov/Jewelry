@@ -30,9 +30,9 @@ function AddCollection({ collections }: Props): JSX.Element {
   };
 
   return (
-    <div>
-      <div>Добавить коллекцию</div>
-      <form onSubmit={addCollectionForm}>
+    <div className='collectionConteiner'>
+      <div className='textH1'>Добавить коллекцию</div>
+      <form onSubmit={addCollectionForm} className='collectionAdd'>
         <input
           name="name"
           type="text"
@@ -52,7 +52,7 @@ function AddCollection({ collections }: Props): JSX.Element {
           Добавить
         </button>
       </form>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>№</th>

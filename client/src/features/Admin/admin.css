@@ -1,0 +1,84 @@
+.containerAdmin {
+  display: flex;
+  justify-content: center;
+}
+
+.containerAdminContent {
+  margin-top: 30px;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerAdmin {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.selectorAdmin {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  flex-grow: 1;
+}
+
+.selectorButton {
+  padding: 8px;
+  min-width: fit-content;
+  border: none;
+  cursor: pointer;
+}
+
+
+.textH1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+th {
+  font-size: 15px;
+}
+
+.table {
+  margin-top: 25px;
+  width: 100%;
+  border: none;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+.table thead th {
+  padding: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: left;
+  color: #444441;
+  border-top: 2px solid #716561;
+  border-bottom: 2px solid #716561;
+}
+.table tbody td {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #444441;
+  border-top: 1px solid #716561;
+  button {
+    width: 100px;
+    height: 30px;
+  }
+}
+
+.collectionAdd {
+  input,select{
+    padding: 8px;
+    font-size: 18px;
+    margin-right: 15px;
+    max-width: 400px;
+  }
+
+  select{
+    width: 264px;
+  }
+}

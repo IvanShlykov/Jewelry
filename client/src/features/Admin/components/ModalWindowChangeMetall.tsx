@@ -26,12 +26,13 @@ function ModalWindowChangeMetall({ metall, state, setState }: Props): JSX.Elemen
       <div className="adminmodal_content">
         <form onSubmit={changeItem}>
           <input
+          className='inputModalAdmin'
             type="text"
             placeholder="Название коллекции"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
           />
-          <button className="btnAdmin" type="submit">
+          <button className="btnAdmin modalBtninput" type="submit">
             Сохранить
           </button>
         </form>
