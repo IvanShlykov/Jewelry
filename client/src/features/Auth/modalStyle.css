@@ -34,8 +34,10 @@
   background-color: #f2f2f2;
 }
 
-.close {
-  padding-left: 91%;
+.closeDiv {
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
   font-weight: 200;
   font-size: 30px;
 

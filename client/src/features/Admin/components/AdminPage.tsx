@@ -62,13 +62,13 @@ function AdminPage(): JSX.Element {
       <div className="containerAdminContent">
         <div className="headerAdmin">
           <div className='selectorAdmin'>
-            <button type="button" className='selectorButton' onClick={() => setState('bd')}>
+            <button type="button" className={state === 'bd' ? 'selectorButton activBtnAdminJewelry': 'selectorButton'} onClick={() => setState('bd')}>
               Работа с БД
             </button>
-            <button type="button" className='selectorButton' onClick={() => setState('jewelry')}>
+            <button type="button" className={state === 'jewelry' ? 'selectorButton activBtnAdminJewelry': 'selectorButton'}  onClick={() => setState('jewelry')}>
               Работа с украшениями
             </button>
-            <button type="button" className='selectorButton' onClick={() => setState('order')}>
+            <button type="button" className={state === 'order' ? 'selectorButton activBtnAdminJewelry': 'selectorButton'}  onClick={() => setState('order')}>
               Работа с заказами
             </button>
           </div>

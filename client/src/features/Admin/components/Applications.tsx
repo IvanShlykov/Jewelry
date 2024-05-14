@@ -9,7 +9,7 @@ type Props = {
 
 function Applications({ applications, open }: Props): JSX.Element {
   return applications.length > 0 ? (
-    <table>
+    <table className='table'>
       <thead>
         <tr>
           <th>№</th>

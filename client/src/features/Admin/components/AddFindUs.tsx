@@ -10,93 +10,109 @@ function AddFindUs({ locations }: { locations: Location[] }): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [city, setSity] = useState('');
-  const [adress, setAdress] = useState('');
+  const [strit, setStrit] = useState('');
+  const [house, setHouse] = useState('');
+  const [korp, setKorp] = useState('');
   const [phone, setPhone] = useState('');
   const [time, setTime] = useState('');
-  const [img, setImg] = useState<File | null>();
 
-  const [error,setError] = useState('')
+  const [error, setError] = useState('');
 
   const message = useSelector((store: RootState) => store.adminState.error);
 
   const addLocationFunc = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    if (city && adress && phone && time) {
-      const formData = new FormData();
-      if (img) {
-        formData.append('photo', img);
-      }
-      formData.append('city', city);
-      formData.append('adress', adress);
-      formData.append('phone', phone);
-      formData.append('time', time);
-
-      dispatch(addLocation(formData)).catch(console.log);
+    if (city && strit && house && korp && phone && time) {
+      dispatch(addLocation({ city, phone, strit, house, korp, time })).catch(console.log);
 
       setSity('');
-      setAdress('');
+      setStrit('');
+      setHouse('');
+      setKorp('');
       setPhone('');
       setTime('');
-      setError('')
-
-      e.currentTarget.photo.value = null;
-      setImg(null);
+      setError('');
     } else {
-      setError('Заполните все поля')
+      setError('Заполните все поля');
     }
   };
 
   return (
     <div>
-      <div className='textH1'>Добавить локацию</div>
-      <form onSubmit={addLocationFunc} className='collectionAdd'>
+      <div className="textH1">Добавить локацию</div>
+      <form onSubmit={addLocationFunc} className="collectionAdd">
         <input
           name="city"
           type="text"
           placeholder="Город"
           value={city}
-          onChange={(e) => {setSity(e.target.value); setError('');}}
+          onChange={(e) => {
+            setSity(e.target.value);
+            setError('');
+          }}
         />
         <input
-          name="adress"
+          name="strit"
           type="text"
-          placeholder="Адрес"
-          value={adress}
-          onChange={(e) => {setAdress(e.target.value); setError('');}}
+          placeholder="Улица"
+          value={strit}
+          onChange={(e) => {
+            setStrit(e.target.value);
+            setError('');
+          }}
+        />
+        <input
+          name="house"
+          type="text"
+          placeholder="Дом"
+          value={house}
+          onChange={(e) => {
+            setHouse(e.target.value);
+            setError('');
+          }}
+        />{' '}
+        <input
+          name="korp"
+          type="text"
+          placeholder="Корпус"
+          value={korp}
+          onChange={(e) => {
+            setKorp(e.target.value);
+            setError('');
+          }}
         />
         <input
           name="phone"
           type="text"
           placeholder="Телефон"
           value={phone}
-          onChange={(e) => {setPhone(e.target.value); setError('');}}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            setError('');
+          }}
+           className='inputW'
         />
         <input
           name="time"
           type="text"
           placeholder="Время"
           value={time}
-          onChange={(e) => {setTime(e.target.value);setError('');}}
-        />
-        <input
-          name="photo"
-          type="file"
-          placeholder="Фото"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            if (event.target.files && event.target.files.length > 0) setImg(event.target.files[0]);
+          onChange={(e) => {
+            setTime(e.target.value);
+            setError('');
           }}
         />
         <button className="btnAdmin" type="submit">
           Добавить
         </button>
-        <div>
+        <div className='errorAdmin'>
           {message}
           {error}
         </div>
       </form>
 
-      <table className='table'>
+      <table className="table">
         <thead>
           <tr>
             <th>№</th>
