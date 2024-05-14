@@ -50,15 +50,15 @@ function Authorization(): JSX.Element {
       <div className="auth">
         <form onSubmit={handleSubmit(auth)} className="authForm">
           <input className="inputAuth" type="email" placeholder="email" {...register('email')} />
-          <span className='eroorMessageAuth'>{errors.email?.message}</span>
+          <span className="eroorMessageAuth">{errors.email?.message}</span>
           <input
             className="inputAuth"
             type="password"
             placeholder="Пароль"
             {...register('password')}
           />
-          <span className='eroorMessageAuth'>{errors.password?.message}</span>
-          <button className="btnAuth enter"  type="submit">
+          <span className="eroorMessageAuth">{errors.password?.message}</span>
+          <button className="btnAuth enter" type="submit">
             Войти
           </button>
         </form>

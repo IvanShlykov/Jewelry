@@ -9,6 +9,7 @@ import '../style/jewelry.css';
 import ModalWindowJewelry from './ModalWindowJewelry';
 import { addBasket } from '../basketSlice';
 
+
 function JewelryPage(): JSX.Element {
   const [active, setActive] = useState(false);
   const { id } = useParams();

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css"
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -27,8 +27,6 @@ import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
 import { initSizes } from '../features/Admin/adminSlice';
 import { initBasket } from '../features/JewelrysPage/basketSlice';
-
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -59,10 +57,10 @@ function App(): JSX.Element {
           <Route path="collections/:collectionID" element={<CollectionPage />} />
           <Route path="new" element={<NewPage />} />
           <Route path="registration" element={<Registration />} />
-          <Route path="aboutUs" element={<AboutUs/>} />
+          <Route path="aboutUs" element={<AboutUs />} />
           <Route path="authorization" element={<Authorization />} />
-          <Route path="application" element={<AddCustomJewelery/>}/>
-          <Route path="basket" element={<BasketPage/>}/>
+          <Route path="application" element={<AddCustomJewelery />} />
+          <Route path="basket" element={<BasketPage />} />
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

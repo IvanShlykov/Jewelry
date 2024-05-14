@@ -289,8 +289,7 @@ export const addLocationFetch = async (obj: LocationAdd): Promise<Location> => {
   const pointFetch = await fetch(
     `https://geocode-maps.yandex.ru/1.x/?apikey=56192366-4517-49c3-9efc-ef6e314eebae&geocode=${city}+${strit.replace(' ','+')}+${house}+к+${korp}&format=json`,
   );
-  const point = (await pointFetch.json()).response.GeoObjectCollection.featureMember[0].GeoObject
-    .Point.pos;
+  const point = (await pointFetch.json()).response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos;
 
   const { url } = await fetch(
     `https://static-maps.yandex.ru/v1?ll=${point.replace(' ', ',')}&lang=ru_RU&size=450,450&z=16&pt=${point.replace(' ', ',')},pm2lbl&apikey=df88e39f-e5e3-4534-ac20-4a21cbed6048`,

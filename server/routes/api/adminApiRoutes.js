@@ -464,7 +464,14 @@ router.get('/basket', async (req, res) => {
       if (basket) {
         basket = await OrderItem.findAll({
           where: { orderID: basket.id },
-          include: [{ model: Order }, { model: Jewelry }, { model: Size }],
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
           order: [['id', 'ASC']],
         });
         res.status(200).json({ basket });
@@ -483,7 +490,7 @@ router.post('/basket/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { sizeID } = req.body;
-    console.log(sizeID,'+++++++');
+    console.log(sizeID, '+++++++');
 
     const jewelry = await Jewelry.findOne({ where: { id } });
 
@@ -518,8 +525,15 @@ router.post('/basket/:id', async (req, res) => {
 
       if (c) {
         const newBasket = await OrderItem.findAll({
-          where: { orderID: basketID },
-          include: [{ model: Order }, { model: Jewelry }, { model: Size }],
+          where: { orderID: basket.id },
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
           order: [['id', 'ASC']],
         });
         res.status(200).json({ newBasket });
@@ -532,12 +546,19 @@ router.post('/basket/:id', async (req, res) => {
         price: jewelry.price,
         count: 1,
         orderID: basketID,
-        sizeID
+        sizeID,
       });
       if (orderItem) {
         const newBasket = await OrderItem.findAll({
           where: { orderID: basketID },
-          include: [{ model: Order }, { model: Jewelry }, { model: Size }],
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
           order: [['id', 'ASC']],
         });
         res.status(200).json({ newBasket });
@@ -546,7 +567,6 @@ router.post('/basket/:id', async (req, res) => {
       }
     }
   } catch ({ message }) {
-    console.log(message,'llllllllllllllllllllllllllllll');
     res.status(500).json({ message });
   }
 });

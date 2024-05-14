@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import type { RootState } from '../../store/store';
@@ -48,7 +48,15 @@ function Header(): JSX.Element {
       .catch(console.log);
   };
   const basket = useSelector((store: RootState) => store.basketState.orderItems);
-  
+  const [anim, setAnim] = useState(false);
+
+  useEffect(() => {
+    setAnim(true);
+    setTimeout(() => {
+      setAnim(false);
+    }, 300);
+  }, [basket]);
+
   return (
     <div className="menu">
       <input
@@ -95,16 +103,16 @@ function Header(): JSX.Element {
         </li>
         <li>
           <NavLink to="/application" className="menu-item" onClick={change}>
-            Заказать индивидуальное украшение
+            Индивидуальный заказ
           </NavLink>
         </li>
         <li>
-          <Link className="menu-item" onClick={logOutHeader} to="/">
+          <Link className="exit" onClick={logOutHeader} to="/">
             Выйти
           </Link>
         </li>
       </ul>
-      <div className='dgls'>
+      <div className="dgls">
         <NavLink to="/">DGLS CRFT</NavLink>
       </div>
       <div className="searchAndLK">
@@ -117,7 +125,9 @@ function Header(): JSX.Element {
           </>
         ) : (
           <NavLink to="/basket">
-            <div className="basketHeader"><div className='numberBasket'>{basket.length}</div></div>
+            <div className={anim ? 'basketHeader animate' : 'basketHeader'}>
+              <div className="numberBasket">{basket? basket.reduce((acc, a) => acc + a.count, 0) : ''}</div>
+            </div>
           </NavLink>
         )}
 
