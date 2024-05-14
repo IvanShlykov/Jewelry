@@ -21,6 +21,9 @@ export const initJewelrys = createAsyncThunk(
 export const initCollectionsHome = createAsyncThunk('collectionsHome/init', () =>
   api.initCollectionHomeFetch(),
 );
+export const nitMetalls = createAsyncThunk('metall/init', () => api.fetchInitMetalls());
+
+export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
 
 const jewelrysSlice = createSlice({
   name: 'jewelrys',
@@ -41,7 +44,18 @@ const jewelrysSlice = createSlice({
       })
       .addCase(initCollectionsHome.rejected, (state, action) => {
         state.error = action.error.message;
-      });
+      })
+      .addCase(nitMetalls.fulfilled, (state, action) => {
+        state.metalls = action.payload;
+        state.error = undefined;
+      })
+      .addCase(nitMetalls.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(initTypes.fulfilled, (state, action) => {
+        state.types = action.payload;
+        state.error = undefined;
+      })
   },
 });
 

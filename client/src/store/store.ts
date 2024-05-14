@@ -13,6 +13,7 @@ import specificCollectionSlice from '../features/CollectionsPage/specificCollect
 
 
 
+
 const store = configureStore({
   reducer: {
     authState: authSlice,
@@ -23,6 +24,7 @@ const store = configureStore({
     newJewelrysState: newJewelrysSlice,
     collectionsState: collectionsSlice,
     specificCollectionState: specificCollectionSlice,
+
   },
 });
 

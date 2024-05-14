@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import JewelryCard from './JewelryCard';
-import type { RootState } from '../../../store/store';
+import { useAppDispatch, type RootState } from '../../../store/store';
+import { initTypes, nitMetalls } from '../jewelrysSlice';
 
 function JewelrysPage(): JSX.Element {
   const [collectionFilter, setCollectionFilter] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [typeMetall, setTypeMetall] = useState('');
-
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(nitMetalls()).catch(console.log);
+    dispatch(initTypes()).catch(console.log);
+  },[])
  
 
   const jewelrysSelect = useSelector((store: RootState) => store.adminState.jewelrys);
-
-  const searchPriceJewelrys = jewelrysSelect.filter(jewelry =>
-    jewelry.price)
+  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
+  const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
+  const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
 
   const filteredJewelrys = jewelrysSelect.filter(jewelry => {
     const matchesCollection = !collectionFilter || jewelry.Collection.id === +collectionFilter;
-    const matchesPrice = !priceFilter || jewelry.price === +priceFilter;
+    const matchesPrice = (!minPrice || jewelry.price >= +minPrice) && (!maxPrice || jewelry.price <= +maxPrice);
     const matchesType = !typeFilter || jewelry.Type.id === +typeFilter;
     const matchesMetall = !typeMetall || jewelry.Metall.id === +typeMetall;
     
@@ -29,26 +35,32 @@ function JewelrysPage(): JSX.Element {
     <div className="list">
       <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
-        {jewelrysSelect.map(jewelry => (
-          <option key={jewelry.Collection.id} value={jewelry.Collection.id}>{jewelry.Collection.name}</option>
+        {jewelryscollection.map(jewelry => (
+          <option key={jewelry.id} value={jewelry.id}>{jewelry.name}</option>
         ))}
       </select>
-      <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}>
-        <option value="">Цена</option>
-        {jewelrysSelect.map(jewelry => (
-          <option key={jewelry.id} value={jewelry.price}>{jewelry.price}</option>
-        ))}
-      </select>
+      <input
+        type="number"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+        placeholder="Цена от..."
+      />
+      <input
+        type="number"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+        placeholder="Цена до..."
+      />
       <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
         <option value="">Тип</option>
-        {jewelrysSelect.map(jewelry => (
-          <option key={jewelry.Type.id} value={jewelry.Type.id}>{jewelry.Type.name}</option>
+        {jewelrysTypes.map(jewelry => (
+          <option key={jewelry.id} value={jewelry.id}>{jewelry.name}</option>
         ))}
       </select>
       <select value={typeMetall} onChange={(e) => setTypeMetall(e.target.value)}>
         <option value="">Металл</option>
-        {jewelrysSelect.map(jewelry => (
-          <option key={jewelry.Metall.id} value={jewelry.Metall.id}>{jewelry.Metall.name}</option>
+        {jewelrysMetalls.map(jewelry => (
+          <option key={jewelry.id} value={jewelry.id}>{jewelry.name}</option>
         ))}
       </select>
       
