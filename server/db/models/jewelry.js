@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       Metall,
       Type,
       Collection,
-      Favorit,
+      Favorite,
       JewHashtag,
       Stock,
       Photo,
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(OrderItem, { foreignKey: 'jewelryID' });
       this.hasMany(Photo, { foreignKey: 'jewelryID' });
       this.hasMany(Stock, { foreignKey: 'jewelryID' });
-      this.hasMany(Favorit, { foreignKey: 'jewelryID' });
+      this.hasMany(Favorite, { foreignKey: 'jewelryID' });
       this.hasMany(JewHashtag, { foreignKey: 'jewelryID' });
       this.hasMany(JewStone, { foreignKey: 'jewelryID' });
     }
