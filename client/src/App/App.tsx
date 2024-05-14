@@ -26,6 +26,7 @@ import CollectionPage from '../features/CollectionsPage/components/CollectionPag
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
 import BelowFiveThousandPage from '../features/BelowFiveThousand copy/components/BelowFiveThousandPage';
+import FavoritesPage from '../features/Favorites/components/FavoritesPage';
 
 
 
@@ -56,6 +57,7 @@ function App(): JSX.Element {
           <Route path="collections/:collectionID" element={<CollectionPage />} />
           <Route path="new" element={<NewPage />} />
           <Route path="below-five-thousand" element={<BelowFiveThousandPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
           <Route path="registration" element={<Registration />} />
           <Route path="aboutUs" element={<AboutUs/>} />
           <Route path="authorization" element={<Authorization />} />

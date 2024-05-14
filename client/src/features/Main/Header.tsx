@@ -103,7 +103,12 @@ function Header(): JSX.Element {
           </Link>
         </li>
       </ul>
-      <div className='dgls'>
+
+      <NavLink to='/favorites' style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} className="favorites">
+        <SVG id="favorites" />
+      </NavLink>
+
+      <div className="dgls">
         <NavLink to="/">DGLS CRFT</NavLink>
       </div>
       <div className="searchAndLK">
