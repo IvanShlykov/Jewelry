@@ -20,8 +20,6 @@ function CollectionPage(): JSX.Element {
 
   const specificCollectionSelect = useSelector((store: RootState) => store.specificCollectionState.jewelrysSpecificCollection);
 
-  console.log(specificCollectionSelect, '0000000000000000000')
-
   const searchPriceJewelrys = specificCollectionSelect.filter(jewelry =>
     jewelry.price)
 
@@ -34,7 +32,6 @@ function CollectionPage(): JSX.Element {
     return matchesCollection && matchesPrice && matchesType && matchesMetall ;
   });
 
-  console.log(filteredJewelrysCollection, 'FIIILLLLLTEEERRR')
 
   return (
     <div className="list">
