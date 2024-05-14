@@ -98,6 +98,11 @@ function Header(): JSX.Element {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/location" className="menu-item" onClick={change}>
+            Где нас найти
+          </NavLink>
+        </li>
+        <li>
           <Link className="menu-item" onClick={logOutHeader} to="/">
             Выйти
           </Link>

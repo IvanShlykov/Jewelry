@@ -25,6 +25,7 @@ import CollectionsPage from '../features/CollectionsPage/components/CollectionsP
 import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
+import LocationsPages from '../features/location/components/LocationsPages';
 
 
 
@@ -58,6 +59,7 @@ function App(): JSX.Element {
           <Route path="aboutUs" element={<AboutUs/>} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
+          <Route path="location" element={<LocationsPages/>}/>
           <Route path="basket" element={<BasketPage/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />

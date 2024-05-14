@@ -9,6 +9,9 @@ import searchReducer from '../features/Search/searchSlice';
 import newJewelrysSlice from '../features/NewPage/newJewelrysSlice';
 import collectionsSlice from '../features/CollectionsPage/specificCollectionSlice';
 import specificCollectionSlice from '../features/CollectionsPage/specificCollectionSlice';
+import LocationSlice from '../features/location/LocationSlice';
+
+
 
 
 
@@ -24,7 +27,7 @@ const store = configureStore({
     newJewelrysState: newJewelrysSlice,
     collectionsState: collectionsSlice,
     specificCollectionState: specificCollectionSlice,
-
+    locationState:LocationSlice,
   },
 });
 
