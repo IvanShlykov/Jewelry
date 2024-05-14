@@ -21,6 +21,8 @@ import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
 import JewelryPage from '../features/JewelrysPage/components/JewelryPage';
 import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCustomJewelery';
 import NewPage from '../features/NewPage/components/NewPage';
+import CollectionsPage from '../features/CollectionsPage/components/CollectionsPage';
+import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
 
@@ -49,8 +51,8 @@ function App(): JSX.Element {
           <Route index element={<HomePage />} />
           <Route path="jewelry" element={<JewelrysPage />} />
           <Route path="jewelry/:id" element={<JewelryPage />} />
-          {/* <Route path="collections" element={<CollectionsPage />} />
-          <Route path="specials" element={<SpecialsPage />} /> */}
+          <Route path="collections" element={<CollectionsPage />} />
+          <Route path="collections/:collectionID" element={<CollectionPage />} />
           <Route path="new" element={<NewPage />} />
           <Route path="registration" element={<Registration />} />
           <Route path="aboutUs" element={<AboutUs/>} />
