@@ -1,4 +1,6 @@
-import type { Basket, CollectionHome, Jewelry, Metall, OrderItem, Type } from './type';
+
+import type { Basket, CollectionHome, Hashtag,Jewelry, Metall, OrderItem, Type } from './type';
+
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -22,6 +24,11 @@ export const initTypesFetch = async (): Promise<Type[]> => {
   const res = await fetch('/api/admin/types');
   const data = await res.json();
   return data.types;
+};
+export const initHashtagFetch = async (): Promise<Hashtag[]> => {
+  const res = await fetch('/api/admin/hashtags');
+  const data = await res.json();
+  return data.hashtags;
 };
 
 export const initBasketFetch = async (): Promise<OrderItem[]> => {

@@ -45,6 +45,16 @@
   height: auto; /* Высота изменяется пропорционально */
 }
 
+.favorite-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .image-container {
   position: relative;
   width: 100%;
