@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
 import { useAppDispatch, type RootState } from '../../../store/store';
 import { initSpecificCollection } from '../specificCollectionSlice';
 
+
 function CollectionPage(): JSX.Element {
+  const { collectionID } = useParams();
   const dispatch = useAppDispatch();
   const [collectionFilter, setCollectionFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
@@ -50,7 +53,7 @@ function CollectionPage(): JSX.Element {
       <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
         <option value="">Тип</option>
         {specificCollectionSelect.map(jewelry => (
-          <option key={jewelry.Type.id} value={jewelry.Type.id}>{jewelry.Type.name}</option>
+          <option key={`${jewelry.Type.id}-${jewelry.Type.name}`} value={jewelry.Type.id}>{jewelry.Type.name}</option>
         ))}
       </select>
       <select value={typeMetall} onChange={(e) => setTypeMetall(e.target.value)}>
