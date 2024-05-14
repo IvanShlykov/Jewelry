@@ -9,6 +9,7 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { clear, authorization } from '../authSlice';
 import type { AuthForm } from '../type';
+import { initBasket } from '../../JewelrysPage/basketSlice';
 
 const schema = object().shape({
   email: string().required('Необходимо указать электронную почту'),
@@ -49,14 +50,14 @@ function Authorization(): JSX.Element {
       <div className="auth">
         <form onSubmit={handleSubmit(auth)} className="authForm">
           <input className="inputAuth" type="email" placeholder="email" {...register('email')} />
-          <span>{errors.email?.message}</span>
+          <span className='eroorMessageAuth'>{errors.email?.message}</span>
           <input
             className="inputAuth"
             type="password"
             placeholder="Пароль"
             {...register('password')}
           />
-          <span>{errors.password?.message}</span>
+          <span className='eroorMessageAuth'>{errors.password?.message}</span>
           <button className="btnAuth enter"  type="submit">
             Войти
           </button>

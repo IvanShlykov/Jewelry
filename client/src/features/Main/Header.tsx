@@ -47,7 +47,8 @@ function Header(): JSX.Element {
       })
       .catch(console.log);
   };
-
+  const basket = useSelector((store: RootState) => store.basketState.orderItems);
+  
   return (
     <div className="menu">
       <input
@@ -116,7 +117,7 @@ function Header(): JSX.Element {
           </>
         ) : (
           <NavLink to="/basket">
-            <div className="basketHeader" />
+            <div className="basketHeader"><div className='numberBasket'>{basket.length}</div></div>
           </NavLink>
         )}
 

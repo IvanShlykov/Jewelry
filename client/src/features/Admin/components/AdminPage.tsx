@@ -27,7 +27,6 @@ function AdminPage(): JSX.Element {
   const collections = useSelector((store: RootState) => store.adminState.collections);
   const colPhotos = useSelector((store: RootState) => store.adminState.colPhotos);
   const metalls = useSelector((store: RootState) => store.adminState.metalls);
-  // const types = useSelector((store: RootState) => store.adminState.types);
   const locations = useSelector((store: RootState) => store.adminState.locations);
   const applications = useSelector((store: RootState) => store.adminState.applications);
 
@@ -46,7 +45,7 @@ function AdminPage(): JSX.Element {
     dispatch(initMetalls()).catch(console.log);
     dispatch(initTypes()).catch(console.log);
     dispatch(initHashtag()).catch(console.log);
-    dispatch(initSizes()).catch(console.log);
+    // dispatch(initSizes()).catch(console.log);
     dispatch(initLocation()).catch(console.log);
     dispatch(initApplications()).catch(console.log);
   }, []);

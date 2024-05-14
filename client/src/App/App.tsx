@@ -25,6 +25,8 @@ import CollectionsPage from '../features/CollectionsPage/components/CollectionsP
 import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
+import { initSizes } from '../features/Admin/adminSlice';
+import { initBasket } from '../features/JewelrysPage/basketSlice';
 
 
 
@@ -36,12 +38,14 @@ function App(): JSX.Element {
     dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
+    dispatch(initSizes()).catch(console.log);
   }, []);
 
   useEffect(() => {
     if (user && user.isAdmin) {
       navigate('/admin');
     }
+    dispatch(initBasket()).catch(console.log);
   }, [user]);
 
   return (
