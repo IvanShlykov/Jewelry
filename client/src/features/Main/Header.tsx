@@ -83,6 +83,11 @@ function Header(): JSX.Element {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/aboutUs" className="menu-item" onClick={change}>
+            О нас
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/specials" className="menu-item" onClick={change}>
             Специальные предложения
           </NavLink>
