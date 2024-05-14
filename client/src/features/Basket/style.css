@@ -1,0 +1,75 @@
+.h1Basket {
+  width: 100%;
+  padding: 25px;
+  font-size: 20px;
+}
+
+.photoOrderItem img {
+  width: 100%;
+}
+.photoOrderItem {
+  margin-left: 25px;
+  width: 40%;
+}
+
+.oredrItemCard {
+  display: flex;
+  width: 100%;
+}
+
+.descriptionOrderItemPage {
+  margin-left: 7px;
+  font-size: 15px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-right: 10px;
+}
+
+.borderOrder {
+  margin-left: 2.5%;
+  width: 95%;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+  margin-top: 25px;
+}
+.borderOrder2{
+  margin-left: 2.5%;
+  width: 95%;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.itogBasket{
+  display: flex;
+  justify-content: end;
+  margin-right: 2.5%;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+}
+
+.btnBuy{
+  margin-top: 10px;
+  padding: 18px 16px;
+  display: flex; /* выставляем display на flex для правильного выравнивания */
+  align-items: center; /* выравнивание по вертикали */
+  justify-content: center; /* выравнивание по горизонтали */
+  font-size: 18px;
+  color: #fff;
+  background: #000;
+  width: 100%;
+  border-radius: 0; /* убирается скругление углов */
+}
+
+.HH11{
+  font-weight: 700;
+  margin-top: 25px;
+
+}
+
+.NameJewelry{
+  font-weight: 600;
+}

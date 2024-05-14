@@ -84,8 +84,8 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
   };
 
   return (
-    <div className={state ? 'adminmodal active' : 'adminmodal'}>
-      <div className="adminmodal_content" style={{ minWidth: '300px' }}>
+    <div className={state ? 'jewelryModal active' : 'jewelryModal'}>
+      <div className="jewelryModal_content" style={{ minWidth: '300px' }}>
         <form onSubmit={changeItem} className="formChangeJewelry">
           <div className='label'>
             <div className="descriptionLabel">Название</div>
@@ -171,12 +171,12 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                     value={hashtag}
                     onChange={(e) => setHashtag(e.target.value)}
                   />
-                  <button type="button" onClick={addHashtag}>
+                  <button type="button" className='btnAdmin ' onClick={addHashtag}>
                     Сохранить
                   </button>
                 </>
               )}
-              <button type="button" onClick={() => setAddHash(!addHash)}>
+              <button type="button" className='btnAdmin ' onClick={() => setAddHash(!addHash)}>
                 {addHash ? `Добавить` : 'Закрыть'}
               </button>
             </div>
@@ -227,7 +227,6 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
                       <tr>
                         <td>Размер</td>
                         <td>Кол-во</td>
-                        <td>Удалить</td>
                       </tr>
                       {jewelry.Stocks.map((el) => (
                         <StockMap key={el.id} stock={el} isChange={isChange} />

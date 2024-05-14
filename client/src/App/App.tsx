@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css"
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -25,9 +25,10 @@ import CollectionsPage from '../features/CollectionsPage/components/CollectionsP
 import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
+import { initSizes } from '../features/Admin/adminSlice';
+import { initBasket } from '../features/JewelrysPage/basketSlice';
 import BelowFiveThousandPage from '../features/BelowFiveThousand copy/components/BelowFiveThousandPage';
 import FavoritesPage from '../features/Favorites/components/FavoritesPage';
-
 
 
 function App(): JSX.Element {
@@ -38,12 +39,14 @@ function App(): JSX.Element {
     dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
+    dispatch(initSizes()).catch(console.log);
   }, []);
 
   useEffect(() => {
     if (user && user.isAdmin) {
       navigate('/admin');
     }
+    dispatch(initBasket()).catch(console.log);
   }, [user]);
 
   return (
@@ -59,10 +62,10 @@ function App(): JSX.Element {
           <Route path="below-five-thousand" element={<BelowFiveThousandPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="registration" element={<Registration />} />
-          <Route path="aboutUs" element={<AboutUs/>} />
+          <Route path="aboutUs" element={<AboutUs />} />
           <Route path="authorization" element={<Authorization />} />
-          <Route path="application" element={<AddCustomJewelery/>}/>
-          <Route path="basket" element={<BasketPage/>}/>
+          <Route path="application" element={<AddCustomJewelery />} />
+          <Route path="basket" element={<BasketPage />} />
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

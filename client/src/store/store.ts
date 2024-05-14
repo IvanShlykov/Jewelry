@@ -4,15 +4,12 @@ import authSlice from '../features/Auth/authSlice';
 
 import jewelrysSlice from '../features/JewelrysPage/jewelrysSlice';
 import adminSlice from '../features/Admin/adminSlice';
-import  addCustomJewelerySlice  from '../features/AddCustomJewelery/jewelrysSlice';
+import addCustomJewelerySlice from '../features/AddCustomJewelery/jewelrysSlice';
 import searchReducer from '../features/Search/searchSlice';
 import newJewelrysSlice from '../features/NewPage/newJewelrysSlice';
 import collectionsSlice from '../features/CollectionsPage/specificCollectionSlice';
 import specificCollectionSlice from '../features/CollectionsPage/specificCollectionSlice';
-
-
-
-
+import basketSlice from '../features/JewelrysPage/basketSlice';
 
 const store = configureStore({
   reducer: {
@@ -24,7 +21,7 @@ const store = configureStore({
     newJewelrysState: newJewelrysSlice,
     collectionsState: collectionsSlice,
     specificCollectionState: specificCollectionSlice,
-
+    basketState: basketSlice,
   },
 });
 

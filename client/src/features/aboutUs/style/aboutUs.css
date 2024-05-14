@@ -17,8 +17,8 @@
 }
 
 .text-container {
-  text-align:right;
-  padding-right: 200px; 
+  text-align:center;
+  padding: 45px;
 }
 
 .text {
@@ -26,11 +26,10 @@
   z-index: 1;
   font-size: 24px;
   font-weight: bold;
-  color: rgb(9, 7, 7);
+  color: white;
 }
 
 .description {
-  padding-left: 400px; 
   font-size: 16px;
-  color: rgb(0, 0, 0);
+  color: white
 }
