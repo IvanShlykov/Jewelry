@@ -43,7 +43,7 @@ function JewelryPageAdmin(): JSX.Element {
           </tr>
           <tr>
             <th>Размер</th>
-            <th >Кол-во</th>
+            <th className='kol'>Кол-во</th>
           </tr>
         </thead>
         <tbody>{jewelrys?.map((el, i) => <JewelryUno jewelry={el} i={i} key={el.id} />)}</tbody>

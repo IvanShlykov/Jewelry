@@ -21,11 +21,12 @@ function ModalWindow({ deleteItem, modal, setModal, id }: Props): JSX.Element {
               deleteItem(id);
               setModal(false);
             }}
+            className='btnAdmin'
           >
             Да
           </button>
 
-          <button type="button" onClick={() => setModal(false)}>
+          <button type="button" className='btnAdmin' onClick={() => setModal(false)}>
             Закрыть
           </button>
         </div>

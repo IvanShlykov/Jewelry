@@ -15,8 +15,8 @@ function ModalWindowAuth({
   return isOpen ? (
     <div className="authmodal active" onClick={onClose}>
       <div className="authmodal-content" onClick={(e) => e.stopPropagation()}>
-        <div>
-          <span className="close" onClick={onClose}>
+        <div className="closeDiv">
+          <span onClick={onClose}>
             &times;
           </span>
         </div>

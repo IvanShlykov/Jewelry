@@ -14,12 +14,12 @@ function OrderAdminPage({ applications }: Props): JSX.Element {
   return (
     <div>
       <div>
-        <div>Открытые заказы</div>
+        <div className='textH1'>Открытые заказы</div>
         <Applications applications={applicationsOpen} open={open} />
       </div>
 
       <div>
-        <div>Закрытые заказы</div>
+        <div className='textH1'>Закрытые заказы</div>
         <Applications applications={applicationsClose} open={false} />
       </div>
     </div>

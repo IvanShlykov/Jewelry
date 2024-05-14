@@ -47,7 +47,7 @@ function ModalWindowChange({ collection, state, setState }: Props): JSX.Element 
                 setNewImg(event.target.files[0]);
             }}
           />
-          <button className="btnAdmin" type="submit">
+          <button className="btnAdmin " type="submit">
             Сохранить
           </button>
         </form>

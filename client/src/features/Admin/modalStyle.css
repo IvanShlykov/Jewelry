@@ -184,3 +184,11 @@ textarea {
   min-width: 250px;
   justify-content: space-between;
 }
+
+.formChangeMetall{
+  min-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+}
