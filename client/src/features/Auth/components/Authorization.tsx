@@ -57,7 +57,7 @@ function Authorization(): JSX.Element {
             {...register('password')}
           />
           <span>{errors.password?.message}</span>
-          <button className="btnAuth" type="submit">
+          <button className="btnAuth enter"  type="submit">
             Войти
           </button>
         </form>

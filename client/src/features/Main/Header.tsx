@@ -103,8 +103,8 @@ function Header(): JSX.Element {
           </Link>
         </li>
       </ul>
-      <div>
-        <NavLink to="/">DOUGLAS CRAFT</NavLink>
+      <div className='dgls'>
+        <NavLink to="/">DGLS CRFT</NavLink>
       </div>
       <div className="searchAndLK">
         {!user ? (

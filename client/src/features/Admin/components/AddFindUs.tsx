@@ -49,8 +49,8 @@ function AddFindUs({ locations }: { locations: Location[] }): JSX.Element {
 
   return (
     <div>
-      <div>Добавить локацию</div>
-      <form onSubmit={addLocationFunc}>
+      <div className='textH1'>Добавить локацию</div>
+      <form onSubmit={addLocationFunc} className='collectionAdd'>
         <input
           name="city"
           type="text"
@@ -96,7 +96,7 @@ function AddFindUs({ locations }: { locations: Location[] }): JSX.Element {
         </div>
       </form>
 
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>№</th>
@@ -105,6 +105,7 @@ function AddFindUs({ locations }: { locations: Location[] }): JSX.Element {
             <th>Телефон</th>
             <th>Время</th>
             <th>Фото</th>
+            <th>Удалить</th>
           </tr>
         </thead>
         <tbody>

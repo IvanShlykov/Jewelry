@@ -14,19 +14,21 @@ function ModalWindow({ deleteItem, modal, setModal, id }: Props): JSX.Element {
     <div className={modal ? 'adminmodal active' : 'adminmodal'}>
       <div className="adminmodal_content">
         <div>Вы уверены?</div>
-        <button
-          type="button"
-          onClick={() => {
-            deleteItem(id);
-            setModal(false);
-          }}
-        
-        >
-          Да
-        </button>
-        <button type="button" onClick={() => setModal(false)}>
-          Закрыть
-        </button>
+        <div className="deleteAdminVopros">
+          <button
+            type="button"
+            onClick={() => {
+              deleteItem(id);
+              setModal(false);
+            }}
+          >
+            Да
+          </button>
+
+          <button type="button" onClick={() => setModal(false)}>
+            Закрыть
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -22,8 +22,8 @@ function AddMetall({ metalls }: Props): JSX.Element {
 
   return (
     <div>
-      <div>Добавить материал</div>
-      <form onSubmit={addCollectionForm}>
+      <div className='textH1'>Добавить материал</div>
+      <form onSubmit={addCollectionForm} className='collectionAdd'>
         <input
           name="name"
           type="text"
@@ -35,7 +35,7 @@ function AddMetall({ metalls }: Props): JSX.Element {
           Добавить
         </button>
       </form>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>№</th>

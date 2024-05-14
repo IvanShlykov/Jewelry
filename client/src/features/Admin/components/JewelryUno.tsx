@@ -22,7 +22,7 @@ function JewelryUno({ jewelry, i }: Props): JSX.Element {
   };
 
   return (
-    <tr style={{ fontSize: '20px', wordWrap: 'break-word' }}>
+    <tr >
       <td>{i + 1}.</td>
       <td>{jewelry.name}</td>
       {/* <td>{jewelry.description}</td> */}
@@ -39,7 +39,7 @@ function JewelryUno({ jewelry, i }: Props): JSX.Element {
           ))}
         </td>
       ) : (
-        <td colSpan={2}>Нет на складе</td>
+        <td colSpan={2} style={{textAlign: 'center'}}>Нет на складе</td>
       )}
       <td>{jewelry.Metall?.name}</td>
       <td>

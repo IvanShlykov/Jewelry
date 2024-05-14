@@ -21,10 +21,10 @@ function JewelryPageAdmin(): JSX.Element {
   return (
     <div>
       <div>
-        <div>Добавить украшение <button className='btnAdmin' type='button' onClick={()=> setState(true)}>Добавить</button></div>
+        <div className='textH1 '>Добавить украшение <button className='btnAdmin' type='button' onClick={()=> setState(true)}>Добавить</button></div>
         <AddJewelryModalAdmin state={state} setState={setState}/>
       </div>
-      <table className="jewelrysAdmin">
+      <table className="table">
         <thead>
           <tr>
             <th rowSpan={2}>№</th>
@@ -35,16 +35,15 @@ function JewelryPageAdmin(): JSX.Element {
             <th rowSpan={2}>Тип</th>
             <th rowSpan={2}>Новинка</th>
             <th rowSpan={2}>Хэштеги</th>
-            <th colSpan={2}>Склад</th>
+            <th colSpan={2} style={{textAlign: 'center'}}>Склад</th>
             <th rowSpan={2}>Металл</th>
             {/* <th rowSpan={2}>Фото</th> */}
-            <th>Изменить/</th>
+            <th rowSpan={2}>Детали</th>
             <th rowSpan={2}>Удалить</th>
           </tr>
           <tr>
             <th>Размер</th>
-            <th>Кол-во</th>
-            <th>Подробнее</th>
+            <th >Кол-во</th>
           </tr>
         </thead>
         <tbody>{jewelrys?.map((el, i) => <JewelryUno jewelry={el} i={i} key={el.id} />)}</tbody>
