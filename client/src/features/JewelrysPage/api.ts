@@ -1,4 +1,4 @@
-import type { CollectionHome, Jewelry, Metall, Type } from './type';
+import type { CollectionHome, Hashtag, Jewelry, Metall, Type } from './type';
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -23,6 +23,11 @@ export const initTypesFetch = async (): Promise<Type[]> => {
   const res = await fetch('/api/admin/types');
   const data = await res.json();
   return data.types;
+};
+export const initHashtagFetch = async (): Promise<Hashtag[]> => {
+  const res = await fetch('/api/admin/hashtags');
+  const data = await res.json();
+  return data.hashtags;
 };
 
 
