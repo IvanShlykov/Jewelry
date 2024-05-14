@@ -49,5 +49,14 @@ router.get("/:collectionID", async (req, res) => {
     res.status(500).json({ message });
   }
 });
+router.get('/metalls', async (req, res) => {
+  try {
+    const metalls = await Metall.findAll({ order: [['id', 'ASC']] });
+    res.status(200).json({ metalls });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 
 module.exports = router;
