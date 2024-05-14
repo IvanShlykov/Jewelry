@@ -9,6 +9,7 @@ import type {
   JewelryAdd,
   JewelryChange,
   Location,
+  LocationAdd,
   Metall,
   MetallAdd,
   Photo,
@@ -282,10 +283,25 @@ export const delJewelryFetch = async (id: IDCollection): Promise<IDCollection> =
 };
 
 // Location
-export const addLocationFetch = async (formData: FormData): Promise<Location> => {
+export const addLocationFetch = async (obj: LocationAdd): Promise<Location> => {
+  const { city, phone, strit, house, korp, time } = obj;
+
+  const pointFetch = await fetch(
+    `https://geocode-maps.yandex.ru/1.x/?apikey=56192366-4517-49c3-9efc-ef6e314eebae&geocode=${city}+${strit.replace(' ','+')}+${house}+к+${korp}&format=json`,
+  );
+  const point = (await pointFetch.json()).response.GeoObjectCollection.featureMember[0].GeoObject
+    .Point.pos;
+
+  const { url } = await fetch(
+    `https://static-maps.yandex.ru/v1?ll=${point.replace(' ', ',')}&lang=ru_RU&size=450,450&z=16&pt=${point.replace(' ', ',')},pm2lbl&apikey=df88e39f-e5e3-4534-ac20-4a21cbed6048`,
+  );
+
+  const adress = `${strit} дом. ${house} к. ${korp}`
+
   const res = await fetch('/api/admin/location', {
-    method: 'post',
-    body: formData,
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({city, phone, time, img:url, adress }),
   });
 
   if (res.ok) {
@@ -302,7 +318,6 @@ export const initlocationFetch = async (): Promise<Location[]> => {
   return data.locations;
 };
 
-
 export const delLocationFetch = async (id: IDCollection): Promise<IDCollection> => {
   const res = await fetch(`/api/admin/location/${id}`, { method: 'DELETE' });
   const data = await res.json();
@@ -311,7 +326,6 @@ export const delLocationFetch = async (id: IDCollection): Promise<IDCollection> 
   }
   throw data.message;
 };
-
 
 export const initApplicationsFetch = async (): Promise<Application[]> => {
   const res = await fetch('/api/admin/applications');

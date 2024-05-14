@@ -5,6 +5,8 @@ import type {
   IDCollection,
   JewelryAdd,
   JewelryChange,
+  Location,
+  LocationAdd,
   Metall,
   MetallAdd,
   Photo,
@@ -108,8 +110,8 @@ export const delJewelry = createAsyncThunk('jewelry/del', (id: IDCollection) =>
   api.delJewelryFetch(id),
 );
 
-export const addLocation = createAsyncThunk('location/add', (formData: FormData) =>
-  api.addLocationFetch(formData),
+export const addLocation = createAsyncThunk('location/add', (obj: LocationAdd) =>
+  api.addLocationFetch(obj),
 );
 
 export const initLocation = createAsyncThunk('location/init', () => api.initlocationFetch());

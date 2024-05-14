@@ -91,3 +91,7 @@ th {
 .activBtnAdminJewelry{
   border: 1px solid black;
 }
+
+.errorAdmin{
+  color: red;
+}

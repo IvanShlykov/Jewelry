@@ -406,14 +406,7 @@ router.get('/locations', async (req, res) => {
 
 router.post('/location', async (req, res) => {
   try {
-    const file = req.files && req.files.photo;
-    let img;
-    if (file) {
-      img = await fileupload(file);
-    } else {
-      img = '/img/placeholder.png';
-    }
-    const { city, adress, phone, time } = req.body;
+    const { city, adress, phone, time, img } = req.body;
 
     const location = await Location.create({
       city,
