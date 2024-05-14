@@ -1,10 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
 import type {
-  Collection,
-  CollectionAdd,
   Hashtag,
-  HashtagAdd,
   IDCollection,
   JewelryAdd,
   JewelryChange,
@@ -24,7 +21,8 @@ const initialState: State = {
   types: [],
   sizes: [],
   hashtags: [],
-
+  locations: [],
+  applications: [],
   error: undefined,
 };
 
@@ -108,6 +106,24 @@ export const addJewelry = createAsyncThunk('jewelry/add', (obj: JewelryAdd) =>
 
 export const delJewelry = createAsyncThunk('jewelry/del', (id: IDCollection) =>
   api.delJewelryFetch(id),
+);
+
+export const addLocation = createAsyncThunk('location/add', (formData: FormData) =>
+  api.addLocationFetch(formData),
+);
+
+export const initLocation = createAsyncThunk('location/init', () => api.initlocationFetch());
+
+export const delLocation = createAsyncThunk('location/del', (id: IDCollection) =>
+  api.delLocationFetch(id),
+);
+
+export const initApplications = createAsyncThunk('applications/init', () =>
+  api.initApplicationsFetch(),
+);
+
+export const closeOrderSlice = createAsyncThunk('applications/del', (id: IDCollection) =>
+  api.delApplicationFetch(id),
 );
 
 const adminSlice = createSlice({
@@ -296,6 +312,28 @@ const adminSlice = createSlice({
       })
       .addCase(delJewelry.fulfilled, (state, action) => {
         state.jewelrys = state.jewelrys.filter((el) => el.id !== action.payload);
+        state.error = undefined;
+      })
+      .addCase(initLocation.fulfilled, (state, action) => {
+        state.locations = action.payload;
+        state.error = undefined;
+      })
+      .addCase(addLocation.fulfilled, (state, action) => {
+        state.locations.push(action.payload);
+        state.error = undefined;
+      })
+      .addCase(delLocation.fulfilled, (state, action) => {
+        state.locations = state.locations.filter((el) => el.id !== action.payload);
+        state.error = undefined;
+      })
+      .addCase(initApplications.fulfilled, (state, action) => {
+        state.applications = action.payload;
+        state.error = undefined;
+      })
+      .addCase(closeOrderSlice.fulfilled, (state, action) => {
+        state.applications = state.applications.map((el) =>
+          el.id === action.payload ? { ...el, status: 'close' } : el,
+        );
         state.error = undefined;
       });
   },

@@ -1,19 +1,18 @@
 import type {
+  Application,
   ColPhoto,
   Collection,
-  CollectionAdd,
   Hashtag,
-  HashtagAdd,
   IDCollection,
   JewHashtag,
   Jewelry,
   JewelryAdd,
   JewelryChange,
+  Location,
   Metall,
   MetallAdd,
   Photo,
   Size,
-  SizeAdd,
   Stock,
   StockAdd,
   Type,
@@ -275,6 +274,53 @@ export const addJewelryFetch = async (obj: JewelryAdd): Promise<Jewelry> => {
 
 export const delJewelryFetch = async (id: IDCollection): Promise<IDCollection> => {
   const res = await fetch(`/api/admin/jewelry/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  }
+  throw data.message;
+};
+
+// Location
+export const addLocationFetch = async (formData: FormData): Promise<Location> => {
+  const res = await fetch('/api/admin/location', {
+    method: 'post',
+    body: formData,
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data.location;
+  }
+  const data = await res.json();
+  throw data.message;
+};
+
+export const initlocationFetch = async (): Promise<Location[]> => {
+  const res = await fetch('/api/admin/locations');
+  const data = await res.json();
+  return data.locations;
+};
+
+
+export const delLocationFetch = async (id: IDCollection): Promise<IDCollection> => {
+  const res = await fetch(`/api/admin/location/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  }
+  throw data.message;
+};
+
+
+export const initApplicationsFetch = async (): Promise<Application[]> => {
+  const res = await fetch('/api/admin/applications');
+  const data = await res.json();
+  return data.applications;
+};
+
+export const delApplicationFetch = async (id: IDCollection): Promise<IDCollection> => {
+  const res = await fetch(`/api/admin/application/${id}`, { method: 'DELETE' });
   const data = await res.json();
   if (res.ok) {
     return data;

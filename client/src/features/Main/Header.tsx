@@ -8,6 +8,7 @@ import { logout } from '../Auth/authSlice';
 import ModalWindowAuth from '../Auth/components/ModalWindowAuth';
 
 import ModalWindowSearch from '../Search/components/ModalWindowSearch';
+import SVG from '../SVG/SVG';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,8 +20,7 @@ function Header(): JSX.Element {
 
   const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
 
-  const query = useSelector((store: RootState)=> store.search.searchQuery);
-
+  const query = useSelector((store: RootState) => store.search.searchQuery);
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -43,6 +43,7 @@ function Header(): JSX.Element {
     dispatch(logout())
       .then(() => {
         setIsModalOpen(false);
+        setCheck((prev) => !prev);
       })
       .catch(console.log);
   };
@@ -56,7 +57,7 @@ function Header(): JSX.Element {
         onChange={change}
         checked={check}
       />
-      
+
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="burger-checkbox" className="burger" />
       <ul className="menu-list">
@@ -75,10 +76,15 @@ function Header(): JSX.Element {
             Новинки
           </NavLink>
         </li>
-        
+
         <li>
           <NavLink to="/collections" className="menu-item" onClick={change}>
             Коллекции
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/aboutUs" className="menu-item" onClick={change}>
+            О нас
           </NavLink>
         </li>
         <li>
@@ -91,27 +97,36 @@ function Header(): JSX.Element {
             Заказать индивидуальное украшение
           </NavLink>
         </li>
+        <li>
+          <Link className="menu-item" onClick={logOutHeader} to="/">
+            Выйти
+          </Link>
+        </li>
       </ul>
+      <div>
+        <NavLink to="/">DOUGLAS CRAFT</NavLink>
+      </div>
+      <div className="searchAndLK">
+        {!user ? (
+          <>
+            <button type="button" className="btnSearch" onClick={openModal}>
+              <div className="LK" />
+            </button>
+            <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
+          </>
+        ) : (
+          <NavLink to="/basket">
+            <div className="basketHeader" />
+          </NavLink>
+        )}
 
-      {!user ? (
-        <>
-          <button type="button" onClick={openModal}>
-            Открыть модальное окно
-          </button>
-          <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
-        </>
-      ) : (
-        <Link onClick={logOutHeader} to="/">
-          Выйти
-        </Link>
-      )}
-      <button type="button" onClick={openModalSearch}>
-            Поиск
-          </button>
-          <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
+        <button type="button" onClick={openModalSearch} className="btnSearch">
+          <SVG id="search" />
+        </button>
+        <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
+      </div>
     </div>
   );
 }
-
 
 export default Header;

@@ -23,6 +23,9 @@ import AddCustomJewelery from '../features/AddCustomJewelery/components/AddCusto
 import NewPage from '../features/NewPage/components/NewPage';
 import CollectionsPage from '../features/CollectionsPage/components/CollectionsPage';
 import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
+import AboutUs from '../features/aboutUs/components/AboutUs';
+import BasketPage from '../features/Basket/components/BasketPage';
+
 
 
 function App(): JSX.Element {
@@ -52,8 +55,10 @@ function App(): JSX.Element {
           <Route path="collections/:collectionID" element={<CollectionPage />} />
           <Route path="new" element={<NewPage />} />
           <Route path="registration" element={<Registration />} />
+          <Route path="aboutUs" element={<AboutUs/>} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
+          <Route path="basket" element={<BasketPage/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

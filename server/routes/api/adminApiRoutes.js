@@ -8,10 +8,12 @@ const {
   JewHashtag,
   Stock,
   Photo,
-  Stone,
   JewStone,
   Hashtag,
   Size,
+  Location,
+  Application,
+  User,
 } = require('../../db/models');
 const fileupload = require('../../utils/fileUpload');
 
@@ -260,8 +262,6 @@ router.delete('/jewelry/:id', async (req, res) => {
   }
 });
 
-
-
 router.get('/types', async (req, res) => {
   try {
     const types = await Type.findAll({ order: [['id', 'ASC']] });
@@ -392,5 +392,72 @@ router.delete('/stock/:id', async (req, res) => {
   }
 });
 
+// Location
+router.get('/locations', async (req, res) => {
+  try {
+    const locations = await Location.findAll({
+      order: [['id', 'ASC']],
+    });
+    res.status(200).json({ locations });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/location', async (req, res) => {
+  try {
+    const file = req.files && req.files.photo;
+    let img;
+    if (file) {
+      img = await fileupload(file);
+    } else {
+      img = '/img/placeholder.png';
+    }
+    const { city, adress, phone, time } = req.body;
+
+    const location = await Location.create({
+      city,
+      adress,
+      phone,
+      time,
+      img,
+    });
+    res.status(200).json({ location });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/location/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Location.destroy({ where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/applications', async (req, res) => {
+  try {
+    const applications = await Application.findAll({
+      include: User,
+      order: [['id', 'ASC']],
+    });
+    res.status(200).json({ applications });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/application/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Application.update({ status: 'close' }, { where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
 
 module.exports = router;
