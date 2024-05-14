@@ -1,0 +1,67 @@
+.searchmodal {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+  
+  }
+  
+  .searchmodal.active {
+    background-color: rgb(255, 255, 255, 0.5);
+    z-index: 2;
+    opacity: 1;
+    pointer-events: all;
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .searcmodal-content {
+    width: 90vw;
+    max-height: 70vh;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(199, 196, 196);
+    border-radius: 15px;
+    overflow: auto;
+  } 
+
+  
+  .close{
+    padding-left: 95%;
+  }
+  
+  .btnAuthdiv{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .btn{
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
+    background-color: aliceblue;
+  }
+  
+  .auth{
+    width: 80vw;
+    margin: 10%;
+  }
+  
+  .inputAuth{
+    width: 85%
+  }
+  .modal-body {
+    overflow-y: auto;
+  }
+  
+  .scrollable-content {
+    padding: 10px;
+  }

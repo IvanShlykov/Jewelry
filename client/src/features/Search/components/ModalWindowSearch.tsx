@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Auth/modalStyle.css';
+import "../style/style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery } from '../searchSlice';
 import type { RootState } from '../../../store/store';
@@ -30,8 +30,8 @@ function ModalWindowSearch({
         jewelry.name.toLowerCase().includes(query.toLowerCase()))
 
   return isOpen ? (
-    <div className="authmodal active">
-<div className="authmodal-content">
+    <div className="searchmodal active">
+<div className="searcmodal-content">
           <div>
             <span className="close" onClick={onClose}>
               &times;
