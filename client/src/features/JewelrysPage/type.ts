@@ -1,3 +1,5 @@
+import type { User } from "../Auth/type";
+
 export type JewStoneAdd = {
   jewelryID: number;
   stoneID: number;
@@ -13,8 +15,17 @@ export type State = {
   types: Type[];
   hashtags: Hashtag[];
   sizes: Size[];
+  favorites: Favorite[];
   error: undefined | string;
 };
+
+export type Favorite = {
+  id:number;
+  userID: IDUser;
+  jewelryID: IDJewelry;
+  Jewelry: Jewelry
+};
+
 
 export type CollectionAdd = {
   name: string;
@@ -143,3 +154,6 @@ export type Order = {
   userID: number;
   status: string;
 };
+
+export type IDUser = User['id'];
+

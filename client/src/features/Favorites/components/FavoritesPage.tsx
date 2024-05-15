@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
-import type { Jewelry } from '../../JewelrysPage/type';
+import type { Favorite, Jewelry } from '../../JewelrysPage/type';
+import { RootState } from '../../../store/store';
+
+
 
 function FavoritesPage(): JSX.Element {
-  const [favorites, setFavorites] = useState<Jewelry[]>([]);
+  
+  const favorites = useSelector((store: RootState) => store.jewelrysState.favorites)
 
-  useEffect(() => {
-    let savedFavorites: Jewelry[] = [];
-    const favoritesFromStorage = localStorage.getItem('favorites');
-    if (favoritesFromStorage) {
-      savedFavorites = JSON.parse(favoritesFromStorage) || [];
-    }
-    setFavorites(savedFavorites);
-  }, []);
+  console.log(favorites, '*****************')
 
   return (
     <div className="list">
       {favorites.length === 0 ? (
         <p>Нет избранных украшений</p>
       ) : (
-        favorites.map((jewelry: Jewelry) => <JewelryCard key={jewelry.id} jewelry={jewelry} />)
+        favorites.map((favorite: Favorite) => <JewelryCard key={favorite.id} jewelry={favorite.Jewelry} />)
       )}
     </div>
   );

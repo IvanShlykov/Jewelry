@@ -1,11 +1,12 @@
 export type User={
+    id: number;
     name:string;
     email:string;
     phone: string;
     password:string;
 }
 
-export type UserClient = User['name'] & {id:'number', isAdmin: boolean}
+export type UserClient = User['name'] & {id:number, isAdmin: boolean}
 export type RegistrationUser = User & {cpassword:'string'}
 
 

@@ -1,48 +1,66 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import SVG from '../../SVG/SVG'; // Убедитесь, что путь правильный
+import ModalWindowAuth from '../../Auth/components/ModalWindowAuth';
+import { useAppDispatch, type RootState } from '../../../store/store'; // Импортируйте свой тип RootState
 import type { Jewelry } from '../type';
+import { addFavorite, removeFavorite } from '../jewelrysSlice';
 
 type Props = {
   jewelry: Jewelry;
 };
 
 function JewelryCard({ jewelry }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    let savedFavorites: Jewelry[] = [];
-    const favoritesFromStorage = localStorage.getItem('favorites');
-    if (favoritesFromStorage) {
-      savedFavorites = JSON.parse(favoritesFromStorage) || [];
-    }
-    setIsFavorite(savedFavorites.some((item) => item.id === jewelry.id));
-  }, [jewelry.id]);
+  const user = useSelector((store: RootState) => store.authState.user);
+  const favorites = useSelector((store: RootState) => store.jewelrysState.favorites);
+  const isFovorit = favorites.find((el)=> el.jewelryID === jewelry.id && el.userID === user?.id)
+  // useEffect(() => {
+  //   let savedFavorites: Jewelry[] = [];
+  //   const favoritesFromStorage = localStorage.getItem('favorites');
+  //   if (favoritesFromStorage) {
+  //     savedFavorites = JSON.parse(favoritesFromStorage) || [];
+  //   }
+  //   setIsFavorite(savedFavorites.some((item) => item.id === jewelry.id));
+  // }, [jewelry.id]);
+
+  // const closeModal = (): void => {
+  //   setIsModalOpen(false);
+  // };
 
   const toggleFavorite = (event: React.MouseEvent) => {
     event.stopPropagation(); // Остановка распространения события
     event.preventDefault(); // Отменить переход по ссылке
 
-    let savedFavorites: Jewelry[] = [];
-    const favoritesFromStorage = localStorage.getItem('favorites');
-    if (favoritesFromStorage) {
-      savedFavorites = JSON.parse(favoritesFromStorage) || [];
+    if (!user) {
+      setIsModalOpen(true);
+      return;
     }
-    let updatedFavorites;
-    if (isFavorite) {
-      updatedFavorites = savedFavorites.filter((item) => item.id !== jewelry.id);
-    } else {
-      updatedFavorites = [...savedFavorites, jewelry];
+
+    console.log("userID:", user.id);
+    console.log("jewelryID:", jewelry.id);
+
+    try {
+      if (isFovorit) {
+        dispatch(removeFavorite({ userID: +user.id, jewelryID: jewelry.id })).catch(console.log);
+      } else {
+        dispatch(addFavorite({ userID: +user.id, jewelryID: jewelry.id })).catch(console.log);
+      }
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error('Ошибка при обновлении избранного:', error);
     }
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    setIsFavorite(!isFavorite);
   };
 
   return (
     <div className="card">
       <Link to={`/jewelry/${jewelry.id}`}>
         <div className="image-container">
-          {jewelry.Photos.length > 0 ? (
+          {jewelry.Photos?.length > 0 ? (
             <>
               <img
                 src={jewelry.Photos[0].url}
@@ -60,10 +78,11 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
             onClick={toggleFavorite}
             style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
           >
-            <SVG id={isFavorite ? 'favorites-active' : 'favorites'} />
+            <SVG id={ isFovorit ? 'favorites-active' : 'favorites'} />
           </button>
         </div>
       </Link>
+      <ModalWindowAuth isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
