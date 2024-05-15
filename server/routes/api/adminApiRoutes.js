@@ -14,6 +14,8 @@ const {
   Location,
   Application,
   User,
+  Order,
+  OrderItem,
 } = require('../../db/models');
 const fileupload = require('../../utils/fileUpload');
 
@@ -448,6 +450,122 @@ router.delete('/application/:id', async (req, res) => {
     const { id } = req.params;
     await Application.update({ status: 'close' }, { where: { id } });
     res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.get('/basket', async (req, res) => {
+  try {
+    if (res.locals.user) {
+      let basket = await Order.findOne({
+        where: { userID: res.locals.user.id, status: 'basket' },
+      });
+      if (basket) {
+        basket = await OrderItem.findAll({
+          where: { orderID: basket.id },
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
+          order: [['id', 'ASC']],
+        });
+        res.status(200).json({ basket });
+      } else {
+        res.status(400).json({ message: 'Корзина пуста' });
+      }
+    } else {
+      res.status(401).json({ message: 'Юзера нет' });
+    }
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.post('/basket/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { sizeID } = req.body;
+    console.log(sizeID, '+++++++');
+
+    const jewelry = await Jewelry.findOne({ where: { id } });
+
+    const basket = await Order.findOne({
+      where: { userID: res.locals.user.id, status: 'basket' },
+    });
+    let basketID;
+    if (basket) {
+      basketID = basket.id;
+      await Order.update(
+        { price: basket.price + jewelry.price },
+        { where: { id: basketID } }
+      );
+    } else {
+      const order = await Order.create({
+        userID: res.locals.user.id,
+        status: 'basket',
+        price: jewelry.price,
+      });
+      basketID = order.id;
+    }
+
+    const item = await OrderItem.findOne({
+      where: { jewelryID: +id, orderID: basketID, sizeID },
+    });
+
+    if (item) {
+      const c = await OrderItem.update(
+        { count: item.count + 1 },
+        { where: { id: item.id } }
+      );
+
+      if (c) {
+        const newBasket = await OrderItem.findAll({
+          where: { orderID: basket.id },
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
+          order: [['id', 'ASC']],
+        });
+        res.status(200).json({ newBasket });
+      } else {
+        res.json({ message: 'Не получилось записать' });
+      }
+    } else {
+      const orderItem = await OrderItem.create({
+        jewelryID: +id,
+        price: jewelry.price,
+        count: 1,
+        orderID: basketID,
+        sizeID,
+      });
+      if (orderItem) {
+        const newBasket = await OrderItem.findAll({
+          where: { orderID: basketID },
+          include: [
+            { model: Order },
+            {
+              model: Jewelry,
+              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            },
+            { model: Size },
+          ],
+          order: [['id', 'ASC']],
+        });
+        res.status(200).json({ newBasket });
+      } else {
+        res.json({ message: 'Не получилось записать' });
+      }
+    }
   } catch ({ message }) {
     res.status(500).json({ message });
   }

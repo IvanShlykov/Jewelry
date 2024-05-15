@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
-import type { RootState } from '../../../store/store';
+import { useAppDispatch, type RootState } from '../../../store/store';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../style/jewelry.css';
 import ModalWindowJewelry from './ModalWindowJewelry';
+import { addBasket } from '../basketSlice';
+
 
 function JewelryPage(): JSX.Element {
   const [active, setActive] = useState(false);
@@ -14,6 +16,30 @@ function JewelryPage(): JSX.Element {
   const jewelry = useSelector((store: RootState) =>
     store.jewelrysState.jewelrys.find((jew) => jew.id.toString() === id),
   );
+
+  let sizes = useSelector((store: RootState) => store.adminState.sizes);
+
+  if (jewelry) {
+    if (jewelry.Type.id === 1) {
+      sizes = sizes.slice(0, 8);
+    } else if (jewelry.Type.id === 5) {
+      sizes = sizes.slice(9);
+    } else {
+      sizes = sizes.slice(8, 9);
+    }
+  }
+
+  const [sizeID, setSize] = useState(1);
+  const dispatch = useAppDispatch();
+  console.log(sizeID);
+
+  const basketAdd = (e: React.FormEvent): void => {
+    e.preventDefault();
+    if (!sizeID) {
+      setSize(sizes[0].id);
+    }
+    dispatch(addBasket({ jewelryID: jewelry?.id, sizeID })).catch(console.log);
+  };
 
   const settings = {
     dots: true,
@@ -34,8 +60,8 @@ function JewelryPage(): JSX.Element {
         <div className="image-container">
           <div className="jewelry-slider-container">
             <Slider {...settings}>
-              {jewelry.Photos.map((photo, index) => (
-                <div key={index} onClick={() => setActive(true)}>
+              {jewelry.Photos.map((photo) => (
+                <div key={photo.id} onClick={() => setActive(true)}>
                   <img
                     src={photo.url}
                     alt={`Фото ${jewelry.name}`}
@@ -94,9 +120,24 @@ function JewelryPage(): JSX.Element {
           className="product-details__buttons js-add-to-cart-form"
           method="post"
           action="/netcat/modules/default/actions/cart.php"
+          onSubmit={basketAdd}
         >
+          <div className="jewelry-details__option contsizeJewelryPage">
+            <span className="jewelry-details__option-title">Выберите размер</span>
+            <select
+              className="sizeJewelryPage"
+              onChange={(e) => setSize(Number(e.target.value))}
+              defaultValue={sizeID}
+            >
+              {sizes.map((size) => (
+                <option key={size.id} value={size.id}>
+                  {size.scale}
+                </option>
+              ))}
+            </select>
+          </div>
           <button
-            type="button"
+            type="submit"
             className="btn js-add-to-cart-btn"
             data-card-add-btn=""
             data-available-type="true"

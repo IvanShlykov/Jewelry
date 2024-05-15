@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:collectionID", async (req, res) => {
+  console.log(6666666666666666666666666666666666666666)
   try {
     const { collectionID } = req.params;
     const jewelrysSpecificCollection = await Jewelry.findAll({
@@ -40,6 +41,7 @@ router.get("/:collectionID", async (req, res) => {
         { model: JewStone },
       ],
     });
+    console.log(jewelrysSpecificCollection, '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     if (jewelrysSpecificCollection) {
       res.json({ jewelrysSpecificCollection });
     } else {

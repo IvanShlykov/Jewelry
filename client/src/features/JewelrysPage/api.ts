@@ -1,4 +1,6 @@
-import type { CollectionHome, Hashtag, Jewelry, Metall, Type } from './type';
+
+import type { Basket, CollectionHome, Hashtag,Jewelry, Metall, OrderItem, Type } from './type';
+
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -10,13 +12,12 @@ export const initCollectionHomeFetch = async (): Promise<CollectionHome[]> => {
   const res = await fetch('/api/collections');
   const data = await res.json();
   return data.collections;
- 
 };
 export const fetchInitMetalls = async (): Promise<Metall[]> => {
   const res = await fetch('/api/admin/metalls');
   const data = await res.json();
   console.log(data);
-  
+
   return data.metalls;
 };
 export const initTypesFetch = async (): Promise<Type[]> => {
@@ -30,5 +31,23 @@ export const initHashtagFetch = async (): Promise<Hashtag[]> => {
   return data.hashtags;
 };
 
+export const initBasketFetch = async (): Promise<OrderItem[]> => {
+  const res = await fetch('/api/admin/basket');
+  const data = await res.json();
+  return data.basket;
+};
+
+export const addBasketFetch = async (obj: {
+  jewelryID: number | undefined;
+  sizeID: number;
+}): Promise<OrderItem[]> => {
+  const res = await fetch(`/api/admin/basket/${obj.jewelryID}`, {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(obj),
+  });
+  const data = await res.json();
+  return data.newBasket;
+};
 
 export default initJewelryFetch;

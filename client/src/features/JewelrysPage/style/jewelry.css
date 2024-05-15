@@ -45,6 +45,16 @@
   height: auto; /* Высота изменяется пропорционально */
 }
 
+.favorite-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .image-container {
   position: relative;
   width: 100%;
@@ -189,4 +199,23 @@
   .card {
     max-width: 100%;
   }
+}
+
+
+.js-add-to-cart-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.contsizeJewelryPage{
+  width: 100%;
+}
+.sizeJewelryPage{
+  padding: 0px 2%;
+  margin-right: 3%;
+  text-align: right;
+  font-size: 12px;
+  text-transform: uppercase;
+  border: none;
+  background-color: #fff;
 }

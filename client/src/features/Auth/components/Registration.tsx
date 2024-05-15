@@ -9,6 +9,7 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { registration, clear } from '../authSlice';
 import type { RegistrationUser } from '../type';
+import { initBasket } from '../../JewelrysPage/basketSlice';
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),
@@ -66,25 +67,25 @@ function Registration(): JSX.Element {
       <div className="auth">
         <form onSubmit={handleSubmit(reg)} className="authForm">
           <input className="inputAuth" type="text" placeholder="Имя" {...register('name')} />
-          <span>{errors.name?.message}</span>
+          <span className="eroorMessageAuth">{errors.name?.message}</span>
           <input className="inputAuth" type="email" placeholder="email" {...register('email')} />
-          <span>{errors.email?.message}</span>
+          <span className="eroorMessageAuth">{errors.email?.message}</span>
           <input className="inputAuth" type="text" placeholder="Телефон" {...register('phone')} />
-          <span>{errors.phone?.message}</span>
+          <span className="eroorMessageAuth">{errors.phone?.message}</span>
           <input
             className="inputAuth"
             type="password"
             placeholder="Пароль"
             {...register('password')}
           />
-          <span>{errors.password?.message}</span>
+          <span className="eroorMessageAuth">{errors.password?.message}</span>
           <input
             className="inputAuth"
             type="password"
             placeholder="Повторить пароль"
             {...register('cpassword')}
           />
-          <span>{errors.cpassword?.message}</span>
+          <span className="eroorMessageAuth">{errors.cpassword?.message}</span>
           <button className="btnAuth" type="submit">
             Зарегестрироваться
           </button>
