@@ -7,6 +7,13 @@ export type UserChange={
 }
 export type State = {
     error: string | undefined;
-    orderItems: OrderItem[]
+    orderItems: Order[]
   }
   export type User = UserChange 
+
+  export type Order ={
+    id:number;
+    userID:number;
+    status:string;
+    OrderItems:OrderItem[]
+  }

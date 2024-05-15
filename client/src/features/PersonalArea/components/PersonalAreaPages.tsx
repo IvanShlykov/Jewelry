@@ -14,12 +14,13 @@ function PersonalAreaPages(): JSX.Element {
 
   const users = useSelector((store: RootState) => store.authState.user);
   const baskets = useSelector((store: RootState) => store.userState.orderItems);
+console.log(baskets);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(initOrder()).catch(console.log);
-  }, []);
+  }, [dispatch]);
 
   const handleUpdateUserClick = (): void => {
     setShowUpdateUser(true);
@@ -32,12 +33,12 @@ function PersonalAreaPages(): JSX.Element {
 
   const handleOrderStoryClick = (): void => {
     setShowOrderHistory(true);
-    setShowCloseOrderHistory(true); // Показываем кнопку закрытия
+    setShowCloseOrderHistory(true); 
   };
 
   const handleCloseOrderStory = (): void => {
     setShowOrderHistory(false);
-    setShowCloseOrderHistory(false); // Скрываем кнопку закрытия
+    setShowCloseOrderHistory(false); 
   };
 
   return (
@@ -62,7 +63,10 @@ function PersonalAreaPages(): JSX.Element {
           Ваши заказы
         </button>
         {showOrderHistory && baskets.map((el) => (
-          <OrderItemElem key={el.id} orderItem={el} />
+          <div>
+          <div>№{el.id}</div>
+         <div>{ el.OrderItems.map((le)=><OrderItemElem key={le.id} orderItem={le} />)}</div>
+         </div>
         ))}
         {showCloseOrderHistory && (
           <button type='button' className='closeOrder' onClick={handleCloseOrderStory}>
