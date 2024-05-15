@@ -107,6 +107,13 @@ function Header(): JSX.Element {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/location" className="menu-item" onClick={change}>
+            Где нас найти
+          </NavLink>
+        </li>
+        
+        <li>
+          <Link className="menu-item" onClick={logOutHeader} to="/">
           <Link className="exit" onClick={logOutHeader} to="/">
             Выйти
           </Link>
@@ -127,11 +134,18 @@ function Header(): JSX.Element {
             <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
           </>
         ) : (
+          <>
+          
+          <NavLink to="/personalArea" >
+          <div className="LK"/>
+          </NavLink>
+        
           <NavLink to="/basket">
             <div className={anim ? 'basketHeader animate' : 'basketHeader'}>
               <div className="numberBasket">{basket? basket.reduce((acc, a) => acc + a.count, 0) : ''}</div>
             </div>
           </NavLink>
+          </>
         )}
 
         <button type="button" onClick={openModalSearch} className="btnSearch">
