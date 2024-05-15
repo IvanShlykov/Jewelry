@@ -18,7 +18,7 @@ function BelowFiveThousandPage(): JSX.Element {
  
 
   const jewelrysSelect = useSelector((store: RootState) => store.adminState.jewelrys);
-  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
+  const jewelryscollection = useSelector((store: RootState) => store.specificCollectionState.collections);
   const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
   const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
 

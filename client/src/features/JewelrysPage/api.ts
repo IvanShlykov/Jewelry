@@ -9,6 +9,8 @@ import type {
   OrderItem,
   Type,
 } from './type';
+import type { IDCollection } from '../Admin/type';
+
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -64,6 +66,7 @@ export const addBasketFetch = async (obj: {
   return data.newBasket;
 };
 
+
 export const addFavoriteFetch = async (obj: {
   userID: IDUser;
   jewelryID: IDJewelry | undefined;
@@ -103,5 +106,37 @@ export const removeFavoriteFetch = async (obj: {
     console.error('Ошибка при удалении избранного из базы данных:', error);
   }
 };
+
+
+export const delOrderItemFetch = async ({
+  orderID,
+  itemID,
+}: {
+  orderID: number;
+  itemID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/items/${itemID}/delete`,{method: 'delete'});
+  return itemID;
+};
+
+
+export const delOrderFetch = async ({
+  orderID,
+}: {
+  orderID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/delete`,{method: 'delete'});
+  return orderID;
+};
+
+export const buyOrderFetch = async ({
+  orderID,
+}: {
+  orderID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/buy`,{method: 'PUT'});
+  return orderID;
+};
+
 
 export default initJewelryFetch;

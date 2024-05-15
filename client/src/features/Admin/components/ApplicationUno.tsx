@@ -30,19 +30,17 @@ function ApplicationUno({ application, i, open }: Props): JSX.Element {
       </td>
       <td>{application.description}</td>
       {open && (
-        <>
-          <td>
-            <button type="button" onClick={() => setModal(true)}>
-              Закрыть
-            </button>
-          </td>
+        <td>
           <ModalWindow
             deleteItem={closeOrder}
             modal={modal}
             setModal={setModal}
             id={application.id}
           />
-        </>
+          <button type="button" onClick={() => setModal(true)}>
+            Подтвердить
+          </button>
+        </td>
       )}
     </tr>
   );

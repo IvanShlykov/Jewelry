@@ -38,7 +38,7 @@ function ModalWindowAuth({
             </button>
           </div>
         </div>
-        {state ? <Authorization /> : <Registration />}
+        {state ? <Authorization onClose={onClose}/> : <Registration onClose={onClose} />}
       </div>
     </div>
   ) : (

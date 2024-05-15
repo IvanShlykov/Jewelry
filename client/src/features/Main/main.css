@@ -104,7 +104,6 @@ a {
   position: relative;
   border: none;
   background: transparent;
-  width: 75px;
   height: 26px;
 }
 .burger::before,
@@ -288,4 +287,18 @@ a {
 
 .noneVisab{
   opacity: 0;
+}
+
+.burgerFavorit{
+  display: flex;
+  min-width: 110px;
+}
+
+.favorites{
+  margin-left: 10px;
+}
+
+.searchAndLK{
+  min-width: 115px;
+  justify-content: end;
 }

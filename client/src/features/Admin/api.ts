@@ -12,6 +12,7 @@ import type {
   LocationAdd,
   Metall,
   MetallAdd,
+  Order,
   Photo,
   Size,
   Stock,
@@ -335,6 +336,22 @@ export const initApplicationsFetch = async (): Promise<Application[]> => {
 
 export const delApplicationFetch = async (id: IDCollection): Promise<IDCollection> => {
   const res = await fetch(`/api/admin/application/${id}`, { method: 'DELETE' });
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  }
+  throw data.message;
+};
+
+export const initOrdersFetch = async (): Promise<Order[]> => {
+  const res = await fetch('/api/admin/orders');
+  const data = await res.json();
+  return data.orders;
+};
+
+
+export const closeOrderAllFetch = async (id: IDCollection): Promise<IDCollection> => {
+  const res = await fetch(`/api/admin/order/${id}`, { method: 'DELETE' });
   const data = await res.json();
   if (res.ok) {
     return data;

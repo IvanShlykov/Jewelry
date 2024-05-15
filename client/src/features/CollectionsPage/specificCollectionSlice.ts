@@ -11,6 +11,7 @@ const initialState: State = {
   types: [],
   sizes: [],
   hashtags: [],
+  searchHashtags: '',
   error: undefined,
 };
 
@@ -22,10 +23,15 @@ export const initSpecificCollection = createAsyncThunk('specificCollections/init
   api.initSpecificCollectionFetch(collectionID),
 );
 
+
 const specificCollectionSlice = createSlice({
   name: 'specificCollection',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchHashtags(state, action) {
+      state.searchHashtags = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(initSpecificCollection.fulfilled, (state, action) => {
@@ -41,8 +47,8 @@ const specificCollectionSlice = createSlice({
       })
       .addCase(initCollectionsHome.rejected, (state, action) => {
         state.error = action.error.message;
-      });
+      })
   },
 });
-
+export const { setSearchHashtags } = specificCollectionSlice.actions;
 export default specificCollectionSlice.reducer;

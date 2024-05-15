@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { object, ref, string } from 'yup';
@@ -9,7 +8,7 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { registration, clear } from '../authSlice';
 import type { RegistrationUser } from '../type';
-import { initBasket } from '../../JewelrysPage/basketSlice';
+import { initBasket } from '../../Basket/basketSlice';
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),
@@ -26,22 +25,18 @@ const schema = object().shape({
     .oneOf([ref('password')], 'Пароли не совпадают'),
 });
 
-function Registration(): JSX.Element {
+function Registration({onClose}:{onClose:()=> void}): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
-  const navigate = useNavigate();
   useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
 
     if (message) {
       setTimeout(() => {
         dispatch(clear());
       }, 2000);
     }
-  }, [user, message]);
+  }, [user, message,dispatch]);
 
   const {
     register,
@@ -60,6 +55,7 @@ function Registration(): JSX.Element {
         password: data.password,
       }),
     ).catch(console.log);
+    onClose()
   };
 
   return (

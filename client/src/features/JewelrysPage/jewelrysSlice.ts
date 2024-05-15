@@ -11,6 +11,7 @@ const initialState: State = {
   sizes: [],
   hashtags: [],
   favorites: [],
+  searchHashtags: '',
   error: undefined };
 
 export const initJewelrys = createAsyncThunk(
@@ -48,7 +49,11 @@ export const initHashtag = createAsyncThunk('hashtag/init', () => api.initHashta
 const jewelrysSlice = createSlice({
   name: 'jewelrys',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchHashtags(state, action) {
+      state.searchHashtags = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(initJewelrys.fulfilled, (state, action) => {
@@ -105,5 +110,5 @@ const jewelrysSlice = createSlice({
       });
   },
 });
-
+export const { setSearchHashtags } = jewelrysSlice.actions;
 export default jewelrysSlice.reducer;

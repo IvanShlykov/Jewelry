@@ -1,23 +1,12 @@
-import type { User } from "./type/type";
-  
-export const initUserFetch = async (): Promise<User> => {
-    const res = await fetch('/api/user');
-    const data = await res.json();
-    return data.user;
-  };
-  export default initUserFetch
+import type { OrderItem } from "../JewelrysPage/type";
 
-  export const changeMetallFetch = async (obj: User): Promise<User> => {
-    const res = await fetch(`/api/admin/metall/${obj.id}`, {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(obj),
-    });
+
   
-    if (res.ok) {
-      const data = await res.json();
-      return data.user;
-    }
-    const data = await res.json();
-    throw data.message;
+  export const initOrderFetchUser = async (): Promise<OrderItem[]> => {
+    const res = await fetch('/api/user/orders');
+    const data = await res.json();;
+    
+    return data.orderUser;
   };
+  
+  export default initOrderFetchUser

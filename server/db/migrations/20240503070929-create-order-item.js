@@ -15,7 +15,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-
       },
       price: {
         type: Sequelize.INTEGER,
@@ -29,6 +28,7 @@ module.exports = {
           model: 'Orders',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       sizeID: {
         type: Sequelize.INTEGER,

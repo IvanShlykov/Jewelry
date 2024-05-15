@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../../../store/store';
+import { useAppDispatch, type RootState } from '../../../store/store';
 import OrderItemElem from './OrderItemElem';
 import '../style.css';
+import { buyBasket, delOrder } from '../basketSlice';
+import ModalWindowBasket from './ModalWindowBasket';
 
 function BasketPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [modal, setModal] = useState(true);
   const baskets = useSelector((store: RootState) => store.basketState.orderItems);
 
   const basketsStock = baskets?.filter((orderItem) =>
@@ -19,8 +23,17 @@ function BasketPage(): JSX.Element {
       ),
   );
 
-  return baskets ? (
-    <div>
+  const delOrderFunc = (): void => {
+    dispatch(delOrder({ orderID: baskets[0].orderID })).catch(console.log);
+  };
+  const buyBasketFunc = (): void => {
+    dispatch(buyBasket({ orderID: baskets[0].orderID })).catch(console.log);
+    setModal(true);
+  };
+  console.log(modal);
+
+  return baskets?.length ? (
+    <div className="list">
       <div>
         <div className="h1Basket HH11">КОРЗИНА</div>
         <div className="borderOrder2" />
@@ -48,12 +61,19 @@ function BasketPage(): JSX.Element {
         <div className="itogBasket">
           Итого: {baskets?.reduce((acc, a) => acc + a.price * a.count, 0)} руб.
         </div>
-        <div className="btnBuy">Купить</div>
-        <div className="btnDel">Очистить корзину</div>
+        <button type="button" className="btnBuy" onClick={buyBasketFunc}>
+          Купить
+        </button>
+        <button type="button" className="btnDel" onClick={delOrderFunc}>
+          Очистить корзину
+        </button>
       </div>
     </div>
   ) : (
-    <div>Корзина пуста</div>
+    <div className="list">
+      <div className="h1Basket HH11">Корзина пуста</div>
+      <ModalWindowBasket setModal={setModal} modal={modal}/>
+    </div>
   );
 }
 

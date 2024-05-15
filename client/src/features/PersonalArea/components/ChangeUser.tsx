@@ -1,22 +1,39 @@
 import React, { useState } from 'react'
+import  { useAppDispatch } from '../../../store/store'
+
+import { updateUserSlice } from '../../Auth/authSlice'
+
+
 
 function ChangeUser():JSX.Element {
-    const [changeName, setChangeName] =useState('users.name')
-    const [changeMail, setChangeMail] =useState('users.mail')
-    const [changePhone, setChangePhone] =useState('users.phone')
-    const [changePassword, setChangePassword] =useState('users.password')
+    const [changeName, setChangeName] =useState('')
+    const [changeMail, setChangeMail] =useState('')
+    const [changePhone, setChangePhone] =useState('')
+
+    const dispatch = useAppDispatch();
+
+
+    const handleFormSubmit = (e: React.FormEvent): void => {
+      e.preventDefault();
+      const updatedUser = {
+        name: changeName,
+        email: changeMail,
+        phone: changePhone,
+        
+    };
+      dispatch(updateUserSlice(updatedUser)).catch(console.log);
+  };
+
   return (
-    <div>
-         <form >
-                <input value={changeName} placeholder='title' required onChange={(e) => setChangeName(e.target.value)} />
-                <input value={changeMail} placeholder='description' onChange={(e) => setChangeMail(e.target.value)} />
-                <input value={changePhone} placeholder='img' onChange={(e) => setChangePhone(e.target.value)} />
-                <input value={changePassword} placeholder='author' onChange={(e) => setChangePassword(e.target.value)} />
-                <button type='submit'>Update</button>
-            </form>
-         
-    </div>
-  )
+      <div>
+          <form onSubmit={handleFormSubmit}>
+              <input value={changeName} placeholder="Name" required onChange={(e) => setChangeName(e.target.value)} />
+              <input value={changeMail} placeholder="Email" onChange={(e) => setChangeMail(e.target.value)} />
+              <input value={changePhone} placeholder="Phone" onChange={(e) => setChangePhone(e.target.value)} />
+              <button type="submit">Update</button>
+          </form>
+      </div>
+  );
 }
 
-export default ChangeUser
+export default ChangeUser;

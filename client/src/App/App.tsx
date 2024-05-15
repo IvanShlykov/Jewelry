@@ -29,10 +29,8 @@ import BelowFiveThousandPage from '../features/BelowFiveThousand copy/components
 import LocationsPages from '../features/location/components/LocationsPages';
 import PersonalAreaPages from '../features/PersonalArea/components/PersonalAreaPages';
 import { initSizes } from '../features/Admin/adminSlice';
-import { initBasket } from '../features/JewelrysPage/basketSlice';
+import { initBasket } from '../features/Basket/basketSlice';
 import FavoritesPage from '../features/Favorites/components/FavoritesPage';
-
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -68,10 +66,10 @@ function App(): JSX.Element {
           <Route path="registration" element={<Registration />} />
           <Route path="aboutUs" element={<AboutUs />} />
           <Route path="authorization" element={<Authorization />} />
-          <Route path="application" element={<AddCustomJewelery/>}/>
-          <Route path="location" element={<LocationsPages/>}/>
-          <Route path="personalArea" element={<PersonalAreaPages/>}/>
-          <Route path="basket" element={<BasketPage/>}/>
+          <Route path="application" element={<AddCustomJewelery />} />
+          <Route path="location" element={<LocationsPages />} />
+          <Route path="personalArea" element={<PersonalAreaPages />} />
+          <Route path="basket" element={<BasketPage />} />
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

@@ -32,7 +32,7 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
   //   setIsModalOpen(false);
   // };
 
-  const toggleFavorite = (event: React.MouseEvent) => {
+  const toggleFavorite = (event: React.MouseEvent):void => {
     event.stopPropagation(); // Остановка распространения события
     event.preventDefault(); // Отменить переход по ссылке
 

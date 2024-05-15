@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../style/modalStyle.css';
 import { useSelector } from 'react-redux';
-import type { RootState } from '@reduxjs/toolkit/query';
+import type { RootState } from '../../../store/store';
 import type { IDJewelry } from '../type';
 
 function ModalWindowJewelry({
@@ -43,11 +43,11 @@ function ModalWindowJewelry({
     );
   }
 
-  const goToNextPhoto = () => {
+  const goToNextPhoto = ():void => {
     setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % jewelry.Photos.length);
   };
 
-  const goToPreviousPhoto = () => {
+  const goToPreviousPhoto = () :void=> {
     setCurrentPhotoIndex(
       (prevIndex) => (prevIndex - 1 + jewelry.Photos.length) % jewelry.Photos.length,
     );
@@ -64,7 +64,7 @@ function ModalWindowJewelry({
           />
           {jewelry.Photos.length > 1 && (
             <div className="photo-controls">
-              <button className="back" onClick={goToPreviousPhoto} title="Назад">
+              <button type="button" className="back" onClick={goToPreviousPhoto} title="Назад">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ function ModalWindowJewelry({
                 </div>
               </button>
 
-              <button className="next" onClick={goToNextPhoto} title="Вперед">
+              <button type="button" className="next" onClick={goToNextPhoto} title="Вперед">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M15.4 12.97l-2.68 2.72 1.34 1.38L19 12l-4.94-5.07-1.34 1.38 2.68 2.72H5v1.94z"></path>

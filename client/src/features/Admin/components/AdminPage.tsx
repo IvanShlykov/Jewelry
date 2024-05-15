@@ -10,6 +10,7 @@ import {
   initHashtag,
   initLocation,
   initMetalls,
+  initOrders,
   initSizes,
   initTypes,
 } from '../adminSlice';
@@ -29,12 +30,13 @@ function AdminPage(): JSX.Element {
   const metalls = useSelector((store: RootState) => store.adminState.metalls);
   const locations = useSelector((store: RootState) => store.adminState.locations);
   const applications = useSelector((store: RootState) => store.adminState.applications);
+  const orders = useSelector((store: RootState) => store.adminState.orders);
 
   const user = useSelector((store: RootState) => store.authState.user);
   const navigate = useNavigate();
 
   const [state, setState] = useState('bd');
-
+  
   const logOutHeader = (): void => {
     dispatch(logout()).catch(console.log);
   };
@@ -45,9 +47,10 @@ function AdminPage(): JSX.Element {
     dispatch(initMetalls()).catch(console.log);
     dispatch(initTypes()).catch(console.log);
     dispatch(initHashtag()).catch(console.log);
-    // dispatch(initSizes()).catch(console.log);
     dispatch(initLocation()).catch(console.log);
     dispatch(initApplications()).catch(console.log);
+    dispatch(initOrders()).catch(console.log);
+
   }, []);
 
   useEffect(() => {
@@ -84,7 +87,7 @@ function AdminPage(): JSX.Element {
           </>
         )}
         {state === 'jewelry' && <JewelryPageAdmin />}
-        {state === 'order' && <OrderAdminPage applications={applications} />}
+        {state === 'order' && <OrderAdminPage applications={applications} orders={orders}/>}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ export type State = {
   sizes: Size[];
   favorites: Favorite[];
   error: undefined | string;
+  searchHashtags: string;
 };
 
 export type Favorite = {

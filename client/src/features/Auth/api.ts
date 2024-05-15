@@ -1,4 +1,4 @@
-import type { AuthForm, User, UserClient } from "./type"
+import type { AuthForm, User, UserClient, UserUpdate } from "./type"
 
 export const registrationFetch = async(obj:User):Promise<UserClient>=>{
 
@@ -50,3 +50,19 @@ if(res.ok){
   const data = await res.json()
     throw data.message
   }
+  export const changeUserFetch = async (obj: UserUpdate): Promise<UserClient> => {
+    const res = await fetch(`/api/user/update`, {
+      method: 'PUT',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(obj),
+    });
+  
+    if (res.ok) {
+      const data = await res.json();
+      console.log(data.user);
+      
+      return data.user;
+    }
+    const data = await res.json();
+    throw data.message;
+  };
