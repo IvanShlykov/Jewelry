@@ -4,7 +4,8 @@ import { type RootState } from '../../../store/store';
 import Collection from '../../HomePage/components/Collection';
 
 function CollectionsPage(): JSX.Element {
-  const collections = useSelector((store: RootState) => store.collectionsState.collections);
+
+  const collections = useSelector((store: RootState) => store.specificCollectionState.collections);
 
   const enhancedCollections = collections
     .map((collection) => ({

@@ -14,6 +14,7 @@ export type State = {
   hashtags: Hashtag[];
   sizes: Size[];
   error: undefined | string;
+  searchHashtags: string;
 };
 
 export type CollectionAdd = {

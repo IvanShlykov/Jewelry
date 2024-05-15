@@ -24,7 +24,6 @@ const personalAreaSlice = createSlice({
       
       .addCase(initOrder.fulfilled, (state, action) => {
         state.orderItems = action.payload;
-        console.log(state.orderItems,'1234312412321');
         
         state.error = undefined;
       })

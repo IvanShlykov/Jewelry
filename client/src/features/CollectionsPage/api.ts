@@ -1,4 +1,4 @@
-import type { CollectionHome, IDCollection, Jewelry } from '../JewelrysPage/type';
+import type { CollectionHome,  IDCollection, Jewelry } from '../JewelrysPage/type';
 
 export const initCollectionHomeFetch = async (): Promise<CollectionHome[]> => {
   const res = await fetch('/api/collections');
@@ -9,9 +9,8 @@ export const initCollectionHomeFetch = async (): Promise<CollectionHome[]> => {
 export const initSpecificCollectionFetch = async (collectionID:IDCollection): Promise<Jewelry[]> => {
   const res = await fetch(`/api/collections/${collectionID}`);
   const data = await res.json();
-  console.log(await data, '------------')
+  
   return data.jewelrysSpecificCollection;
 };
-
 
 export default initCollectionHomeFetch;

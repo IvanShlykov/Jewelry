@@ -31,7 +31,7 @@ import type { AuthForm, State, User, UserUpdate } from "./type";
     name: 'auth',
     initialState,
    reducers:{
-    clear:(state)=>state.error=undefined
+    clear:(state)=>{state.error=undefined}
    },
     extraReducers: (builder) => {
       builder

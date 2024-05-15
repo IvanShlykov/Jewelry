@@ -16,11 +16,9 @@ function AddCustomJewelery(): JSX.Element {
   const openModal = (): void => {
     setIsModalOpen(true);
   };
-
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
-
   const addCustomJeweleryForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = new FormData();

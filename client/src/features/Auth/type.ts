@@ -18,7 +18,7 @@ export type UserUpdate = {
     phone: string;
 }
 
-export type RegistrationUser = User & {cpassword:'string'}
+export type RegistrationUser = User & {cpassword: string}
 
 
 
