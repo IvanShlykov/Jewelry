@@ -36,11 +36,10 @@ function JewelryPage(): JSX.Element {
 
   const [sizeID, setSize] = useState(1);
   const dispatch = useAppDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
-
 
   const basketAdd = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -50,7 +49,7 @@ function JewelryPage(): JSX.Element {
     if (user) {
       dispatch(addBasket({ jewelryID: jewelry?.id, sizeID })).catch(console.log);
     } else {
-      setIsModalOpen(true)
+      setIsModalOpen(true);
     }
   };
 
@@ -68,13 +67,13 @@ function JewelryPage(): JSX.Element {
 
   return (
     <div className="jewelry-card">
-      {isModalOpen && <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal}/>}
+      {isModalOpen && <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />}
       {active && <ModalWindowJewelry active={active} setActive={setActive} id={jewelry.id} />}
       <div id="main-content">
         <div className="image-container">
           <div className="jewelry-slider-container">
-            <Slider {...settings}>
-              {jewelry.Photos.map((photo) => (
+            {jewelry.Photos.length === 1 &&
+              jewelry.Photos.map((photo) => (
                 <div key={photo.id} onClick={() => setActive(true)}>
                   <img
                     src={photo.url}
@@ -83,7 +82,19 @@ function JewelryPage(): JSX.Element {
                   />
                 </div>
               ))}
-            </Slider>
+            {jewelry.Photos.length > 1 && (
+              <Slider {...settings}>
+                {jewelry.Photos.map((photo) => (
+                  <div key={photo.id} onClick={() => setActive(true)}>
+                    <img
+                      src={photo.url}
+                      alt={`Фото ${jewelry.name}`}
+                      className="jewelry-main-photo"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            )}
           </div>
           {jewelry.Photos.length === 0 && (
             <div className="no-photo">К сожалению, фото отсутствует</div>
