@@ -53,6 +53,7 @@ function CollectionPage(): JSX.Element {
 
   return (
     <div className="list">
+      <div className="filterCSS">
       <input
         type="number"
         value={minPrice}
@@ -82,7 +83,7 @@ function CollectionPage(): JSX.Element {
 
         ))}
       </select>
-      <div className="searcmodal-content">
+
         <input type="text" value={query} onChange={handleSearch} placeholder="Поиск украшений..." />
       </div>
       {filteredJewelrysCollection.length === 0 ? (
