@@ -106,7 +106,7 @@ function Header(): JSX.Element {
             Индивидуальный заказ
           </NavLink>
         </li>
-        <li>
+        <li className={user? '' : 'noneVisab'}>
           <Link className="exit" onClick={logOutHeader} to="/">
             Выйти
           </Link>

@@ -209,3 +209,7 @@
   border: none;
   background-color: #fff;
 }
+
+.list{
+  min-height: 70vh;
+}
