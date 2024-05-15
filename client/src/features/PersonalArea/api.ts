@@ -1,13 +1,12 @@
 import type { OrderItem } from "../JewelrysPage/type";
-import type { User } from "./type/type";
+
 
   
-  export const initBasketFetchUser = async (): Promise<OrderItem[]> => {
-    const res = await fetch('/api/admin/basket');
-    const data = await res.json();
-    console.log(data.basket);
+  export const initOrderFetchUser = async (): Promise<OrderItem[]> => {
+    const res = await fetch('/api/user/orders');
+    const data = await res.json();;
     
-    return data.basket;
+    return data.orderUser;
   };
   
-  export default initBasketFetchUser
+  export default initOrderFetchUser

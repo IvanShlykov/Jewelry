@@ -6,9 +6,6 @@ export type UserChange={
     phone: string;
 }
 export type State = {
-    name:string;
-    email:string;
-    phone: string;
     error: string | undefined;
     orderItems: OrderItem[]
   }
