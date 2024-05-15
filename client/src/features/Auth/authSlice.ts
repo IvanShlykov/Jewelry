@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from './api'
-import type { AuthForm, State, User } from "./type";
+
+import type { AuthForm, State, User, UserUpdate } from "./type";
 
    const initialState:State = {user:null,error:undefined}
 
@@ -23,6 +24,9 @@ import type { AuthForm, State, User } from "./type";
    // eslint-disable-next-line @typescript-eslint/no-floating-promises
    () => api.fetchLogOut()
   );
+  export const updateUserSlice = createAsyncThunk('users/update',  (updatedUser: UserUpdate) => 
+    api.changeUserFetch(updatedUser));
+
    const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -58,6 +62,10 @@ import type { AuthForm, State, User } from "./type";
         })
         .addCase(logout.rejected, (state, action) => {
           state.error = action.error.message;
+        })
+        .addCase(updateUserSlice.fulfilled, (state, action) => {
+          state.user = action.payload;
+        
         })
     },
    });

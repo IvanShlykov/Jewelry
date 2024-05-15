@@ -490,6 +490,8 @@ router.post('/basket/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { sizeID } = req.body;
+    console.log(sizeID, '+++++++');
+
     const jewelry = await Jewelry.findOne({ where: { id } });
 
     const basket = await Order.findOne({
@@ -565,7 +567,6 @@ router.post('/basket/:id', async (req, res) => {
       }
     }
   } catch ({ message }) {
-    console.log(message);
     res.status(500).json({ message });
   }
 });
@@ -661,5 +662,6 @@ router.delete('/order/:id', async (req, res) => {
     res.status(500).json({ message });
   }
 });
+
 
 module.exports = router;

@@ -30,7 +30,7 @@ function JewelrysPage(): JSX.Element {
   const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
   const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
   const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
-  const jewelrysHashtags = useSelector((store: RootState) => store.adminState.hashtags);
+ ;
 
   const filteredJewelrys = jewelrysSelect.filter((jewelry) => {
     const matchesCollection = !collectionFilter || jewelry.Collection.id === +collectionFilter;
