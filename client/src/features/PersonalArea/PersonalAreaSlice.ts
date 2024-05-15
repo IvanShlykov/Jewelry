@@ -5,31 +5,30 @@ import type  { State } from "./type/type";
 
 
 const initialState: State = { 
-    name:'',
-    email:'',
-    phone: '',
     orderItems: [],
   error:undefined
  };
  
- export const initBasket = createAsyncThunk(
-  'baskets/init',
+ export const initOrder = createAsyncThunk(
+  'orders/init',
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  () => api.initBasketFetchUser(),
+  () => api.initOrderFetchUser(),
 );
 
 const personalAreaSlice = createSlice({
-  name: 'users',
+  name: 'order',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       
-      .addCase(initBasket.fulfilled, (state, action) => {
+      .addCase(initOrder.fulfilled, (state, action) => {
         state.orderItems = action.payload;
+        console.log(state.orderItems,'1234312412321');
+        
         state.error = undefined;
       })
-      .addCase(initBasket.rejected, (state, action) => {
+      .addCase(initOrder.rejected, (state, action) => {
         state.error = action.error.message;
       })
 

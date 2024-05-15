@@ -1,15 +1,15 @@
 const router = require('express').Router()
 const { User, Order, OrderItem, Stock, Photo, Metall, Size, Jewelry} = require('../../db/models')
 
-router.get('/basket', async (req, res) => {
+router.get('/orders', async (req, res) => {
   try {
     if (res.locals.user) {
-      let basket = await Order.findOne({
-        where: { userID: res.locals.user.id, status: 'confirm' },
+      let orderUser = await Order.findOne({
+        where: { userID: res.locals.user.id, status: 'confirmed' },
       });
-      if (basket) {
-        basket = await OrderItem.findAll({
-          where: { orderID: basket.id },
+      if (orderUser) {
+        orderUser = await OrderItem.findAll({
+          where: { orderID: orderUser.id },
           include: [
             { model: Order },
             {
@@ -20,7 +20,7 @@ router.get('/basket', async (req, res) => {
           ],
           order: [['id', 'ASC']],
         });
-        res.status(200).json({ basket });
+        res.status(200).json({ orderUser });
       } else {
         res.status(400).json({ message: 'Корзина пуста' });
       }

@@ -8,6 +8,10 @@ module.exports = {
           userID: 2,
           status: 'basket',
         },
+        {
+          userID: 2,
+          status: 'confirmed',
+        }
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}
     );

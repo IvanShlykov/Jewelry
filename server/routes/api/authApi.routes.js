@@ -100,6 +100,8 @@ router.get('/checked', async (req, res) => {
       id: res.locals.user.id,
       name: res.locals.user.name,
       isAdmin: res.locals.user.isAdmin,
+      email: res.locals.user.email,
+      phone: res.locals.user.phone
     });
   } else {
     res.status(400).json({ message: 'neok' });

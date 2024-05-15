@@ -11,6 +11,13 @@ module.exports = {
           orderID: 1,
           sizeID: 1,
         },
+        {
+          jewelryID: 2,
+          price: 2000,
+          count: 2,
+          orderID: 2,
+          sizeID: 1,
+        },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}
     );
