@@ -3,23 +3,22 @@ const { User, Order, OrderItem, Stock, Photo, Metall, Size, Jewelry} = require('
 
 router.get('/orders', async (req, res) => {
   try {
+    console.log('++++++++++');
     if (res.locals.user) {
-      let orderUser = await Order.findOne({
+      let orderUser = await Order.findAll({
         where: { userID: res.locals.user.id, status: 'confirmed' },
+        include:[{model:
+          OrderItem,
+        include:[
+          { model: Order },
+          {
+            model: Jewelry,
+            include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+          },
+          { model: Size },
+        ]}]
       });
       if (orderUser) {
-        orderUser = await OrderItem.findAll({
-          where: { orderID: orderUser.id },
-          include: [
-            { model: Order },
-            {
-              model: Jewelry,
-              include: [{ model: Stock }, { model: Photo }, { model: Metall }],
-            },
-            { model: Size },
-          ],
-          order: [['id', 'ASC']],
-        });
         res.status(200).json({ orderUser });
       } else {
         res.status(400).json({ message: 'Корзина пуста' });
