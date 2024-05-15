@@ -68,6 +68,7 @@ function Header(): JSX.Element {
       />
 
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+
       <div className='burgerFavorit'>
         <label htmlFor="burger-checkbox" className="burger" />{' '}
         <NavLink
@@ -126,7 +127,6 @@ function Header(): JSX.Element {
           </Link>
         </li>
       </ul>
-
       <div className="dgls">
         <NavLink to="/">DGLS CRFT</NavLink>
       </div>

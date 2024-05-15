@@ -28,6 +28,13 @@ a {
   background-color: white;
   width: 100vw;
 }
+
+.burgerAndMenu-actions {
+  display: flex;
+  align-items: flex-start;
+  min-width: 60px;
+}
+
 .burger-checkbox {
   position: absolute;
   visibility: hidden;

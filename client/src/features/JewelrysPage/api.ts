@@ -1,5 +1,16 @@
+import type {
+  CollectionHome,
+  Favorite,
+  Hashtag,
+  IDJewelry,
+  IDUser,
+  Jewelry,
+  Metall,
+  OrderItem,
+  Type,
+} from './type';
 import type { IDCollection } from '../Admin/type';
-import type { CollectionHome, Hashtag, Jewelry, Metall, OrderItem, Type } from './type';
+
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -36,6 +47,12 @@ export const initBasketFetch = async (): Promise<OrderItem[]> => {
   return data.basket;
 };
 
+export const initFavoritesFetch = async (): Promise<Favorite[]> => {
+  const res = await fetch('/api/favorites');
+  const data = await res.json();
+  return data.favorites;
+};
+
 export const addBasketFetch = async (obj: {
   jewelryID: number | undefined;
   sizeID: number;
@@ -48,6 +65,48 @@ export const addBasketFetch = async (obj: {
   const data = await res.json();
   return data.newBasket;
 };
+
+
+export const addFavoriteFetch = async (obj: {
+  userID: IDUser;
+  jewelryID: IDJewelry | undefined;
+}):Promise<Favorite | undefined> => {
+  try {
+    console.log(`userID: ${obj.userID}, jewelryID: ${obj.jewelryID}`); 
+    const res = await fetch(`/api/favorites`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    });
+    const data = await res.json();
+    return data.favorite;
+  } catch (error) {
+    console.error('Ошибка при сохранении избранного в базе данных:', error);
+    return undefined;
+  }
+};
+
+export const removeFavoriteFetch = async (obj: {
+  userID: IDUser;
+  jewelryID: IDJewelry | undefined;
+}) => {
+  try {
+    const res = await fetch(`/api/favorites`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    });
+    const data = await res.json();
+    return obj;
+  } catch (error) {
+    console.error('Ошибка при удалении избранного из базы данных:', error);
+  }
+};
+
 
 export const delOrderItemFetch = async ({
   orderID,

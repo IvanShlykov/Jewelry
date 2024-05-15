@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from './api';
-import type { State } from './type';
+import type { IDJewelry, IDUser, State } from './type';
 
 const initialState: State = { 
   collections: [],
@@ -10,6 +10,7 @@ const initialState: State = {
   types: [],
   sizes: [],
   hashtags: [],
+  favorites: [],
   searchHashtags: '',
   error: undefined };
 
@@ -22,6 +23,23 @@ export const initJewelrys = createAsyncThunk(
 export const initCollectionsHome = createAsyncThunk('collectionsHome/init', () =>
   api.initCollectionHomeFetch(),
 );
+
+export const initFavorites = createAsyncThunk(
+  'favorites/init',
+  () => api.initFavoritesFetch(),
+);
+
+export const addFavorite = createAsyncThunk(
+  'favorite/add',
+  (obj: { userID: IDUser, jewelryID: IDJewelry | undefined }) => api.addFavoriteFetch(obj),
+);
+
+export const removeFavorite = createAsyncThunk(
+  'favorite/remove',
+  async (obj: { userID: IDUser; jewelryID: IDJewelry | undefined }) => 
+     api.removeFavoriteFetch(obj),
+);
+
 export const nitMetalls = createAsyncThunk('metall/init', () => api.fetchInitMetalls());
 
 export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
@@ -67,6 +85,29 @@ const jewelrysSlice = createSlice({
         state.hashtags = action.payload;
         state.error = undefined;
       })
+      .addCase(initFavorites.fulfilled, (state, action) => {
+        state.favorites = action.payload;
+        state.error = undefined;
+      })
+      .addCase(initFavorites.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(addFavorite.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.favorites.push(action.payload);
+        }
+        state.error = undefined;
+      })
+      .addCase(addFavorite.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(removeFavorite.fulfilled, (state, action) => {
+        state.favorites = state.favorites.filter(el => !(el.userID === action.payload?.userID && el.jewelryID === action.payload?.jewelryID));
+        state.error = undefined;
+      })
+      .addCase(removeFavorite.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
   },
 });
 export const { setSearchHashtags } = jewelrysSlice.actions;

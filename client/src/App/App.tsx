@@ -13,7 +13,7 @@ import type { RootState } from '../store/store';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
 import Authorization from '../features/Auth/components/Authorization';
-import { initCollectionsHome, initJewelrys } from '../features/JewelrysPage/jewelrysSlice';
+import { initCollectionsHome, initFavorites, initJewelrys } from '../features/JewelrysPage/jewelrysSlice';
 import HomePage from '../features/HomePage/components/HomePage';
 import AdminPage from '../features/Admin/components/AdminPage';
 import JewelrysPage from '../features/JewelrysPage/components/JewelrysPage';
@@ -41,6 +41,7 @@ function App(): JSX.Element {
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
     dispatch(initSizes()).catch(console.log);
+    dispatch(initFavorites()).catch(console.log);
   }, []);
 
   useEffect(() => {

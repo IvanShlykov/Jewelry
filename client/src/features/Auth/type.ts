@@ -1,9 +1,11 @@
 export type User={
+    id: number;
     name:string;
     email:string;
     phone: string;
     password:string;
 }
+
 
 export type UserClient = {
     id:number
@@ -19,8 +21,6 @@ export type UserUpdate = {
 }
 
 export type RegistrationUser = User & {cpassword: string}
-
-
 
 export type State = {
     user:  null | UserClient;
