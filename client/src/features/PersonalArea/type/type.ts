@@ -1,15 +1,15 @@
+import type { OrderItem } from "../../JewelrysPage/type";
 
-export type User={
+export type UserChange={
     name:string;
     email:string;
     phone: string;
-    password:string;
-    id:number;
 }
 export type State = {
     name:string;
     email:string;
     phone: string;
-    password:string;
     error: string | undefined;
+    orderItems: OrderItem[]
   }
+  export type User = UserChange 
