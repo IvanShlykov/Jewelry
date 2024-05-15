@@ -140,16 +140,15 @@ function Header(): JSX.Element {
           </>
         ) : (
           <>
-            <NavLink to="/personalArea">
-              <div className="LK" />
-            </NavLink>
-
             <NavLink to="/basket">
               <div className={anim ? 'basketHeader animate' : 'basketHeader'}>
                 <div className="numberBasket">
                   {basket ? basket.reduce((acc, a) => acc + a.count, 0) : ''}
                 </div>
               </div>
+            </NavLink>
+            <NavLink to="/personalArea">
+              <div className="LK" />
             </NavLink>
           </>
         )}

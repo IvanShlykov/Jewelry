@@ -8,6 +8,7 @@ export type State = {
   sizes: Size[];
   locations: Location[];
   applications: Application[];
+  orders: Order[];
   error: undefined | string;
 };
 
@@ -153,3 +154,22 @@ export type Application = {
   userID: number;
   User: User;
 };
+
+
+export type Order = {
+  id: number;
+  userID: number;
+  status: string;
+  OrderItems: OrderItem[];
+  User: User;
+}
+
+export type OrderItem = {
+  id: number;
+  jewelryID: number;
+  price: number;
+  count: number;
+  orderID: number;
+  sizeID: number;
+  Jewelry: Jewelry;
+}

@@ -630,4 +630,36 @@ router.put('/order/:orderID/buy', async (req, res) => {
   }
 });
 
+router.get('/orders', async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      include: [
+        {
+          model: OrderItem,
+          include: [
+            { model: Jewelry, include: [{ model: Photo }, { model: Metall }] },
+          ],
+        },
+        {
+          model: User,
+        },
+      ],
+      order: [['id', 'ASC']],
+    });
+    res.status(200).json({ orders });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/order/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Order.update({ status: 'confirmed' }, { where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
 module.exports = router;

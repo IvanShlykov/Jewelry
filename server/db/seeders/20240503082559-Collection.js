@@ -6,7 +6,7 @@ module.exports = {
       [
         {
           name: 'База',
-          photo: '',
+          photo: '/img/7_1.jpeg',
         },
         {
           name: 'Слушай своё сердце',

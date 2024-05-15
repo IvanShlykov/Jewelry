@@ -24,6 +24,7 @@ const initialState: State = {
   hashtags: [],
   locations: [],
   applications: [],
+  orders:[],
   error: undefined,
 };
 
@@ -126,6 +127,15 @@ export const initApplications = createAsyncThunk('applications/init', () =>
 export const closeOrderSlice = createAsyncThunk('applications/del', (id: IDCollection) =>
   api.delApplicationFetch(id),
 );
+
+export const initOrders = createAsyncThunk('orders/init', () =>
+  api.initOrdersFetch(),
+);
+
+export const closeOrderAllSlice = createAsyncThunk('ordersAll/close', (id: IDCollection) =>
+  api.closeOrderAllFetch(id),
+);
+
 
 const adminSlice = createSlice({
   name: 'admin',
@@ -336,7 +346,17 @@ const adminSlice = createSlice({
           el.id === action.payload ? { ...el, status: 'close' } : el,
         );
         state.error = undefined;
-      });
+      })
+      .addCase(initOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+        state.error = undefined;
+      })
+      .addCase(closeOrderAllSlice.fulfilled, (state, action) => {
+        state.orders = state.orders.map((el) =>
+          el.id === action.payload ? { ...el, status: 'confirmed' } : el,
+        );
+        state.error = undefined;
+      })
   },
 });
 

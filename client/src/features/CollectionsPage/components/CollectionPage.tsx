@@ -38,7 +38,7 @@ function CollectionPage(): JSX.Element {
       <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
         {specificCollectionSelect.map(jewelry => (
-          <option key={jewelry.Collection.id} value={jewelry.Collection.id}>{jewelry.Collection.name}</option>
+          <option key={jewelry.id} value={jewelry.Collection.id}>{jewelry.Collection.name}</option>
         ))}
       </select>
       <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}>
@@ -50,13 +50,13 @@ function CollectionPage(): JSX.Element {
       <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
         <option value="">Тип</option>
         {specificCollectionSelect.map(jewelry => (
-          <option key={`${jewelry.Type.id}-${jewelry.Type.name}`} value={jewelry.Type.id}>{jewelry.Type.name}</option>
+          <option key={jewelry.id} value={jewelry.Type.id}>{jewelry.Type.name}</option>
         ))}
       </select>
       <select value={typeMetall} onChange={(e) => setTypeMetall(e.target.value)}>
         <option value="">Металл</option>
         {specificCollectionSelect.map(jewelry => (
-          <option key={jewelry.Metall.id} value={jewelry.Metall.id}>{jewelry.Metall.name}</option>
+          <option key={jewelry.id} value={jewelry.Metall.id}>{jewelry.Metall.name}</option>
         ))}
       </select>
       
