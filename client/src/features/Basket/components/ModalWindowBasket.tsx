@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../Admin/modalStyle.css'
 
 type Props = {
   modal: boolean;
@@ -9,7 +10,7 @@ function ModalWindowBasket({ modal, setModal }: Props): JSX.Element {
   return (
     <div className={modal ? 'adminmodal active' : 'adminmodal'}>
       <div className="adminmodal_content">
-        <div>Заказ оплачен</div>
+        <div className='basketConfirm'>Заказ оформлен</div>
         <button type="button" className="btnAdmin" onClick={() => setModal(false)}>
           ОК
         </button>

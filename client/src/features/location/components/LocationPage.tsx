@@ -8,7 +8,7 @@ function LocationPage({location}:{location:Location}):JSX.Element{
     <div>{location.adress}</div>
     <div>{location.phone}</div>
     <div>{location.time}</div>
-    <img src={location.img} alt='' className="jewelry-main-photo"/>
+    <img src={location.img} className="jewelry-main-photo" alt='Фото не подгрузилось'/>
    </div>
   )
 }

@@ -571,4 +571,97 @@ router.post('/basket/:id', async (req, res) => {
   }
 });
 
+router.delete('/order/:orderID/delete', async (req, res) => {
+  try {
+    const { orderID } = req.params;
+    const data = await Order.destroy({
+      where: { status: 'basket', id: +orderID },
+    });
+
+    if (data) {
+      res.status(200).json({ message: 'ok' });
+    } else {
+      res.status(400).json({ message: 'Не удалось удалить корзину' });
+    }
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.delete('/order/:orderID/items/:itemID/delete', async (req, res) => {
+  try {
+    const { orderID, itemID } = req.params;
+    const item = await OrderItem.findByPk(+itemID);
+    const order = await Order.findByPk(+orderID);
+    await Order.update(
+      { price: order.price - item.price * item.count },
+      { where: { id: +orderID } }
+    );
+
+    const data = await OrderItem.destroy({
+      where: { id: +itemID },
+    });
+    // const basket = await OrderItem.findAll({ where: { orderID } });
+    if (data) {
+      res.status(200).json({ message: 'Позиция удалена' });
+    } else {
+      res.status(400).json({ message: 'Не удалось удалить позицию' });
+    }
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.put('/order/:orderID/buy', async (req, res) => {
+  try {
+    const { orderID } = req.params;
+    // const items = await OrderItem.findAll({ where: { orderID } });
+    const data = await Order.update(
+      { status: 'onAdmin' },
+      { where: { id: +orderID } }
+    );
+
+    if (data) {
+      res.status(200).json({ message: 'Заказ принят' });
+    } else {
+      res.status(400).json({ message: 'Что-то пошло не так' });
+    }
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+router.get('/orders', async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      include: [
+        {
+          model: OrderItem,
+          include: [
+            { model: Jewelry, include: [{ model: Photo }, { model: Metall }] },
+          ],
+        },
+        {
+          model: User,
+        },
+      ],
+      order: [['id', 'ASC']],
+    });
+    res.status(200).json({ orders });
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+router.delete('/order/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Order.update({ status: 'confirmed' }, { where: { id } });
+    res.status(200).json(+id);
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
+});
+
+
 module.exports = router;
