@@ -5,7 +5,6 @@ export const addCollectionFetch = async (formData: FormData): Promise<Applicatio
       method: 'post',
       body:formData
     });
-    console.log(formData);
     
 if (res.ok) {
     const data = await res.json();

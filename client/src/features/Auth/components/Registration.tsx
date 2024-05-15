@@ -25,18 +25,17 @@ const schema = object().shape({
     .oneOf([ref('password')], 'Пароли не совпадают'),
 });
 
-function Registration({onClose}:{onClose:()=> void}): JSX.Element {
+function Registration({ onClose }: { onClose: () => void }): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
   useEffect(() => {
-
     if (message) {
       setTimeout(() => {
         dispatch(clear());
       }, 2000);
     }
-  }, [user, message,dispatch]);
+  }, [user, message, dispatch]);
 
   const {
     register,
@@ -54,8 +53,8 @@ function Registration({onClose}:{onClose:()=> void}): JSX.Element {
         phone: data.phone,
         password: data.password,
       }),
-    ).catch(console.log);
-    onClose()
+    ).then(()=> {if(user) onClose()}).catch(console.log);
+    onClose();
   };
 
   return (

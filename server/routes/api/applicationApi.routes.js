@@ -5,8 +5,7 @@ const { Application } = require('../../db/models');
 router.post('/', async (req, res) => {
   try {
     const { description, userID } = req.body;
-    console.log(userID);
-    const { file } = req.files.photo && req.files;
+    const file = req.files && req.files.photo;
     let img;
     if (file) {
       img = await fileupload(file);
@@ -17,9 +16,9 @@ router.post('/', async (req, res) => {
       photo: img,
       description,
       status: 'Просчет',
-      userID
-  }); 
-  res.status(200).json({ message: 'ok', application });
+      userID,
+    });
+    res.status(200).json({ message: 'ok', application });
   } catch ({ message }) {
     res.status(500).json({ message });
   }

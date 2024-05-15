@@ -1,0 +1,84 @@
+.labelApplicat{
+  position: relative;
+  display: flex;
+}
+
+.fileUpload{
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 10px;
+  z-index: 0;
+}
+
+.containerApplication{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.applicationContent{
+  margin: 45px 10px 0px 10px;
+  max-width: 300px;
+}
+
+.applicationH1{
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.formAplication{
+  display: flex;
+  flex-direction: column;
+}
+
+.opisanieApp{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.textareaApp{
+  width: 250px;
+  height: 95px;
+  margin: auto;
+  padding: 10px;
+  border: 2px solid black;
+}
+
+.fileButtonAppl{
+  width: 140px;
+  height: 40px;
+  padding: 8px;
+  font-size: 12px;
+  background-color: #282828;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25px;
+}
+
+.imgNameApp{
+ margin-left: 10px;
+ font-size: 10px;
+ display: flex;
+ align-items: center;
+}
+
+.addButtonAppl{
+  height: 50px;
+  width: 250px;
+  margin: 40px auto;
+  text-transform: uppercase;
+  background-color: #282828;
+  color: white;
+}

@@ -69,16 +69,16 @@ function Header(): JSX.Element {
 
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 
-      <div className='burgerFavorit'>
-        <label htmlFor="burger-checkbox" className="burger" />{' '}
+      {/* <div className='burgerFavorit'> */}
+        <label htmlFor="burger-checkbox" className={user? 'burger':"burger burgerAkt"} />{' '}
         {user && <NavLink
           to="/favorites"
           style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
           className="favorites"
         >
-          <SVG id="favorites" />
+          <SVG id="favoritesNavbar" />
         </NavLink>}
-      </div>
+      {/* </div> */}
       <ul className="menu-list">
         <li>
           <NavLink to="/" className="menu-item" onClick={change}>
@@ -127,7 +127,7 @@ function Header(): JSX.Element {
           </Link>
         </li>
       </ul>
-      <div className="dgls">
+      <div className={user? 'dglsLK': "dgls"}>
         <NavLink to="/">DGLS CRFT</NavLink>
       </div>
       <div className="searchAndLK">
