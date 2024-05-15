@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import JewelryCard from './JewelryCard';
 import { useAppDispatch, type RootState } from '../../../store/store';
-import { initHashtag, initTypes, nitMetalls } from '../jewelrysSlice';
-import { setSearchQuery } from '../../Search/searchSlice';
+import { initHashtag, initTypes, nitMetalls, setSearchHashtags } from '../jewelrysSlice';
+
 
 function JewelrysPage(): JSX.Element {
   const [collectionFilter, setCollectionFilter] = useState('');
@@ -13,21 +13,19 @@ function JewelrysPage(): JSX.Element {
   const [typeMetall, setTypeMetall] = useState('');
 
   const dispatch = useAppDispatch();
-  const query = useSelector((store: RootState) => store.search.searchQuery);
+  const query = useSelector((store: RootState) => store.jewelrysState.searchHashtags);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setSearchQuery(e.target.value));
+    dispatch(setSearchHashtags(e.target.value));
   };
 
   useEffect(() => {
     dispatch(nitMetalls()).catch(console.log);
     dispatch(initTypes()).catch(console.log);
     dispatch(initHashtag()).catch(console.log);
-  }, []);
-
-  console.log(query);
+  }, [dispatch]);
 
   const jewelrysSelect = useSelector((store: RootState) => store.adminState.jewelrys);
-  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
+  const jewelryscollection = useSelector((store: RootState) => store.specificCollectionState.collections);
   const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
   const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
  ;

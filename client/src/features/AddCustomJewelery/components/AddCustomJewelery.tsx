@@ -30,7 +30,7 @@ if (user) {
     formData.append('photo', img);
   }
   formData.append('description', nameJewelery);
-  formData.append('userID', user.id);
+  formData.append('userID', user.id.toString());
   dispatch(addCustomJewelery(formData)).catch(console.log);
   setNameJewelery('');
 }else {

@@ -1,5 +1,5 @@
 import type { IDCollection } from '../Admin/type';
-import type { Basket, CollectionHome, Hashtag, Jewelry, Metall, OrderItem, Type } from './type';
+import type { CollectionHome, Hashtag, Jewelry, Metall, OrderItem, Type } from './type';
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');

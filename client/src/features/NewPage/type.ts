@@ -14,4 +14,5 @@ export type State = {
   newJewelrys: NewJewelry[];
   collections: Collection[];
   error: undefined | string;
+  searchHashtags: string;
 };

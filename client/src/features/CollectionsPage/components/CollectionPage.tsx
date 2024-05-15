@@ -3,37 +3,40 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
 import { useAppDispatch, type RootState } from '../../../store/store';
-import { initSpecificCollection } from '../specificCollectionSlice';
-import { setSearchQuery } from '../../Search/searchSlice';
+import { initSpecificCollection, setSearchHashtags } from '../specificCollectionSlice';
+import { initHashtag, initTypes, nitMetalls } from '../../JewelrysPage/jewelrysSlice';
 
 
 function CollectionPage(): JSX.Element {
   const { collectionID } = useParams();
   const dispatch = useAppDispatch();
-  const [collectionFilter, setCollectionFilter] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
+
   const [typeFilter, setTypeFilter] = useState('');
   const [typeMetall, setTypeMetall] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
   useEffect(() => {
-    dispatch(initSpecificCollection(collectionID)).catch(console.log);
+    if (collectionID) {
+      dispatch(initSpecificCollection(+collectionID)).catch(console.log);
+      dispatch(nitMetalls()).catch(console.log);
+      dispatch(initTypes()).catch(console.log);
+      dispatch(initHashtag()).catch(console.log);
+    }
   }, [collectionID, dispatch]);
 
-  const query = useSelector((store: RootState) => store.search.searchQuery);
+  const query = useSelector((store: RootState) => store.specificCollectionState.searchHashtags);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setSearchQuery(e.target.value));
+    dispatch(setSearchHashtags(e.target.value));
   };
 
   const specificCollectionSelect = useSelector((store: RootState) => store.specificCollectionState.jewelrysSpecificCollection);
-  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
   const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
   const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
 
 
   const filteredJewelrysCollection = specificCollectionSelect.filter(jewelry => {
-    const matchesCollection = !collectionFilter || jewelry.Collection.id === +collectionFilter;
+    
     const matchesPrice =
       (!minPrice || jewelry.price >= +minPrice) && (!maxPrice || jewelry.price <= +maxPrice);
     const matchesType = !typeFilter || jewelry.Type.id === +typeFilter;
@@ -44,20 +47,12 @@ function CollectionPage(): JSX.Element {
         ).length > 0
       : true;
 
-    return matchesCollection && matchesPrice && matchesType && matchesMetall && matchesHashtags;
+    return  matchesPrice && matchesType && matchesMetall && matchesHashtags;
   });
 
 
   return (
     <div className="list">
-      <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
-        <option value="">Коллекция</option>
-        {jewelryscollection.map((jewelry) => (
-          <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.name}
-          </option>
-        ))}
-      </select>
       <input
         type="number"
         value={minPrice}

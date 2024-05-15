@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { object, ref, string } from 'yup';
@@ -30,7 +29,6 @@ function Registration({onClose}:{onClose:()=> void}): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
-  const navigate = useNavigate();
   useEffect(() => {
 
     if (message) {
@@ -38,7 +36,7 @@ function Registration({onClose}:{onClose:()=> void}): JSX.Element {
         dispatch(clear());
       }, 2000);
     }
-  }, [user, message]);
+  }, [user, message,dispatch]);
 
   const {
     register,

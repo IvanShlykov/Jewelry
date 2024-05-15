@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
 import { useAppDispatch, type RootState } from '../../../store/store';
-import { initNewJewelrys } from '../newJewelrysSlice';
-import { setSearchQuery } from '../../Search/searchSlice';
+import { initNewJewelrys, setSearchHashtags } from '../newJewelrysSlice';
+import { initHashtag, initTypes, nitMetalls } from '../../JewelrysPage/jewelrysSlice';
 
 function NewPage(): JSX.Element {
   const [collectionFilter, setCollectionFilter] = useState('');
@@ -13,17 +13,20 @@ function NewPage(): JSX.Element {
   const [typeMetall, setTypeMetall] = useState('');
 
   const dispatch = useAppDispatch();
-  const query = useSelector((store: RootState) => store.search.searchQuery);
+  const query = useSelector((store: RootState) => store.newJewelrysState.searchHashtags);
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setSearchQuery(e.target.value));
+    dispatch(setSearchHashtags(e.target.value));
   };
 
   useEffect(() => {
     dispatch(initNewJewelrys()).catch(console.log);
-  }, []);
+    dispatch(nitMetalls()).catch(console.log);
+    dispatch(initTypes()).catch(console.log);
+    dispatch(initHashtag()).catch(console.log);
+  }, [dispatch]);
 
   const newJewelrysSelect = useSelector((store: RootState) => store.newJewelrysState.newJewelrys);
-  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
+  const jewelryscollection = useSelector((store: RootState) => store.specificCollectionState.collections);
   const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
   const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
 
@@ -46,46 +49,55 @@ function NewPage(): JSX.Element {
 
   return (
     <div className="list">
-      <select
-        value={filters.collection}
-        onChange={(e) => handleFilterChange('collection', e.target.value)}
-      >
+      <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
-        {filteredNewJewelrys.map((jewelry) => (
-          <option key={jewelry.Collection.id}>{jewelry.Collection.name}</option>
-        ))}
-      </select>
-      <select value={filters.price} onChange={(e) => handleFilterChange('price', e.target.value)}>
-        <option value="">Цена</option>
-        {filteredNewJewelrys.map((jewelry) => (
+        {jewelryscollection.map((jewelry) => (
           <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
+            {jewelry.name}
           </option>
         ))}
       </select>
-      <select value={filters.type} onChange={(e) => handleFilterChange('type', e.target.value)}>
+      <input
+        type="number"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+        placeholder="Цена от..."
+      />
+      <input
+        type="number"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+        placeholder="Цена до..."
+      />
+      <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
         <option value="">Тип</option>
-        {filteredNewJewelrys.map((jewelry) => (
+        {jewelrysTypes.map((jewelry) => (
           <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
+            {jewelry.name}
           </option>
         ))}
       </select>
-      <select value={filters.metall} onChange={(e) => handleFilterChange('metall', e.target.value)}>
+      <select value={typeMetall} onChange={(e) => setTypeMetall(e.target.value)}>
         <option value="">Металл</option>
-        {filteredNewJewelrys.map((jewelry) => (
+        {jewelrysMetalls.map((jewelry) => (
           <option key={jewelry.id} value={jewelry.id}>
-            {jewelry.price}
+            {jewelry.name}
           </option>
         ))}
       </select>
-      {filteredNewJewelrys.map((jewelry) => (
+      <div className="searcmodal-content">
+        <input type="text" value={query} onChange={handleSearch} placeholder="Поиск украшений..." />
+      </div>
+      {filteredNewJewelrys.length === 0 ? (
+        <p>Такого украшения нет</p>
+      ):(
+      filteredNewJewelrys.map((jewelry) => (
         <div className="jewelry-container" key={jewelry.id}>
           <div className="jewelry-card">
-            { jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id} /> }
+            jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id} /> 
           </div>
         </div>
-      ))}
+      )))}
     </div>
   );
 }
