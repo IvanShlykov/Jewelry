@@ -29,6 +29,13 @@ a {
   background-color: white;
   width: 100vw;
 }
+
+.burgerAndMenu-actions {
+  display: flex;
+  align-items: flex-start;
+  min-width: 60px;
+}
+
 .burger-checkbox {
   position: absolute;
   visibility: hidden;
@@ -205,4 +212,10 @@ a {
   width: 35px;
   height: 35px;
   margin-right: 5px;
+}
+
+.burgerAndFavorites {
+  display: flex;
+  align-items: start;
+  max-width: 80px;
 }

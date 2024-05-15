@@ -59,6 +59,7 @@ function Header(): JSX.Element {
       />
 
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+
       <label htmlFor="burger-checkbox" className="burger" />
       <ul className="menu-list">
         <li>
@@ -104,9 +105,14 @@ function Header(): JSX.Element {
         </li>
       </ul>
 
-      <NavLink to='/favorites' style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} className="favorites">
+      <NavLink
+        to="/favorites"
+        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+        className="favorites"
+      >
         <SVG id="favorites" />
       </NavLink>
+
 
       <div className="dgls">
         <NavLink to="/">DGLS CRFT</NavLink>
