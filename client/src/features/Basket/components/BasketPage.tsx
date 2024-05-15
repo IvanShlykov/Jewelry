@@ -40,7 +40,7 @@ function BasketPage(): JSX.Element {
 
         {basketsStock.length > 0 && (
           <div>
-            <div className="h1Basket">Товары в наличии, заказ придет в течении 1-2 дней</div>
+            <div className="h1Basket">Товары в наличии, заказ придет в течениe 1-2 дней</div>
             <div>
               {basketsStock.map((el) => (
                 <OrderItemElem key={el.id} orderItem={el} />
@@ -50,7 +50,7 @@ function BasketPage(): JSX.Element {
         )}
         {basketsNotStock.length > 0 && (
           <div>
-            <div className="h1Basket">Товары под заказ, придет в течении 7-10 дней</div>
+            <div className="h1Basket">Товары под заказ, придет в течениe 7-10 дней</div>
             <div>
               {basketsNotStock.map((el) => (
                 <OrderItemElem key={el.id} orderItem={el} />
