@@ -9,23 +9,19 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { clear, authorization } from '../authSlice';
 import type { AuthForm } from '../type';
-import { initBasket } from '../../JewelrysPage/basketSlice';
+import { initBasket } from '../../Basket/basketSlice';
 
 const schema = object().shape({
   email: string().required('Необходимо указать электронную почту'),
   password: string().required('Необходимо указать пароль'),
 });
 
-function Authorization(): JSX.Element {
+function Authorization({onClose}:{onClose:()=> void}): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-
     if (message) {
       setTimeout(() => {
         dispatch(clear());
@@ -43,6 +39,7 @@ function Authorization(): JSX.Element {
 
   const auth: SubmitHandler<AuthForm> = (data: AuthForm) => {
     dispatch(authorization({ email: data.email, password: data.password })).catch(console.log);
+    onClose()
   };
 
   return (

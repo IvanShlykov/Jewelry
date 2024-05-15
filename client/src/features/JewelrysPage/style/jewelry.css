@@ -141,17 +141,16 @@
 
 .jewelry-details__option-title {
   padding: 0px 2%;
-  flex: 0 0 25%;
+  flex: 0 0 33%;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #818181;
-  width: 25%;
 }
 
 .jewelry-details__option-value {
-  flex: 0 0 75%;
+  flex: 0 0 40%;
   padding: 0px 2%;
   text-align: right;
   font-size: 12px;
@@ -222,4 +221,10 @@
 
 .list{
   min-height: 70vh;
+}
+
+.i-back-link{
+  background-color: white;
+  border: none;
+  margin-left: 15px;
 }

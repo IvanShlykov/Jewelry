@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import type { OrderItem } from '../../JewelrysPage/type';
+import { useAppDispatch } from '../../../store/store';
+import { delOrderItem } from '../basketSlice';
 
 function OrderItemElem({ orderItem }: { orderItem: OrderItem }): JSX.Element {
   // const photos = useSelector((store:RootState) => store.)
+  const dispatch = useAppDispatch()
+
+  const delOrderItemFunc = ():void => {
+    dispatch(delOrderItem({itemID: orderItem.id , orderID: orderItem.orderID})).catch(console.log)
+  }
   return (
     <>
       <div className="oredrItemCard">
@@ -15,7 +22,7 @@ function OrderItemElem({ orderItem }: { orderItem: OrderItem }): JSX.Element {
           <div className="decsripOrderItem">Размер: {orderItem?.Size?.scale}</div>
           <div className="decsripOrderItem">Цена: {orderItem?.price}</div>
           <div className="decsripOrderItem">Кол-во: {orderItem?.count}шт</div>
-          <div className="decsripOrderItem"><button type='button' className='btnAdmin'>Удалить</button></div>
+          <div className="decsripOrderItem"><button type='button' className='btnAdmin' onClick={delOrderItemFunc}>Удалить</button></div>
         </div>
       </div>
       <div className="borderOrder" />
@@ -23,4 +30,4 @@ function OrderItemElem({ orderItem }: { orderItem: OrderItem }): JSX.Element {
   );
 }
 
-export default OrderItemElem;
+export default memo(OrderItemElem);

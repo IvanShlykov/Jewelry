@@ -11,8 +11,7 @@ import collectionsSlice from '../features/CollectionsPage/specificCollectionSlic
 import specificCollectionSlice from '../features/CollectionsPage/specificCollectionSlice';
 import LocationSlice from '../features/location/LocationSlice';
 import PersonalAreaSlice from '../features/PersonalArea/PersonalAreaSlice';
-import basketSlice from '../features/JewelrysPage/basketSlice';
-
+import basketSlice from '../features/Basket/basketSlice';
 
 const store = configureStore({
   reducer: {
@@ -24,10 +23,9 @@ const store = configureStore({
     newJewelrysState: newJewelrysSlice,
     collectionsState: collectionsSlice,
     specificCollectionState: specificCollectionSlice,
-    locationState:LocationSlice,
+    locationState: LocationSlice,
     userState: PersonalAreaSlice,
     basketState: basketSlice,
-
   },
 });
 

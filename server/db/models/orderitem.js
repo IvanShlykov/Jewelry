@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
         onDelete: 'CASCADE',
-
       },
       price: DataTypes.INTEGER,
       count: DataTypes.INTEGER,
@@ -32,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Orders',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       sizeID: {
         type: DataTypes.INTEGER,

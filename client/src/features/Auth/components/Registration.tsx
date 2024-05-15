@@ -9,7 +9,7 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { registration, clear } from '../authSlice';
 import type { RegistrationUser } from '../type';
-import { initBasket } from '../../JewelrysPage/basketSlice';
+import { initBasket } from '../../Basket/basketSlice';
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),
@@ -26,15 +26,12 @@ const schema = object().shape({
     .oneOf([ref('password')], 'Пароли не совпадают'),
 });
 
-function Registration(): JSX.Element {
+function Registration({onClose}:{onClose:()=> void}): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
 
     if (message) {
       setTimeout(() => {
@@ -60,6 +57,7 @@ function Registration(): JSX.Element {
         password: data.password,
       }),
     ).catch(console.log);
+    onClose()
   };
 
   return (
