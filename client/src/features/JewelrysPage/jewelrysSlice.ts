@@ -25,6 +25,8 @@ export const nitMetalls = createAsyncThunk('metall/init', () => api.fetchInitMet
 
 export const initTypes = createAsyncThunk('types/init', () => api.initTypesFetch());
 
+export const initHashtag = createAsyncThunk('hashtag/init', () => api.initHashtagFetch());
+
 const jewelrysSlice = createSlice({
   name: 'jewelrys',
   initialState,
@@ -54,6 +56,10 @@ const jewelrysSlice = createSlice({
       })
       .addCase(initTypes.fulfilled, (state, action) => {
         state.types = action.payload;
+        state.error = undefined;
+      })
+      .addCase(initHashtag.fulfilled, (state, action) => {
+        state.hashtags = action.payload;
         state.error = undefined;
       })
   },

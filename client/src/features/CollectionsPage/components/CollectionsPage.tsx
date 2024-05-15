@@ -11,7 +11,7 @@ function CollectionsPage(): JSX.Element {
       ...collection,
       ColPhotos: collection.ColPhotos || [],
     }))
-    .slice(1, 3);
+    .slice(0, 3);
 
   return (
     <div className="banners">

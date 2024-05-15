@@ -106,7 +106,7 @@ function JewelryPage(): JSX.Element {
                   <span className="jewelry-details__option-title">Размеры в наличии</span>
                   <span className="jewelry-details__option-value size">
                     {jewelry.Stocks.map((stock) => (
-                      <span key={stock.Size.id}>{stock.Size.scale} </span>
+                      <span key={stock.Size.id}>{stock.Size.scale}, </span>
                     ))}
                   </span>
                 </div>
