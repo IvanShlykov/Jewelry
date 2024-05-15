@@ -91,13 +91,13 @@ function JewelryPage(): JSX.Element {
         </div>
         <div className="pagination">
           <button type="button" className="i-back-link" onClick={back}>{`<`}</button>
-          <Link className="pagination-type" to={`/types/${jewelry.Type.id}`}>
+          {/* <Link className="pagination-type" to={`/types/${jewelry.Type.id}`}>
             <span>
               {jewelry.Type.id === jewelry.typeID
                 ? jewelry.Type.name.toUpperCase()
                 : 'ко всем украшениям такого же типа'}
             </span>
-          </Link>
+          </Link> */}
           <Link className="pagination-collection" to={`/collections/${jewelry.Collection.id}`}>
             <span>{jewelry.Collection.name.toUpperCase()}</span>
           </Link>

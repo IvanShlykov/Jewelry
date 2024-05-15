@@ -8,7 +8,7 @@ import ModalWindowBasket from './ModalWindowBasket';
 
 function BasketPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const baskets = useSelector((store: RootState) => store.basketState.orderItems);
 
   const basketsStock = baskets?.filter((orderItem) =>
