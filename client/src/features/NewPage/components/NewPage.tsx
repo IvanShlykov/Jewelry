@@ -3,40 +3,46 @@ import { useSelector } from 'react-redux';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
 import { useAppDispatch, type RootState } from '../../../store/store';
 import { initNewJewelrys } from '../newJewelrysSlice';
+import { setSearchQuery } from '../../Search/searchSlice';
 
 function NewPage(): JSX.Element {
-  const [filters, setFilters] = useState({
-    collection: '',
-    price: '',
-    type: '',
-    metall: '',
-  });
+  const [collectionFilter, setCollectionFilter] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [typeMetall, setTypeMetall] = useState('');
 
   const dispatch = useAppDispatch();
+  const query = useSelector((store: RootState) => store.search.searchQuery);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setSearchQuery(e.target.value));
+  };
 
   useEffect(() => {
     dispatch(initNewJewelrys()).catch(console.log);
   }, []);
 
   const newJewelrysSelect = useSelector((store: RootState) => store.newJewelrysState.newJewelrys);
+  const jewelryscollection = useSelector((store: RootState) => store.collectionsState.collections);
+  const jewelrysMetalls = useSelector((store: RootState) => store.adminState.metalls);
+  const jewelrysTypes = useSelector((store: RootState) => store.adminState.types);
 
-  const applyFilters = (newJewelrys) => {
-    return Object.keys(filters).every((key) => {
-      if (filters[key] === '') {
-        return true;
-      }
-      return newJewelrys[key].id.toString() === filters[key];
-    });
-  };
+  const filteredNewJewelrys = newJewelrysSelect.filter((jewelry) => {
+    const matchesCollection = !collectionFilter || jewelry.Collection.id === +collectionFilter;
+    const matchesPrice =
+      (!minPrice || jewelry.price >= +minPrice) && (!maxPrice || jewelry.price <= +maxPrice);
+    const matchesType = !typeFilter || jewelry.Type.id === +typeFilter;
+    const matchesMetall = !typeMetall || jewelry.Metall.id === +typeMetall;
+    const matchesHashtags = query
+      ? jewelry.JewHashtags.filter((hashtags) =>
+          hashtags.Hashtag.title.toLowerCase().includes(query.toLowerCase()),
+        ).length > 0
+      : true;
 
-  const filteredNewJewelrys = newJewelrysSelect.filter(applyFilters);
+    return matchesCollection && matchesPrice && matchesType && matchesMetall && matchesHashtags;
+      });
 
-  const handleFilterChange = (filterName, value) => {
-    setFilters({
-      ...filters,
-      [filterName]: value,
-    });
-  };
+  
 
   return (
     <div className="list">
