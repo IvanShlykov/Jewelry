@@ -111,9 +111,7 @@ function Header(): JSX.Element {
             Где нас найти
           </NavLink>
         </li>
-        
-        <li>
-          <Link className="menu-item" onClick={logOutHeader} to="/">
+        <li className={user? '' : 'noneVisab'}>
           <Link className="exit" onClick={logOutHeader} to="/">
             Выйти
           </Link>
