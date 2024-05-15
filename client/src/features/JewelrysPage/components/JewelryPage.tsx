@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import { useAppDispatch, type RootState } from '../../../store/store';
@@ -7,8 +7,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../style/jewelry.css';
 import ModalWindowJewelry from './ModalWindowJewelry';
-import { addBasket } from '../basketSlice';
-
+import { addBasket } from '../../Basket/basketSlice';
+import ModalWindowAuth from '../../Auth/components/ModalWindowAuth';
 
 function JewelryPage(): JSX.Element {
   const [active, setActive] = useState(false);
@@ -18,6 +18,7 @@ function JewelryPage(): JSX.Element {
   );
 
   let sizes = useSelector((store: RootState) => store.adminState.sizes);
+  const user = useSelector((store: RootState) => store.authState.user);
 
   if (jewelry) {
     if (jewelry.Type.id === 1) {
@@ -28,17 +29,29 @@ function JewelryPage(): JSX.Element {
       sizes = sizes.slice(8, 9);
     }
   }
+  const navigate = useNavigate();
+  const back = (): void => {
+    navigate(-1);
+  };
 
   const [sizeID, setSize] = useState(1);
   const dispatch = useAppDispatch();
-  console.log(sizeID);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+  };
+
 
   const basketAdd = (e: React.FormEvent): void => {
     e.preventDefault();
     if (!sizeID) {
       setSize(sizes[0].id);
     }
-    dispatch(addBasket({ jewelryID: jewelry?.id, sizeID })).catch(console.log);
+    if (user) {
+      dispatch(addBasket({ jewelryID: jewelry?.id, sizeID })).catch(console.log);
+    } else {
+      setIsModalOpen(true)
+    }
   };
 
   const settings = {
@@ -55,6 +68,7 @@ function JewelryPage(): JSX.Element {
 
   return (
     <div className="jewelry-card">
+      {isModalOpen && <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal}/>}
       {active && <ModalWindowJewelry active={active} setActive={setActive} id={jewelry.id} />}
       <div id="main-content">
         <div className="image-container">
@@ -76,7 +90,7 @@ function JewelryPage(): JSX.Element {
           )}
         </div>
         <div className="pagination">
-          <i className="i-back-link">{`<`}</i>
+          <button type="button" className="i-back-link" onClick={back}>{`<`}</button>
           <Link className="pagination-type" to={`/types/${jewelry.Type.id}`}>
             <span>
               {jewelry.Type.id === jewelry.typeID
@@ -88,7 +102,8 @@ function JewelryPage(): JSX.Element {
             <span>{jewelry.Collection.name.toUpperCase()}</span>
           </Link>
         </div>
-        <h1>{jewelry.name}</h1>
+
+        <h1>{jewelry.name} </h1>
         <p className="jewelry-price">{`${jewelry.price} p.`}</p>
         <hr className="create-line" />
         <div className="jewelry-details-options">
@@ -106,7 +121,7 @@ function JewelryPage(): JSX.Element {
                   <span className="jewelry-details__option-title">Размеры в наличии</span>
                   <span className="jewelry-details__option-value size">
                     {jewelry.Stocks.map((stock) => (
-                      <span key={stock.Size.id}>{stock.Size.scale}, </span>
+                      <span key={stock.Size.id}>{stock.Size.scale} </span>
                     ))}
                   </span>
                 </div>

@@ -19,7 +19,7 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
     setIsFavorite(savedFavorites.some((item) => item.id === jewelry.id));
   }, [jewelry.id]);
 
-  const toggleFavorite = (event: React.MouseEvent) => {
+  const toggleFavorite = (event: React.MouseEvent):void => {
     event.stopPropagation(); // Остановка распространения события
     event.preventDefault(); // Отменить переход по ссылке
 

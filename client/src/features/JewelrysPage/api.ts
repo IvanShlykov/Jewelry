@@ -1,6 +1,5 @@
-
-import type { Basket, CollectionHome, Hashtag,Jewelry, Metall, OrderItem, Type } from './type';
-
+import type { IDCollection } from '../Admin/type';
+import type { Basket, CollectionHome, Hashtag, Jewelry, Metall, OrderItem, Type } from './type';
 
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
@@ -49,5 +48,36 @@ export const addBasketFetch = async (obj: {
   const data = await res.json();
   return data.newBasket;
 };
+
+export const delOrderItemFetch = async ({
+  orderID,
+  itemID,
+}: {
+  orderID: number;
+  itemID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/items/${itemID}/delete`,{method: 'delete'});
+  return itemID;
+};
+
+
+export const delOrderFetch = async ({
+  orderID,
+}: {
+  orderID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/delete`,{method: 'delete'});
+  return orderID;
+};
+
+export const buyOrderFetch = async ({
+  orderID,
+}: {
+  orderID: number;
+}): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/buy`,{method: 'PUT'});
+  return orderID;
+};
+
 
 export default initJewelryFetch;

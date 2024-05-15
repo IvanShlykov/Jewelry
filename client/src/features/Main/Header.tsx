@@ -68,7 +68,16 @@ function Header(): JSX.Element {
       />
 
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor="burger-checkbox" className="burger" />
+      <div className='burgerFavorit'>
+        <label htmlFor="burger-checkbox" className="burger" />{' '}
+        <NavLink
+          to="/favorites"
+          style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+          className="favorites"
+        >
+          <SVG id="favorites" />
+        </NavLink>
+      </div>
       <ul className="menu-list">
         <li>
           <NavLink to="/" className="menu-item" onClick={change}>
@@ -97,7 +106,7 @@ function Header(): JSX.Element {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/specials" className="menu-item" onClick={change}>
+          <NavLink to="/below-five-thousand" className="menu-item" onClick={change}>
             Специальные предложения
           </NavLink>
         </li>
@@ -111,15 +120,13 @@ function Header(): JSX.Element {
             Где нас найти
           </NavLink>
         </li>
-        <li className={user? '' : 'noneVisab'}>
+        <li className={user ? '' : 'noneVisab'}>
           <Link className="exit" onClick={logOutHeader} to="/">
             Выйти
           </Link>
         </li>
       </ul>
-      <NavLink to='/favorites' style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }} className="favorites">
-        <SVG id="favorites" />
-      </NavLink>
+
       <div className="dgls">
         <NavLink to="/">DGLS CRFT</NavLink>
       </div>
@@ -133,16 +140,17 @@ function Header(): JSX.Element {
           </>
         ) : (
           <>
-          
-          <NavLink to="/personalArea" >
-          <div className="LK"/>
-          </NavLink>
-        
-          <NavLink to="/basket">
-            <div className={anim ? 'basketHeader animate' : 'basketHeader'}>
-              <div className="numberBasket">{basket? basket.reduce((acc, a) => acc + a.count, 0) : ''}</div>
-            </div>
-          </NavLink>
+            <NavLink to="/personalArea">
+              <div className="LK" />
+            </NavLink>
+
+            <NavLink to="/basket">
+              <div className={anim ? 'basketHeader animate' : 'basketHeader'}>
+                <div className="numberBasket">
+                  {basket ? basket.reduce((acc, a) => acc + a.count, 0) : ''}
+                </div>
+              </div>
+            </NavLink>
           </>
         )}
 
