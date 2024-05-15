@@ -129,6 +129,15 @@ export type Location = {
   img: string;
 };
 
+export type LocationAdd = {
+  city: string;
+  strit: string;
+  house: string;
+  korp: string;
+  phone: string;
+  time: string;
+}
+
 export type User = {
   id: number;
   name: string;

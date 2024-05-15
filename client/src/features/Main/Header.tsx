@@ -102,6 +102,7 @@ function Header(): JSX.Element {
             Где нас найти
           </NavLink>
         </li>
+        
         <li>
           <Link className="menu-item" onClick={logOutHeader} to="/">
             Выйти
@@ -120,9 +121,16 @@ function Header(): JSX.Element {
             <ModalWindowAuth isOpen={isModalOpen} onClose={closeModal} />
           </>
         ) : (
+          <>
+          
+          <NavLink to="/personalArea" >
+          <div className="LK"/>
+          </NavLink>
+        
           <NavLink to="/basket">
             <div className="basketHeader" />
           </NavLink>
+          </>
         )}
 
         <button type="button" onClick={openModalSearch} className="btnSearch">

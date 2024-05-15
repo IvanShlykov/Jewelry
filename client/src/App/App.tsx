@@ -25,7 +25,9 @@ import CollectionsPage from '../features/CollectionsPage/components/CollectionsP
 import CollectionPage from '../features/CollectionsPage/components/CollectionPage';
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
+import BelowFiveThousandPage from '../features/BelowFiveThousand copy/components/BelowFiveThousandPage';
 import LocationsPages from '../features/location/components/LocationsPages';
+import PersonalAreaPages from '../features/PersonalArea/components/PersonalAreaPages';
 
 
 
@@ -55,11 +57,13 @@ function App(): JSX.Element {
           <Route path="collections" element={<CollectionsPage />} />
           <Route path="collections/:collectionID" element={<CollectionPage />} />
           <Route path="new" element={<NewPage />} />
+          <Route path="below-five-thousand" element={<BelowFiveThousandPage />} />
           <Route path="registration" element={<Registration />} />
           <Route path="aboutUs" element={<AboutUs/>} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
           <Route path="location" element={<LocationsPages/>}/>
+          <Route path="personalArea" element={<PersonalAreaPages/>}/>
           <Route path="basket" element={<BasketPage/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />
