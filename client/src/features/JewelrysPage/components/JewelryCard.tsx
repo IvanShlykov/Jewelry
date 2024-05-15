@@ -76,7 +76,8 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
           <button
             className="favorite-button"
             onClick={toggleFavorite}
-            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+            style={{border: 'none', padding: 0, cursor: 'pointer' }}
+            type='button'
           >
             <SVG id={ isFovorit ? 'favorites-active' : 'favorites'} />
           </button>

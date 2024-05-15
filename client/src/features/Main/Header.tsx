@@ -71,13 +71,13 @@ function Header(): JSX.Element {
 
       <div className='burgerFavorit'>
         <label htmlFor="burger-checkbox" className="burger" />{' '}
-        <NavLink
+        {user && <NavLink
           to="/favorites"
           style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
           className="favorites"
         >
           <SVG id="favorites" />
-        </NavLink>
+        </NavLink>}
       </div>
       <ul className="menu-list">
         <li>
