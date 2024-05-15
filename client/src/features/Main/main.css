@@ -293,5 +293,5 @@ a {
 
 .searchAndLK{
   min-width: 115px;
-  justify-content: space-between;
+  justify-content: end;
 }

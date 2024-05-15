@@ -28,7 +28,7 @@ function Applications({ applications, open }: Props): JSX.Element {
       </tbody>
     </table>
   ) : (
-    <div>Нет новых заказов</div>
+    <div>Нет открытых заказов</div>
   );
 }
 

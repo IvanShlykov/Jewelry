@@ -52,6 +52,7 @@ function CollectionPage(): JSX.Element {
     <div className="list">
       <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
+
         {jewelryscollection.map((jewelry) => (
           <option key={jewelry.id} value={jewelry.id}>
             {jewelry.name}
@@ -84,6 +85,7 @@ function CollectionPage(): JSX.Element {
           <option key={jewelry.id} value={jewelry.id}>
             {jewelry.name}
           </option>
+
         ))}
       </select>
       <div className="searcmodal-content">
