@@ -5,7 +5,6 @@ import type {
   IDCollection,
   JewelryAdd,
   JewelryChange,
-  Location,
   LocationAdd,
   Metall,
   MetallAdd,

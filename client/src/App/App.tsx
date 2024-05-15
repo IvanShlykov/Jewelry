@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css"
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -26,6 +26,10 @@ import CollectionPage from '../features/CollectionsPage/components/CollectionPag
 import AboutUs from '../features/aboutUs/components/AboutUs';
 import BasketPage from '../features/Basket/components/BasketPage';
 import BelowFiveThousandPage from '../features/BelowFiveThousand copy/components/BelowFiveThousandPage';
+import LocationsPages from '../features/location/components/LocationsPages';
+import PersonalAreaPages from '../features/PersonalArea/components/PersonalAreaPages';
+import { initSizes } from '../features/Admin/adminSlice';
+import { initBasket } from '../features/JewelrysPage/basketSlice';
 import FavoritesPage from '../features/Favorites/components/FavoritesPage';
 
 
@@ -38,12 +42,14 @@ function App(): JSX.Element {
     dispatch(initJewelrys()).catch(console.log);
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
+    dispatch(initSizes()).catch(console.log);
   }, []);
 
   useEffect(() => {
     if (user && user.isAdmin) {
       navigate('/admin');
     }
+    dispatch(initBasket()).catch(console.log);
   }, [user]);
 
   return (
@@ -59,9 +65,11 @@ function App(): JSX.Element {
           <Route path="below-five-thousand" element={<BelowFiveThousandPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="registration" element={<Registration />} />
-          <Route path="aboutUs" element={<AboutUs/>} />
+          <Route path="aboutUs" element={<AboutUs />} />
           <Route path="authorization" element={<Authorization />} />
           <Route path="application" element={<AddCustomJewelery/>}/>
+          <Route path="location" element={<LocationsPages/>}/>
+          <Route path="personalArea" element={<PersonalAreaPages/>}/>
           <Route path="basket" element={<BasketPage/>}/>
         </Route>
         <Route path="/admin" element={<AdminPage />} />

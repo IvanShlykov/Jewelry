@@ -5,15 +5,14 @@ export type JewStoneAdd = {
 
 export type JewStone = JewStoneAdd & { id: number };
 
-
 export type State = {
   collections: Collection[];
   colPhotos: ColPhoto[];
   metalls: Metall[];
   jewelrys: Jewelry[];
   types: Type[];
-  hashtags: Hashtag[]
-  sizes: Size[]
+  hashtags: Hashtag[];
+  sizes: Size[];
   error: undefined | string;
 };
 
@@ -57,7 +56,7 @@ export type JewHashtagAdd = {
   hashtagID: number;
 };
 
-export type JewHashtag = JewHashtagAdd & { id: number, Hashtag: Hashtag };
+export type JewHashtag = JewHashtagAdd & { id: number; Hashtag: Hashtag };
 
 export type HashtagAdd = {
   title: string;
@@ -65,18 +64,16 @@ export type HashtagAdd = {
 
 export type Hashtag = HashtagAdd & { id: number };
 
-
 export type Jewelry = JewelryAdd & { id: number };
 export type IDJewelryAdd = Jewelry['id'];
-
 
 export type StockAdd = {
   sizeID: number;
   jewelryID: number;
-  count: number
+  count: number;
 };
 
-  export type Stock = StockAdd & { id: number, Size: Size  };
+export type Stock = StockAdd & { id: number; Size: Size };
 
 export type StoneAdd = {
   title: string;
@@ -118,9 +115,31 @@ export type CollectionHome = {
   ColPhotos: PhotoCol[];
 };
 
-
 export type SizeAdd = {
   scale: string;
 };
 
 export type Size = SizeAdd & { id: number };
+
+export type StateBasket = {
+  orderItems: OrderItem[];
+  error: undefined | string;
+};
+
+export type OrderItem = {
+  id: number;
+  jewelryID: string;
+  price: number;
+  count: number;
+  orderID: number;
+  sizeID: number;
+  Size: Size;
+  Jewelry: Jewelry;
+  Order: Order;
+};
+
+export type Order = {
+  id: number;
+  userID: number;
+  status: string;
+};

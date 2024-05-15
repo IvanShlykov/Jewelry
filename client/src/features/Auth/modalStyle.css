@@ -103,8 +103,8 @@
       }
 
       span {
-        font-size: 30px;
-        padding-left: 10px;
+        font-size: 15px;
+        padding-left: 30px;
         color: rgb(252, 48, 48);
       }
 
@@ -139,5 +139,7 @@
   background-color: white;
 }
 
-.enter {
+.eroorMessageAuth{
+  font-size: 15px;
+
 }
