@@ -13,7 +13,7 @@ function LocationsPages(): JSX.Element {
   }, []);
 
   return (
-    <div className="location-list ">
+    <div className="location-list list">
       <h3>Где нас найти</h3>
       <div>
         {locations.map((location) => (

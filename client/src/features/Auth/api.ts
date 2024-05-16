@@ -59,10 +59,10 @@ if(res.ok){
   
     if (res.ok) {
       const data = await res.json();
-      console.log(data.user);
-      
       return data.user;
     }
     const data = await res.json();
-    throw data.message;
+    console.log(data);
+    
+    throw data;
   };
