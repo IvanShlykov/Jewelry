@@ -13,23 +13,24 @@ function AddColPhoto({ colPhotos, collections }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [nameCollection, setNameCollection] = useState<number>(2);
-  const [img, setImg] = useState<File>();
+  const [img, setImg] = useState<File|null>();
 
   const addCollectionForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = new FormData();
     if (img) {
       formData.append('photo', img);
+      e.currentTarget.photo.value = '';
     }
     formData.append('collectionID', nameCollection.toString());
-
+    setImg(null)
     dispatch(addColPhoto(formData)).catch(console.log);
   };
 
   return (
     <div>
-      <div className='textH1'>Фото к коллекции</div>
-      <form onSubmit={addCollectionForm} className='collectionAdd'>
+      <div className="textH1">Фото к коллекции</div>
+      <form onSubmit={addCollectionForm} className="collectionAdd">
         <select onChange={(e) => setNameCollection(Number(e.target.value))}>
           {collections.slice(1).map((el) => (
             <option key={el.id} value={el.id}>
@@ -49,7 +50,7 @@ function AddColPhoto({ colPhotos, collections }: Props): JSX.Element {
           Добавить
         </button>
       </form>
-      <table className='table'>
+      <table className="table">
         <thead>
           <tr>
             <th>№</th>

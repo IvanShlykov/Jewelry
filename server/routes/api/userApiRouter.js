@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const jwtConfig = require('../../config/jwtConfig');
 const {
   User,
   Order,
@@ -9,6 +10,7 @@ const {
   Size,
   Jewelry,
 } = require('../../db/models');
+const { generateTokens } = require('../../utils/authUtils');
 
 router.get('/orders', async (req, res) => {
   try {
@@ -55,6 +57,26 @@ router.put('/update', async (req, res) => {
       { where: { id: res.locals.user.id } }
     );
     const user = await User.findOne({ where: { id } });
+    res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
+    const { accessToken, refreshToken } = generateTokens({
+      user: {
+        name: user.name,
+        id: user.id,
+        isAdmin: user.isAdmin,
+        email: user.email,
+        phone: user.phone,
+      },
+    });
+    res.cookie(jwtConfig.access.type, accessToken, {
+      httpOnly: true,
+      maxAge: jwtConfig.access.expiresIn,
+    });
+
+    res.cookie(jwtConfig.refresh.type, refreshToken, {
+      httpOnly: true,
+      maxAge: jwtConfig.refresh.expiresIn,
+    });
+    // res.locals.user = user;
     res.status(200).json({ user });
   } catch ({ message }) {
     res.status(500).json({ message });

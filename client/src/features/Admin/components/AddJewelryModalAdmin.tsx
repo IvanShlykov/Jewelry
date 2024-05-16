@@ -28,7 +28,7 @@ function AddJewelryModalAdmin({ state, setState }: Props): JSX.Element {
 
   const addJewelryFunc = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (name) {
+    if (name && price) {
       dispatch(
         addJewelry({ name, collectionID, typeID, isNew, metallID, description, price }),
       ).catch(console.log);
@@ -43,7 +43,7 @@ function AddJewelryModalAdmin({ state, setState }: Props): JSX.Element {
       setPrice(0);
       setError('');
     } else {
-      setError('Наименование не может быть пустым');
+      setError('Наименование или цена не может быть пустым');
     }
   };
 

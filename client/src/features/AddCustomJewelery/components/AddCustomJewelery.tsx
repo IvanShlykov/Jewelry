@@ -18,11 +18,13 @@ function AddCustomJewelery(): JSX.Element {
     setIsModalOpen(false);
   };
   const [message, setMessage] = useState('');
+  const [imgName, setImgName] = useState('Файл не выбран');
   const addCustomJeweleryForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const formData = new FormData();
     if (user) {
+     if(nameJewelery){
       if (img) {
         formData.append('photo', img);
       }
@@ -33,11 +35,14 @@ function AddCustomJewelery(): JSX.Element {
       e.currentTarget.photo.value = '';
       setImg(null);
       setMessage('');
+      setImgName('Файл не выбран')
+     }else {
+      setMessage('Заполните описание')
+     }
     } else {
       setIsModalOpen(true);
     }
   };
-  const [imgName, setImgName] = useState('Файл не выбран');
   useEffect(() => {
     if (img) setImgName(`${img.name.slice(0,10)}...`);
   }, [img]);
@@ -73,7 +78,7 @@ function AddCustomJewelery(): JSX.Element {
               <div className="imgNameApp">{imgName}</div>
             </label>
             <button type="submit" className='addButtonAppl'>Отправить</button>
-            <div>{message}</div>
+            <div className='messageErooor'>{message}</div>
           </form>
         </div>
       </div>

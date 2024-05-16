@@ -1,0 +1,48 @@
+.containerLK{
+  margin-left: 25px;
+}
+
+.decsLK{
+  margin-top: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+
+}
+
+.LKbutton{
+  height: 35px;
+  width: 125px;
+  margin-left: 50px;
+  background-color: #282828;
+  color: white;
+}
+
+.marginH1{
+  margin-left: 25px;
+}
+
+.formChangeLK{
+  margin-left: 25px;
+}
+
+.LKbuttonChange{
+  height: 35px;
+  width: 125px;
+  margin-left: 30px;
+  background-color: #282828;
+  color: white;
+}
+
+.LKbuttonOrder{
+  height: 35px;
+  width: 125px;
+  margin-left: 25px;
+  margin-top: 25px;
+
+  background-color: #282828;
+  color: white;
+}
+
+.messageErooor{
+  color: red;
+}

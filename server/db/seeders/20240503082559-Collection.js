@@ -10,11 +10,11 @@ module.exports = {
         },
         {
           name: 'Слушай своё сердце',
-          photo: '/CollectionIMG/Heart.jpg',
+          photo: '/img/10_1.jpeg',
         },
         {
           name: 'н а ц е п и',
-          photo: '/CollectionIMG/chain.JPG',
+          photo: '/img/33_3.png',
         },
 
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
