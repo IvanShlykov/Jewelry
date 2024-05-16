@@ -52,8 +52,11 @@ function Registration({ onClose }: { onClose: () => void }): JSX.Element {
         phone: data.phone,
         password: data.password,
       }),
-    ).then(()=> {if(user) onClose()}).catch(console.log);
-    onClose();
+    ).then((action) => {
+      if (action.payload) {
+        onClose();
+      } 
+    }).catch(console.log);
   };
 
   return (
@@ -62,7 +65,7 @@ function Registration({ onClose }: { onClose: () => void }): JSX.Element {
         <form onSubmit={handleSubmit(reg)} className="authForm">
           <input className="inputAuth" type="text" placeholder="Имя" {...register('name')} />
           <span className="eroorMessageAuth">{errors.name?.message}</span>
-          <input className="inputAuth" type="email" placeholder="email" {...register('email')} />
+          <input className="inputAuth" type="email" placeholder="Почта" {...register('email')} />
           <span className="eroorMessageAuth">{errors.email?.message}</span>
           <input className="inputAuth" type="text" placeholder="Телефон" {...register('phone')} />
           <span className="eroorMessageAuth">{errors.phone?.message}</span>
