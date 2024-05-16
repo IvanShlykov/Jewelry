@@ -43,7 +43,6 @@ function App(): JSX.Element {
     dispatch(checked()).catch(console.log);
     dispatch(initCollectionsHome()).catch(console.log);
     dispatch(initSizes()).catch(console.log);
-    dispatch(initFavorites()).catch(console.log);
   }, []);
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function App(): JSX.Element {
     }
     if (user) {
       dispatch(initBasket()).catch(console.log);
+      dispatch(initFavorites()).catch(console.log);
     }
   }, [user]);
 

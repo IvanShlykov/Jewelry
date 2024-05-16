@@ -9,7 +9,6 @@ import '../style.css';
 
 function PersonalAreaPages(): JSX.Element {
   const [showUpdateUser, setShowUpdateUser] = useState(false);
-  const [showCloseUpdateUser, setShowCloseUpdateUser] = useState(false);
   const [showOrderHistory, setShowOrderHistory] = useState(true);
 
   const users = useSelector((store: RootState) => store.authState.user);
@@ -23,11 +22,9 @@ function PersonalAreaPages(): JSX.Element {
 
   const handleUpdateUserClick = (): void => {
     setShowUpdateUser(true);
-    setShowCloseUpdateUser(true);
   };
   const handlCloseUpdateUserClick = (): void => {
     setShowUpdateUser(false);
-    setShowCloseUpdateUser(false);
   };
 
   const handleOrderStoryClick = (): void => {

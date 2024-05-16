@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 
 import { updateUserSlice } from '../../Auth/authSlice';
 
 type Props = {
-  handlCloseUpdateUserClick: ()=> void
-}
+  handlCloseUpdateUserClick: () => void;
+};
 
-function ChangeUser({ handlCloseUpdateUserClick }:Props): JSX.Element {
+function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
   const [changeName, setChangeName] = useState('');
   const [changeMail, setChangeMail] = useState('');
   const [changePhone, setChangePhone] = useState('');
-
+  const error = useSelector((store: RootState) => store.adminState.error);
+  
   const dispatch = useAppDispatch();
 
   const handleFormSubmit = (e: React.FormEvent): void => {
@@ -52,10 +55,11 @@ function ChangeUser({ handlCloseUpdateUserClick }:Props): JSX.Element {
           placeholder="Телефон"
           onChange={(e) => setChangePhone(e.target.value)}
         />
-        
+
         <button type="submit" className="LKbuttonChange">
           Обновить
         </button>
+        <div>{error}</div>
       </form>
     </div>
   );

@@ -65,7 +65,12 @@ import type { AuthForm, RegaUser, State,  UserUpdate } from "./type";
         })
         .addCase(updateUserSlice.fulfilled, (state, action) => {
           state.user = action.payload;
-        
+          state.error=undefined
+        })
+        .addCase(updateUserSlice.rejected, (state, action) => {
+          state.error = action.error.message;
+          console.log(state.error);
+          
         })
     },
    });

@@ -52,32 +52,41 @@ router.put('/update', async (req, res) => {
   try {
     const { id } = res.locals.user;
     const { name, email, phone } = req.body;
-    await User.update(
-      { name, email, phone },
-      { where: { id: res.locals.user.id } }
-    );
-    const user = await User.findOne({ where: { id } });
-    res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
-    const { accessToken, refreshToken } = generateTokens({
-      user: {
-        name: user.name,
-        id: user.id,
-        isAdmin: user.isAdmin,
-        email: user.email,
-        phone: user.phone,
-      },
-    });
-    res.cookie(jwtConfig.access.type, accessToken, {
-      httpOnly: true,
-      maxAge: jwtConfig.access.expiresIn,
-    });
+    const userEmail = await User.findOne({ where: { email } });
+    const userPhone = await User.findOne({ where: { phone } });
+    if (!userEmail && !userPhone) {
+      await User.update(
+        { name, email, phone },
+        { where: { id: res.locals.user.id } }
+      );
+      const user = await User.findOne({ where: { id } });
+      res
+        .clearCookie(jwtConfig.access.type)
+        .clearCookie(jwtConfig.refresh.type);
+      const { accessToken, refreshToken } = generateTokens({
+        user: {
+          name: user.name,
+          id: user.id,
+          isAdmin: user.isAdmin,
+          email: user.email,
+          phone: user.phone,
+        },
+      });
+      res.cookie(jwtConfig.access.type, accessToken, {
+        httpOnly: true,
+        maxAge: jwtConfig.access.expiresIn,
+      });
 
-    res.cookie(jwtConfig.refresh.type, refreshToken, {
-      httpOnly: true,
-      maxAge: jwtConfig.refresh.expiresIn,
-    });
-    // res.locals.user = user;
-    res.status(200).json({ user });
+      res.cookie(jwtConfig.refresh.type, refreshToken, {
+        httpOnly: true,
+        maxAge: jwtConfig.refresh.expiresIn,
+      });
+      res.status(200).json({ user });
+    } else {
+      res
+        .status(400)
+        .json({ message: 'Пользователь с такой почтой и телефоном уже есть' });
+    }
   } catch ({ message }) {
     res.status(500).json({ message });
   }

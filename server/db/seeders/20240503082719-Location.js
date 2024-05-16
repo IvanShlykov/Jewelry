@@ -9,7 +9,7 @@ module.exports = {
           adress: 'Боткинская 15',
           phone: '89312391103',
           time: '11:00',
-          img: 'https://etu.ru/assets/cache/images/en/why-us/cultural-capital/1280x854-spb-view-bridges01.0cb.jpg',
+          img: 'https://static-maps.yandex.ru/v1?ll=30.473594,59.957052&lang=ru_RU&size=450,450&z=16&pt=30.473594,59.957052,pm2lbl&apikey=df88e39f-e5e3-4534-ac20-4a21cbed6048',
         },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
       {}

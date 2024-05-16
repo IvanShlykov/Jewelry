@@ -1,11 +1,12 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
-const { Favorite, Jewelry, Photo } = require("../../db/models");
+const { Favorite, Jewelry, Photo } = require('../../db/models');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const favorites = await Favorite.findAll({
+      where: { userID: res.locals.user.id },
       include: [{ model: Jewelry, include: [{ model: Photo }] }],
     });
     res.status(200).json({ favorites });
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const { userID, jewelryID } = req.body;
 
   try {
@@ -24,7 +25,7 @@ router.post("/", async (req, res) => {
       include: [{ model: Jewelry, include: [{ model: Photo }] }],
     });
 
-    console.log(favorite, "FFFFFFFFFFFF");
+    console.log(favorite, 'FFFFFFFFFFFF');
     res.status(201).json({ favorite });
   } catch (error) {
     console.log(error);
@@ -32,7 +33,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete('/', async (req, res) => {
   const { userID, jewelryID } = req.body;
 
   try {
@@ -42,7 +43,7 @@ router.delete("/", async (req, res) => {
         jewelryID,
       },
     });
-    res.status(200).json({ message: "Favorite removed" });
+    res.status(200).json({ message: 'Favorite removed' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
