@@ -44,7 +44,7 @@ function Authorization({ onClose }: { onClose: () => void }): JSX.Element {
     
   };
   console.log(user);
-  
+
   return (
     <div className="authCont">
       <div className="auth">

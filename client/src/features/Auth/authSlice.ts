@@ -69,8 +69,6 @@ import type { AuthForm, RegaUser, State,  UserUpdate } from "./type";
         })
         .addCase(updateUserSlice.rejected, (state, action) => {
           state.error = action.error.message;
-          console.log(state.error);
-          
         })
     },
    });
