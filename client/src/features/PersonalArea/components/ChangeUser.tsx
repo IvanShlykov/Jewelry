@@ -13,7 +13,7 @@ function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
   const [changeName, setChangeName] = useState('');
   const [changeMail, setChangeMail] = useState('');
   const [changePhone, setChangePhone] = useState('');
-  const error = useSelector((store: RootState) => store.adminState.error);
+  const message = useSelector((store: RootState) => store.authState.error);
   
   const dispatch = useAppDispatch();
 
@@ -60,7 +60,7 @@ function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
         <button type="submit" className="LKbuttonChange">
           Обновить
         </button>
-        <div>{error}</div>
+        <div>{message}</div>
       </form>
     </div>
   );
