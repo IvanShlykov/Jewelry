@@ -5,8 +5,8 @@
     top: 0;
     left: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
@@ -22,14 +22,15 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   .searcmodal-content {
-    width: 90vw;
-    max-height: 70vh;
+    width: 100vw;
+    /* max-height: 70vh; */
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    background-color: rgb(199, 196, 196);
-    border-radius: 15px;
+    background-color: white;
+    /* border-radius: 15px; */
     overflow: auto;
+
   } 
 
   

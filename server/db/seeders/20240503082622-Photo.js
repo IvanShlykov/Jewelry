@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.bulkInsert(
       'Photos',
       [
+        { jewelryID: 1, url: '/img/1_3.jpeg' },
         { jewelryID: 1, url: '/img/1_1.jpg' },
         { jewelryID: 1, url: '/img/1_2.jpeg' },
-        { jewelryID: 1, url: '/img/1_3.jpeg' },
         { jewelryID: 2, url: '/img/2_1.png' },
         { jewelryID: 3, url: '/img/3_1.jpeg' },
         { jewelryID: 3, url: '/img/3_2.jpeg' },

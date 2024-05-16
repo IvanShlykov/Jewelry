@@ -8,7 +8,7 @@ module.exports = {
           userID: 2,
           status: 'Просчет',
           description: 'Хочу такое вот кольцо',
-          photo: 'https://drive.google.com/drive/folders/1QyouNQuXlWgBnAvPcVvLfPz-ruYmfaoT'
+          photo: 'https://static-maps.yandex.ru/v1?ll=30.473594,59.957052&lang=ru_RU&size=450,450&z=16&pt=30.473594,59.957052,pm2lbl&apikey=df88e39f-e5e3-4534-ac20-4a21cbed6048'
         },
 
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
