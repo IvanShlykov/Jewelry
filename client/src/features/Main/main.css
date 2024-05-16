@@ -56,7 +56,7 @@ a {
   position: absolute;
   display: block;
   width: 100%;
-  height: 4px;
+  height: 2px;
   border-radius: 10px;
   background: #000;
 }
@@ -104,7 +104,7 @@ a {
   position: relative;
   border: none;
   background: transparent;
-  height: 26px;
+  height: 24px;
 }
 .burger::before,
 .burger::after {
@@ -113,7 +113,7 @@ a {
   position: absolute;
   display: block;
   width: 35px;
-  height: 4px;
+  height: 2px;
   border-radius: 10px;
   background: #000;
 }
@@ -212,14 +212,16 @@ a {
 
 .searchAndLK {
   display: flex;
-  align-items: start;
+  align-items: center;
+  justify-content: start;
   min-width: 60px;
 }
 
 .LK {
-  background-image: url(/img/icons8-человек-64.png);
-  background-size: 130% 130%;
+  background-image: url(/img/user.svg);
+  background-size: 75% 75%;
   background-position: center;
+  background-repeat: no-repeat;
   width: 35px;
   height: 35px;
   margin-right: 5px;
@@ -232,7 +234,7 @@ a {
 
 .basketHeader {
   background-image: url(/img/2956820.png);
-  background-size: 130% 130%;
+  background-size: 120% 120%;
   background-position: center;
   width: 35px;
   height: 35px;

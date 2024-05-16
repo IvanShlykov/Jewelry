@@ -152,7 +152,8 @@ function Header(): JSX.Element {
         )}
 
         <button type="button" onClick={openModalSearch} className="btnSearch">
-          <SVG id="search" />
+          {/* <SVG id="search" /> */}
+          <img src="/img/search.svg" style={{width: '25px', marginRight: '5px'}} alt="ЛК" />
         </button>
         <ModalWindowSearch isOpen={isModalSearchOpen} onClose={closeModalSearch} />
       </div>
