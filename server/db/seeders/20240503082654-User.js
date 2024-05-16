@@ -8,16 +8,16 @@ module.exports = {
       [
         {
           name: 'Иван',
-          email: '1@1',
+          email: 'admin@admin.ru',
           phone: '8-931-239-11-03',
-          password: await bcrypt.hash('123', 10),
+          password: await bcrypt.hash('123456', 10),
           isAdmin: true,
         },
         {
           name: 'Никита',
-          email: '2@2',
+          email: 'ivan888@mail.ru',
           phone: '8-931-239-11-03',
-          password: await bcrypt.hash('123', 10),
+          password: await bcrypt.hash('123456', 10),
           isAdmin: false,
         },
       ].map((el) => ({ ...el, createdAt: new Date(), updatedAt: new Date() })),
