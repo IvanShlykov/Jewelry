@@ -42,7 +42,8 @@ function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
 
         <input
           value={changeMail}
-          placeholder="Email"
+          placeholder="email"
+          type="email"
           onChange={(e) => setChangeMail(e.target.value)}
         />
         <button type="button" className="LKbuttonChange" onClick={handlCloseUpdateUserClick}>

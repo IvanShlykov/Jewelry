@@ -43,7 +43,7 @@ function PersonalAreaPages(): JSX.Element {
         <div className="containerLK">
           <div className="decsLK">имя</div>
           <div>{users?.name}</div>
-          <div className="decsLK">почта</div>
+          <div className="decsLK" >почта</div>
           <div>{users?.email}</div>
           <div className="decsLK">телефон</div>
           <div>

@@ -43,8 +43,6 @@ function Authorization({ onClose }: { onClose: () => void }): JSX.Element {
     dispatch(authorization({ email: data.email, password: data.password })).catch(console.log);
     
   };
-  console.log(user);
-
   return (
     <div className="authCont">
       <div className="auth">
