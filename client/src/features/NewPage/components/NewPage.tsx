@@ -96,7 +96,7 @@ function NewPage(): JSX.Element {
       filteredNewJewelrys.map((jewelry) => (
         <div className="jewelry-container" key={jewelry.id}>
           <div className="jewelry-card">
-            jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id} /> 
+           { jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id}/> }
           </div>
         </div>
       )))}
