@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
@@ -14,7 +14,14 @@ function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
   const [changeMail, setChangeMail] = useState('');
   const [changePhone, setChangePhone] = useState('');
   const message = useSelector((store: RootState) => store.authState.error);
-  
+  const user = useSelector((store: RootState) => store.authState.user);
+  useEffect(() => {
+    if (user) {
+      setChangeName(user.name);
+      setChangeMail(user.email);
+      setChangePhone(user.phone);
+    }
+  }, []);
   const dispatch = useAppDispatch();
 
   const handleFormSubmit = (e: React.FormEvent): void => {
@@ -24,7 +31,13 @@ function ChangeUser({ handlCloseUpdateUserClick }: Props): JSX.Element {
       email: changeMail,
       phone: changePhone,
     };
-    dispatch(updateUserSlice(updatedUser)).catch(console.log);
+    dispatch(updateUserSlice(updatedUser))
+      .then((action) => {
+        if (action.payload) {
+          handlCloseUpdateUserClick();
+        }
+      })
+      .catch(console.log);
   };
 
   return (

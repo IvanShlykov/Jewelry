@@ -138,6 +138,39 @@ router.put('/update', async (req, res) => {
         maxAge: jwtConfig.refresh.expiresIn,
       });
       res.status(200).json({ user });
+    } else if (
+      userPhone &&
+      userPhone.id === res.locals.user.id &&
+      userEmail &&
+      userEmail.id === res.locals.user.id
+    ) {
+      await User.update(
+        { name, email, phone },
+        { where: { id: res.locals.user.id } }
+      );
+      const user = await User.findOne({ where: { id } });
+      res
+        .clearCookie(jwtConfig.access.type)
+        .clearCookie(jwtConfig.refresh.type);
+      const { accessToken, refreshToken } = generateTokens({
+        user: {
+          name: user.name,
+          id: user.id,
+          isAdmin: user.isAdmin,
+          email: user.email,
+          phone: user.phone,
+        },
+      });
+      res.cookie(jwtConfig.access.type, accessToken, {
+        httpOnly: true,
+        maxAge: jwtConfig.access.expiresIn,
+      });
+
+      res.cookie(jwtConfig.refresh.type, refreshToken, {
+        httpOnly: true,
+        maxAge: jwtConfig.refresh.expiresIn,
+      });
+      res.status(200).json({ user });
     } else {
       res
         .status(400)

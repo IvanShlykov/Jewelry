@@ -18,7 +18,7 @@
   /* } */
 
   .specials {
-    background-image: url('5000.jpg');
+    background-image: url('/img/5000.jpg');
     background-repeat: no-repeat;
     background-size: 100vw auto;
     background-position: center;

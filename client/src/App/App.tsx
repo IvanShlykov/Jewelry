@@ -33,6 +33,7 @@ import PersonalAreaPages from '../features/PersonalArea/components/PersonalAreaP
 import { initSizes } from '../features/Admin/adminSlice';
 import { initBasket } from '../features/Basket/basketSlice';
 import FavoritesPage from '../features/Favorites/components/FavoritesPage';
+import TypesPage from '../features/Types/Types';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -72,6 +73,7 @@ function App(): JSX.Element {
           <Route path="location" element={<LocationsPages />} />
           <Route path="personalArea" element={<PersonalAreaPages />} />
           <Route path="basket" element={<BasketPage />} />
+          <Route path="types/:id" element={<TypesPage />} />
         </Route>
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

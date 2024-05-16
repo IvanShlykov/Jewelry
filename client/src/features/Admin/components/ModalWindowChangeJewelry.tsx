@@ -24,7 +24,6 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
 
   const [addHash, setAddHash] = useState(true);
   const [addPhoto, setPhotoAdd] = useState(true);
-  const [addStockState, setStockAdd] = useState(true);
 
   const [name, setName] = useState(jewelry.name);
   const [collectionID, setCollectionID] = useState(jewelry.collectionID);
@@ -42,7 +41,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
 
   const changeItem = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if(name && price){
+    if (name && price) {
       dispatch(
         changeJewelry({
           id: jewelry.id,
@@ -56,7 +55,7 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
         }),
       ).catch(console.log);
       setState(!state);
-      setError('')
+      setError('');
     } else {
       setError('Наименование или цена не может быть пустым');
     }
@@ -80,7 +79,6 @@ function ModalWindowChangeJewelry({ jewelry, state, setState }: Props): JSX.Elem
   const addStockFunc = (): void => {
     dispatch(addStock({ sizeID, count, jewelryID: jewelry.id })).catch(console.log);
     setCount(1);
-    setStockAdd(true);
   };
 
   return (
