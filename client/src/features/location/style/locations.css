@@ -1,0 +1,42 @@
+.location-list {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.location-list h3 {
+  color: #333;
+  font-size: 1em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.location-card {
+  background-color: #fff;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 0.7em;
+}
+
+.location-card div {
+  margin: 5px 0;
+}
+
+.location-card img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.location-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.location-row {
+    padding: 5px;
+}
+
+.city {
+    font-weight: bold;
+}

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import LocationPage from './LocationPage';
 import { useAppDispatch, type RootState } from '../../../store/store';
 import { initLocation } from '../LocationSlice';
+import '../style/locations.css';
 
 function LocationsPages(): JSX.Element {
   const locations = useSelector((store: RootState) => store.locationState.location);
@@ -12,7 +13,7 @@ function LocationsPages(): JSX.Element {
   }, []);
 
   return (
-    <div className="list">
+    <div className="location-list ">
       <h3>Где нас найти</h3>
       <div>
         {locations.map((location) => (
