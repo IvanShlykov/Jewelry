@@ -36,7 +36,7 @@ function Registration({onClose}:{onClose:()=> void}): JSX.Element {
         dispatch(clear());
       }, 2000);
     }
-  }, [user, message,dispatch]);
+  }, [user, message,]);
 
   const {
     register,

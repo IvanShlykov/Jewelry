@@ -5,7 +5,7 @@ router.get('/orders', async (req, res) => {
   try {
     console.log('++++++++++');
     if (res.locals.user) {
-      let orderUser = await Order.findAll({
+      const orderUser = await Order.findAll({
         where: { userID: res.locals.user.id, status: 'confirmed' },
         include:[{model:
           OrderItem,
