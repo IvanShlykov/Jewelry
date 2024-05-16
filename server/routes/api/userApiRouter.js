@@ -1,22 +1,37 @@
-const router = require('express').Router()
-const { User, Order, OrderItem, Stock, Photo, Metall, Size, Jewelry} = require('../../db/models')
+const router = require('express').Router();
+const {
+  User,
+  Order,
+  OrderItem,
+  Stock,
+  Photo,
+  Metall,
+  Size,
+  Jewelry,
+} = require('../../db/models');
 
 router.get('/orders', async (req, res) => {
   try {
-    console.log('++++++++++');
     if (res.locals.user) {
-      let orderUser = await Order.findAll({
-        where: { userID: res.locals.user.id, status: 'confirmed' },
-        include:[{model:
-          OrderItem,
-        include:[
-          { model: Order },
+      const orderUser = await Order.findAll({
+        where: { userID: res.locals.user.id },
+        include: [
           {
-            model: Jewelry,
-            include: [{ model: Stock }, { model: Photo }, { model: Metall }],
+            model: OrderItem,
+            include: [
+              { model: Order },
+              {
+                model: Jewelry,
+                include: [
+                  { model: Stock },
+                  { model: Photo },
+                  { model: Metall },
+                ],
+              },
+              { model: Size },
+            ],
           },
-          { model: Size },
-        ]}]
+        ],
       });
       if (orderUser) {
         res.status(200).json({ orderUser });
@@ -36,11 +51,13 @@ router.put('/update', async (req, res) => {
     const { id } = res.locals.user;
     const { name, email, phone } = req.body;
     await User.update(
-      { name, email, phone}, { where: { id: res.locals.user.id }});
-      const user = await User.findOne({ where: { id } });
-      res.status(200).json({ user })
-    }
-     catch ({ message }) {
+      { name, email, phone },
+      { where: { id: res.locals.user.id } }
+    );
+    const user = await User.findOne({ where: { id } });
+    res.status(200).json({ user });
+  } catch ({ message }) {
     res.status(500).json({ message });
-  }});
+  }
+});
 module.exports = router;

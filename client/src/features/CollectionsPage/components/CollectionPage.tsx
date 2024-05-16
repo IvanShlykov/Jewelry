@@ -43,6 +43,7 @@ function CollectionPage(): JSX.Element {
     const matchesMetall = !typeMetall || jewelry.Metall.id === +typeMetall;
     const matchesHashtags = query
       ? jewelry.JewHashtags.filter((hashtags) =>
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           hashtags.Hashtag.title.toLowerCase().includes(query.toLowerCase()),
         ).length > 0
       : true;

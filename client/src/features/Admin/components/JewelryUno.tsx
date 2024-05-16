@@ -2,7 +2,7 @@ import React, { memo,  useState } from 'react';
 import type { IDCollection, Jewelry } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import {  delCollection, delJewelry } from '../adminSlice';
+import {   delJewelry } from '../adminSlice';
 import StockMap from './StockMap';
 import ModalWindowChangeJewelry from './ModalWindowChangeJewelry';
 

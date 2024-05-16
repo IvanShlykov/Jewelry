@@ -11,7 +11,6 @@ import {
   initLocation,
   initMetalls,
   initOrders,
-  initSizes,
   initTypes,
 } from '../adminSlice';
 import AddCollection from './AddCollection';

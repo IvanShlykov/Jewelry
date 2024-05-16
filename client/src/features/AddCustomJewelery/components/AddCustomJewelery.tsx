@@ -13,9 +13,7 @@ function AddCustomJewelery(): JSX.Element {
   const user = useSelector((store: RootState) => store.authState.user);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = (): void => {
-    setIsModalOpen(true);
-  };
+
   const closeModal = (): void => {
     setIsModalOpen(false);
   };

@@ -8,11 +8,9 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Main from '../features/Main/Main';
 
-import Registration from '../features/Auth/components/Registration';
 import type { RootState } from '../store/store';
 import { useAppDispatch } from '../store/store';
 import { checked } from '../features/Auth/authSlice';
-import Authorization from '../features/Auth/components/Authorization';
 import {
   initCollectionsHome,
   initFavorites,
