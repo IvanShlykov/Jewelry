@@ -25,6 +25,10 @@ function Authorization({ onClose }: { onClose: () => void }): JSX.Element {
         dispatch(clear());
       }, 10000);
     }
+
+    if (user){
+      onClose()
+    }
   }, [user, message, dispatch]);
 
   const {
@@ -36,10 +40,10 @@ function Authorization({ onClose }: { onClose: () => void }): JSX.Element {
   });
 
   const auth: SubmitHandler<AuthForm> = (data: AuthForm) => {
-    dispatch(authorization({ email: data.email, password: data.password })).then(()=> {if (user) onClose()}).catch(console.log);
+    dispatch(authorization({ email: data.email, password: data.password })).catch(console.log);
     
   };
-  console.log(message);
+  console.log(user);
   
   return (
     <div className="authCont">

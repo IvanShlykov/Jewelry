@@ -41,7 +41,7 @@ function AddCustomJewelery(): JSX.Element {
   useEffect(() => {
     if (img) setImgName(`${img.name.slice(0,10)}...`);
   }, [img]);
-
+  
   return (
     <div className="list">
       <div className="containerApplication">
