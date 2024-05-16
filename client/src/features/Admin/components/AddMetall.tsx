@@ -1,9 +1,8 @@
 import React, { memo, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
-import type {  Metall } from '../type';
+import type { Metall } from '../type';
 import MetallUno from './MetallUno';
 import { addMetall } from '../adminSlice';
-
 
 type Props = {
   metalls: Metall[];
@@ -13,17 +12,23 @@ function AddMetall({ metalls }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [nameCollection, setNameCollection] = useState('');
+  const [message, setMessage] = useState('');
 
   const addCollectionForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    dispatch(addMetall({name: nameCollection})).catch(console.log);
-    setNameCollection('');
+    if (nameCollection) {
+      dispatch(addMetall({ name: nameCollection })).catch(console.log);
+      setNameCollection('');
+      setMessage('');
+    } else {
+      setMessage('Заполните описание');
+    }
   };
 
   return (
     <div>
-      <div className='textH1'>Добавить материал</div>
-      <form onSubmit={addCollectionForm} className='collectionAdd'>
+      <div className="textH1">Добавить материал</div>
+      <form onSubmit={addCollectionForm} className="collectionAdd">
         <input
           name="name"
           type="text"
@@ -34,8 +39,9 @@ function AddMetall({ metalls }: Props): JSX.Element {
         <button className="btnAdmin" type="submit">
           Добавить
         </button>
+        <div className="messageErooor">{message}</div>
       </form>
-      <table className='table'>
+      <table className="table">
         <thead>
           <tr>
             <th>№</th>

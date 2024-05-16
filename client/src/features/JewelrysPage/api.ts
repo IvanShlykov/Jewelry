@@ -11,7 +11,6 @@ import type {
 } from './type';
 import type { IDCollection } from '../Admin/type';
 
-
 export const initJewelryFetch = async (): Promise<Jewelry[]> => {
   const res = await fetch('/api/admin/jewelrys');
   const data = await res.json();
@@ -66,13 +65,12 @@ export const addBasketFetch = async (obj: {
   return data.newBasket;
 };
 
-
 export const addFavoriteFetch = async (obj: {
   userID: IDUser;
   jewelryID: IDJewelry | undefined;
-}):Promise<Favorite | undefined> => {
+}): Promise<Favorite | undefined> => {
   try {
-    console.log(`userID: ${obj.userID}, jewelryID: ${obj.jewelryID}`); 
+    console.log(`userID: ${obj.userID}, jewelryID: ${obj.jewelryID}`);
     const res = await fetch(`/api/favorites`, {
       method: 'POST',
       headers: {
@@ -91,22 +89,20 @@ export const addFavoriteFetch = async (obj: {
 export const removeFavoriteFetch = async (obj: {
   userID: IDUser;
   jewelryID: IDJewelry | undefined;
-}) => {
-  try {
-    const res = await fetch(`/api/favorites`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(obj),
-    });
-    const data = await res.json();
-    return obj;
-  } catch (error) {
-    console.error('Ошибка при удалении избранного из базы данных:', error);
-  }
-};
+}): Promise<{
+  userID: IDUser;
+  jewelryID: IDJewelry | undefined;
+}> => {
+  await fetch(`/api/favorites`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
 
+  return obj;
+};
 
 export const delOrderItemFetch = async ({
   orderID,
@@ -115,28 +111,18 @@ export const delOrderItemFetch = async ({
   orderID: number;
   itemID: number;
 }): Promise<IDCollection> => {
-  await fetch(`/api/admin/order/${orderID}/items/${itemID}/delete`,{method: 'delete'});
+  await fetch(`/api/admin/order/${orderID}/items/${itemID}/delete`, { method: 'delete' });
   return itemID;
 };
 
-
-export const delOrderFetch = async ({
-  orderID,
-}: {
-  orderID: number;
-}): Promise<IDCollection> => {
-  await fetch(`/api/admin/order/${orderID}/delete`,{method: 'delete'});
+export const delOrderFetch = async ({ orderID }: { orderID: number }): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/delete`, { method: 'delete' });
   return orderID;
 };
 
-export const buyOrderFetch = async ({
-  orderID,
-}: {
-  orderID: number;
-}): Promise<IDCollection> => {
-  await fetch(`/api/admin/order/${orderID}/buy`,{method: 'PUT'});
+export const buyOrderFetch = async ({ orderID }: { orderID: number }): Promise<IDCollection> => {
+  await fetch(`/api/admin/order/${orderID}/buy`, { method: 'PUT' });
   return orderID;
 };
-
 
 export default initJewelryFetch;

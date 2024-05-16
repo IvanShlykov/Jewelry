@@ -43,6 +43,7 @@ function CollectionPage(): JSX.Element {
     const matchesMetall = !typeMetall || jewelry.Metall.id === +typeMetall;
     const matchesHashtags = query
       ? jewelry.JewHashtags.filter((hashtags) =>
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           hashtags.Hashtag.title.toLowerCase().includes(query.toLowerCase()),
         ).length > 0
       : true;
@@ -53,6 +54,7 @@ function CollectionPage(): JSX.Element {
 
   return (
     <div className="list">
+      <div className="filterCSS">
       <input
         type="number"
         value={minPrice}
@@ -82,7 +84,7 @@ function CollectionPage(): JSX.Element {
 
         ))}
       </select>
-      <div className="searcmodal-content">
+
         <input type="text" value={query} onChange={handleSearch} placeholder="Поиск украшений..." />
       </div>
       {filteredJewelrysCollection.length === 0 ? (

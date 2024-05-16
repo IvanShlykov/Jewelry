@@ -9,24 +9,27 @@ import { useAppDispatch } from '../../../store/store';
 import { clear, authorization } from '../authSlice';
 import type { AuthForm } from '../type';
 
-
 const schema = object().shape({
   email: string().required('Необходимо указать электронную почту'),
   password: string().required('Необходимо указать пароль'),
 });
 
-function Authorization({onClose}:{onClose:()=> void}): JSX.Element {
+function Authorization({ onClose }: { onClose: () => void }): JSX.Element {
   const dispatch = useAppDispatch();
   const message = useSelector((store: RootState) => store.authState.error);
   const user = useSelector((store: RootState) => store.authState.user);
-  
+
   useEffect(() => {
     if (message) {
       setTimeout(() => {
         dispatch(clear());
       }, 10000);
     }
-  }, [user, message,dispatch]);
+
+    if (user){
+      onClose()
+    }
+  }, [user, message, dispatch]);
 
   const {
     register,
@@ -38,9 +41,10 @@ function Authorization({onClose}:{onClose:()=> void}): JSX.Element {
 
   const auth: SubmitHandler<AuthForm> = (data: AuthForm) => {
     dispatch(authorization({ email: data.email, password: data.password })).catch(console.log);
-    onClose()
+    
   };
-
+  console.log(user);
+  
   return (
     <div className="authCont">
       <div className="auth">

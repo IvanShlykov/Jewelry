@@ -33,6 +33,7 @@ function BelowFiveThousandPage(): JSX.Element {
 
   return (
     <div className="list">
+      <div className="filterCSS">
       <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
         {jewelryscollection.map(jewelry => (
@@ -63,7 +64,7 @@ function BelowFiveThousandPage(): JSX.Element {
           <option key={jewelry.id} value={jewelry.id}>{jewelry.name}</option>
         ))}
       </select>
-      
+      </div>
       {filteredJewelrys.length === 0 ? (
         <p>Такого украшения нет</p>
       ) : (

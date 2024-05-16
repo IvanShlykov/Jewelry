@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch} from '../../../store/store';
-import type  {RootState} from '../../../store/store'
+import { useAppDispatch } from '../../../store/store';
+import type { RootState } from '../../../store/store';
 import { initOrder } from '../PersonalAreaSlice';
 import ChangeUser from './ChangeUser';
 import OrderItemElem from './OrderItemElem';
+import '../style.css';
 
 function PersonalAreaPages(): JSX.Element {
   const [showUpdateUser, setShowUpdateUser] = useState(false);
   const [showCloseUpdateUser, setShowCloseUpdateUser] = useState(false);
-  const [showOrderHistory, setShowOrderHistory] = useState(false);
-  const [showCloseOrderHistory, setShowCloseOrderHistory] = useState(false);
+  const [showOrderHistory, setShowOrderHistory] = useState(true);
 
   const users = useSelector((store: RootState) => store.authState.user);
   const baskets = useSelector((store: RootState) => store.userState.orderItems);
-console.log(baskets);
 
   const dispatch = useAppDispatch();
 
@@ -24,55 +23,67 @@ console.log(baskets);
 
   const handleUpdateUserClick = (): void => {
     setShowUpdateUser(true);
-    setShowCloseUpdateUser(true)
+    setShowCloseUpdateUser(true);
   };
   const handlCloseUpdateUserClick = (): void => {
     setShowUpdateUser(false);
-    setShowCloseUpdateUser(false)
+    setShowCloseUpdateUser(false);
   };
 
   const handleOrderStoryClick = (): void => {
-    setShowOrderHistory(true);
-    setShowCloseOrderHistory(true); 
-  };
-
-  const handleCloseOrderStory = (): void => {
-    setShowOrderHistory(false);
-    setShowCloseOrderHistory(false); 
+    setShowOrderHistory(!showOrderHistory);
   };
 
   return (
-    <div>
-      <h3>Добро пожаловать в ваш личный кабинет</h3>
-      <div>{users?.name}</div>
-      <div>{users?.email}</div>
-      <div>{users?.phone}</div>
-      <div>
-        <button type='button' className='changeUser' onClick={handleUpdateUserClick}>
-          Изменить данные пользователя
-        </button>
-        {showUpdateUser && <ChangeUser />}
-        {showCloseUpdateUser && (
-          <button type='button' className='closeOrder' onClick={handlCloseUpdateUserClick}>
-            Закрыть заказы
-          </button>
-        )}
-      </div>
-      <div>
-        <button type='button' className='changeUser' onClick={handleOrderStoryClick}>
-          Ваши заказы
-        </button>
-        {showOrderHistory && baskets.map((el) => (
+    <div className="list">
+      <div className="HH11 marginH1">Добро пожаловать в ваш личный кабинет</div>
+
+      {showUpdateUser ? (
+        <div>
+          <ChangeUser handlCloseUpdateUserClick={handlCloseUpdateUserClick}/>
+        </div>
+      ) : (
+        <div className="containerLK">
+          <div className="decsLK">имя</div>
+          <div>{users?.name}</div>
+          <div className="decsLK">почта</div>
+          <div>{users?.email}</div>
+          <div className="decsLK">телефон</div>
           <div>
-          <div>№{el.id}</div>
-         <div>{ el.OrderItems.map((le)=><OrderItemElem key={le.id} orderItem={le} />)}</div>
-         </div>
-        ))}
-        {showCloseOrderHistory && (
-          <button type='button' className='closeOrder' onClick={handleCloseOrderStory}>
-            Закрыть заказы
-          </button>
-        )}
+            {users?.phone}
+            <button onClick={handleUpdateUserClick} type="button" className="LKbutton">
+              Изменить
+            </button>
+          </div>
+        </div>
+      )}
+      <div>
+        <button type="button" className="LKbuttonOrder" onClick={handleOrderStoryClick}>
+          {showOrderHistory ? 'Ваши заказы' : 'Закрыть историю'}
+        </button>
+        {!showOrderHistory &&
+          (baskets.length ? (
+            baskets
+              .filter((el) => el.status !== 'basket')
+              .map((el) => (
+                <div key={el.id}>
+                  <div className="h1Basket ">
+                    Заказ №{el.id}, статус -{' '}
+                    {el.status === 'onAdmin' ? 'на рассмотрении' : 'подтвержден'}
+                  </div>
+                  <div>
+                    {el.OrderItems.map((le) => (
+                      <OrderItemElem key={le.id} orderItem={le} />
+                    ))}
+                  </div>
+                  <div className="itogBasket">
+                    Сумма: {el.OrderItems.reduce((a, b) => a + b.count * b.price, 0)}
+                  </div>
+                </div>
+              ))
+          ) : (
+            <div className='HH11 marginH1'>Нет истории заказов</div>
+          ))}
       </div>
     </div>
   );

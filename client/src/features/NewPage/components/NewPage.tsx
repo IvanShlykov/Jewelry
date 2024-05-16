@@ -49,6 +49,7 @@ function NewPage(): JSX.Element {
 
   return (
     <div className="list">
+      <div className="filterCSS">
       <select value={collectionFilter} onChange={(e) => setCollectionFilter(e.target.value)}>
         <option value="">Коллекция</option>
         {jewelryscollection.map((jewelry) => (
@@ -85,8 +86,9 @@ function NewPage(): JSX.Element {
           </option>
         ))}
       </select>
-      <div className="searcmodal-content">
+
         <input type="text" value={query} onChange={handleSearch} placeholder="Поиск украшений..." />
+  
       </div>
       {filteredNewJewelrys.length === 0 ? (
         <p>Такого украшения нет</p>
@@ -94,7 +96,7 @@ function NewPage(): JSX.Element {
       filteredNewJewelrys.map((jewelry) => (
         <div className="jewelry-container" key={jewelry.id}>
           <div className="jewelry-card">
-            jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id} /> 
+           { jewelry.isNew && <JewelryCard jewelry={jewelry} key={jewelry.id}/> }
           </div>
         </div>
       )))}

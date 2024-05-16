@@ -20,7 +20,20 @@ export type UserUpdate = {
     phone: string;
 }
 
-export type RegistrationUser = User & {cpassword: string}
+export type RegistrationUser = {
+    name: string;
+    email: string;
+    phone:string;
+    password:string;
+    cpassword:string;
+}
+
+export type RegaUser = {
+    name: string;
+    email: string;
+    phone:string;
+    password:string;
+}
 
 export type State = {
     user:  null | UserClient;

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SVG from '../../SVG/SVG'; // Убедитесь, что путь правильный
@@ -19,18 +19,6 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
   const user = useSelector((store: RootState) => store.authState.user);
   const favorites = useSelector((store: RootState) => store.jewelrysState.favorites);
   const isFovorit = favorites.find((el)=> el.jewelryID === jewelry.id && el.userID === user?.id)
-  // useEffect(() => {
-  //   let savedFavorites: Jewelry[] = [];
-  //   const favoritesFromStorage = localStorage.getItem('favorites');
-  //   if (favoritesFromStorage) {
-  //     savedFavorites = JSON.parse(favoritesFromStorage) || [];
-  //   }
-  //   setIsFavorite(savedFavorites.some((item) => item.id === jewelry.id));
-  // }, [jewelry.id]);
-
-  // const closeModal = (): void => {
-  //   setIsModalOpen(false);
-  // };
 
   const toggleFavorite = (event: React.MouseEvent):void => {
     event.stopPropagation(); // Остановка распространения события
@@ -76,7 +64,8 @@ function JewelryCard({ jewelry }: Props): JSX.Element {
           <button
             className="favorite-button"
             onClick={toggleFavorite}
-            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+            style={{border: 'none', padding: 0, cursor: 'pointer' }}
+            type='button'
           >
             <SVG id={ isFovorit ? 'favorites-active' : 'favorites'} />
           </button>

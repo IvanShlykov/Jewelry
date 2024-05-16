@@ -1,6 +1,6 @@
-import type { AuthForm, User, UserClient, UserUpdate } from "./type"
+import type { AuthForm, RegaUser, UserClient, UserUpdate } from "./type"
 
-export const registrationFetch = async(obj:User):Promise<UserClient>=>{
+export const registrationFetch = async(obj:RegaUser):Promise<UserClient>=>{
 
     const res = await  fetch('/api/auth/registration',{
         method:'post',
