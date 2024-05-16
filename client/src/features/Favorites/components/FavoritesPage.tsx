@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import JewelryCard from '../../JewelrysPage/components/JewelryCard';
-import type { Favorite, Jewelry } from '../../JewelrysPage/type';
+import type { Favorite } from '../../JewelrysPage/type';
 import type { RootState } from '../../../store/store';
 
 function FavoritesPage(): JSX.Element {

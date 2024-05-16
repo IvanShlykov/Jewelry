@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import type { IDCollection, Location } from '../type';
 import ModalWindow from './ModalWindow';
 import { useAppDispatch } from '../../../store/store';
-import { delLocation, delMetall } from '../adminSlice';
+import { delLocation } from '../adminSlice';
 
 type Props = {
   location: Location;

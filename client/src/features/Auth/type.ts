@@ -25,6 +25,14 @@ export type RegistrationUser = {
     email: string;
     phone:string;
     password:string;
+    cpassword:string;
+}
+
+export type RegaUser = {
+    name: string;
+    email: string;
+    phone:string;
+    password:string;
 }
 
 export type State = {

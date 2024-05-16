@@ -15,6 +15,7 @@ function PersonalAreaPages(): JSX.Element {
   const users = useSelector((store: RootState) => store.authState.user);
   const baskets = useSelector((store: RootState) => store.userState.orderItems);
 
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -57,16 +58,17 @@ function PersonalAreaPages(): JSX.Element {
          { showOrderHistory ? 'Ваши заказы': 'Закрыть историю'}
         </button>
         {!showOrderHistory &&
-        ( baskets.length ? baskets.map((el) => (
+        ( baskets.length ? baskets.filter(el => el.status !== 'basket').map((el) => (
             <div>
-              <div>№{el.id}</div>
+              <div className='h1Basket '>Заказ №{el.id}, статус - {el.status === 'onAdmin' ? 'на рассмотрении' : 'подтвержден'} </div>
               <div>
                 {el.OrderItems.map((le) => (
                   <OrderItemElem key={le.id} orderItem={le} />
                 ))}
               </div>
+              <div className='itogBasket'>Сумма: {el.OrderItems.reduce((a,b) => a + b.count * b.price,0)}</div>
             </div>
-          )) : <div>Нет истории</div>) }
+          )) : <div>Нет истории заказов</div>) }
       </div>
     </div>
   );

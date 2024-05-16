@@ -20,8 +20,6 @@ function Header(): JSX.Element {
 
   const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
 
-  const query = useSelector((store: RootState) => store.search.searchQuery);
-
   const openModal = (): void => {
     setIsModalOpen(true);
   };

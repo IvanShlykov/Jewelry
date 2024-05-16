@@ -227,7 +227,7 @@ a {
 
 .prom {
   width: 100vw;
-  height: 50px;
+  height: 53px;
 }
 
 .basketHeader {
@@ -262,6 +262,7 @@ a {
   flex-direction: column;
   padding: 25px;
   line-height: 20px;
+  min-height: 20vh;
 }
 
 .footerContainer{
@@ -273,6 +274,9 @@ a {
 .blocksFooter{
   display: flex;
   flex-direction: column;
+  a{
+    color: white;
+  }
 }
 
 .oNasFoot{

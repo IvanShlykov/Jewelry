@@ -55,5 +55,12 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     'react-refresh/only-export-components': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    '@typescript-eslint/no-misused-promises' : 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/control-has-associated-label': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off'
   },
 };

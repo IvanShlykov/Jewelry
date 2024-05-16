@@ -8,7 +8,6 @@ import type { RootState } from '../../../store/store';
 import { useAppDispatch } from '../../../store/store';
 import { registration, clear } from '../authSlice';
 import type { RegistrationUser } from '../type';
-import { initBasket } from '../../Basket/basketSlice';
 
 const schema = object().shape({
   name: string().required('Необходимо указать имя'),

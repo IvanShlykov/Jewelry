@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as api from './api'
 
-import type { AuthForm, RegistrationUser, State, User, UserClient, UserUpdate } from "./type";
+import type { AuthForm, RegaUser, State,  UserUpdate } from "./type";
 
    const initialState:State = {user:null,error:undefined}
 
    export const registration = createAsyncThunk(
     'auth/registration',
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    (obj:RegistrationUser) => api.registrationFetch(obj)
+    (obj:RegaUser) => api.registrationFetch(obj)
    );
    export const checked = createAsyncThunk(
     'auth/checked',

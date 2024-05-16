@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SVG({ id, fill }: { id: string; fill?: string }): JSX.Element {
+function SVG({ id }: { id: string }): JSX.Element {
   switch (id) {
     case 'search':
       return (

@@ -8,7 +8,7 @@ export type JewStoneAdd = {
 export type JewStone = JewStoneAdd & { id: number };
 
 export type State = {
-  collections: Collection[];
+  collections: CollectionHome[];
   colPhotos: ColPhoto[];
   metalls: Metall[];
   jewelrys: Jewelry[];
