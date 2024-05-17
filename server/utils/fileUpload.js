@@ -15,7 +15,7 @@ const storage = async (file) => {
   const { md5 } = file;
 
   const URL = `/img/${md5}${extension}`;
-  await util.promisify(file.mv)(`./public${URL}`);
+  await util.promisify(file.mv)(`./server/public${URL}`);
   return URL;
 };
 
